@@ -1,8 +1,8 @@
 package studentdirectory.testcasestructure;
 
 public class GenericTestCaseStructure {
-  private String errMessage="";
-  private String testCaseName="";
+  private String errMessage;
+  private String testCaseName;
 
   public String getErrMessage() {
     return errMessage;
@@ -18,6 +18,11 @@ public class GenericTestCaseStructure {
 
   public void setTestCaseName(String testCaseName) {
     this.testCaseName = testCaseName;
+  }
+
+  public GenericTestCaseStructure(){
+    errMessage="";
+    testCaseName="";
   }
 
 }

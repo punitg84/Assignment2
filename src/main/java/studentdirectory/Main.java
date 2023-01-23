@@ -1,13 +1,13 @@
 package studentdirectory;
 
 public class Main {
-  static void showMenu(boolean userNotExited){
+  static void showMenu(boolean isUserExited){
     //Show options 1-5
     //output sare
     //selectOptionForMenu()
   }
 
-  static void selectOptionForMenu(){
+  static void selectOptionFromMenu(boolean isUserExited){
     //Default recall
     //catch mein showErrors
   }
@@ -47,9 +47,9 @@ public class Main {
 
   public static void main(String[] args){
     //Fetch user from file if present
-    boolean userNotExited = true;
+    boolean isUserExited = true;
     do{
-      showMenu(userNotExited);
-    }while(userNotExited);
+      showMenu(isUserExited);
+    }while(isUserExited);
   }
 }
