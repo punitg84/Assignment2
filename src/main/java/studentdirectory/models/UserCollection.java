@@ -5,10 +5,10 @@ import java.util.HashSet;
 
 //singleton pattern
 public class UserCollection implements Serializable {
-  HashSet<User> userList = new HashSet<User>();
+  HashSet<User> userList = new HashSet<>();
   private static UserCollection userCollection = new UserCollection();
 
-  public static UserCollection getInstance(){
+  public static UserCollection getInstance() {
     return userCollection;
   }
 
@@ -16,11 +16,11 @@ public class UserCollection implements Serializable {
     userList.add(user);
   }
 
-  public void deleteUser(int rollNo){
+  public void deleteUser(int rollNo) {
 
   }
 
-  public void clearUserList(){
+  public void clearUserList() {
     userList.clear();
   }
 
@@ -28,7 +28,7 @@ public class UserCollection implements Serializable {
     return userList;
   }
 
-  private UserCollection(){
+  private UserCollection() {
 
   }
 }

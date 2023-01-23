@@ -7,7 +7,7 @@ import studentdirectory.enums.Courses;
 public class User implements Serializable, Comparable<User> {
 
   private String name;
-  public int age;
+  private int age;
   private String address;
   private String rollNo;
   private List<Courses> courses;

@@ -2,7 +2,7 @@ package studentdirectory.comparator.usercomparatortestcasestructure;
 
 import studentdirectory.models.User;
 
-public class CompareToTestCaseStructure {
+public class CompareTestCaseStructure {
   private User firstUser;
   private User secondUser;
   private int output;
