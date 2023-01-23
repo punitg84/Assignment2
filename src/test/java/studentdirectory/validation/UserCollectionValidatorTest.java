@@ -3,11 +3,9 @@ package studentdirectory.validation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static studentdirectory.validation.UserCollectionValidator.validateRollNo;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.models.User;
@@ -55,6 +53,10 @@ class UserCollectionValidatorTest {
     } catch (Exception e) {
       assertEquals(testCase.getErrMessage(), e.getMessage(), testCase.getTestCaseName());
     }
+  }
+
+  @AfterEach
+  void cleanup(){
     //Clearing user collection
     UserCollection.getInstance().clearUserList();
   }

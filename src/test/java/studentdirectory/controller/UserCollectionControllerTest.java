@@ -8,6 +8,7 @@ import static studentdirectory.controller.UserController.createUser;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -54,8 +55,6 @@ class UserCollectionControllerTest {
       int actualSize = UserCollection.getInstance().getUserList().size();
       assertEquals(expectedSize, actualSize, testCase.getTestCaseName());
     }
-    //Clearing user collection
-    UserCollection.getInstance().clearUserList();
   }
 
   private static Stream<DeleteUserTestCaseStructure> generateTestCaseForDeleteUser() {
@@ -97,12 +96,14 @@ class UserCollectionControllerTest {
       int actualSize = UserCollection.getInstance().getUserList().size();
       assertEquals(expectedSize, actualSize, testCase.getTestCaseName());
     }
-    //Clearing user collection
-    UserCollection.getInstance().clearUserList();
   }
 
   @Test
   void getUserListSortedByOrder() {
+  }
+
+  @AfterEach
+  void cleanup(){
     //Clearing user collection
     UserCollection.getInstance().clearUserList();
   }

@@ -13,7 +13,7 @@ public class UserCollection implements Serializable {
   }
 
   public void addUser(User user) {
-
+    userList.add(user);
   }
 
   public void deleteUser(int rollNo){
