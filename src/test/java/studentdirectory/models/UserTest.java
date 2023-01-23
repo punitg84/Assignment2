@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import studentdirectory.enums.Courses;
 import studentdirectory.models.usertestcasestructure.CompareToTestCaseStructure;
 import studentdirectory.models.usertestcasestructure.EqualsTestCaseStructure;
 import studentdirectory.models.usertestcasestructure.HashCodeTestCaseStructure;
@@ -17,14 +18,14 @@ class UserTest {
 
   private static Stream<HashCodeTestCaseStructure> generateTestCaseForHashCode(){
     //Test Case 1 Alpha Numeric Roll No
-    User user1 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList("A","B","C","D"));
+    User user1 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     HashCodeTestCaseStructure testCase1 = new HashCodeTestCaseStructure();
     testCase1.setUser(user1);
     testCase1.setOutput(100);
     testCase1.setTestCaseName("Alpha Numeric Roll No");
 
     //Test Case 2 Numeric Roll No
-    User user2 = new User("User 2",10,"address 2","8930", Arrays.asList("A","B","C","D"));
+    User user2 = new User("User 2",10,"address 2","8930", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     HashCodeTestCaseStructure testCase2 = new HashCodeTestCaseStructure();
     testCase2.setUser(user2);
     testCase2.setOutput(120);
@@ -43,8 +44,8 @@ class UserTest {
 
   private static Stream<EqualsTestCaseStructure> generateTestCaseForEquals(){
     //Test Case 1 Same roll no
-    User firstUser1 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList("A","B","C","D"));
-    User secondUser1 = new User("User 2",18,"address 1","Roll No 1", Arrays.asList("A","B","F","D"));
+    User firstUser1 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
+    User secondUser1 = new User("User 2",18,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     EqualsTestCaseStructure testCase1 = new EqualsTestCaseStructure();
     testCase1.setFirstUser(firstUser1);
     testCase1.setSecondUser(secondUser1);
@@ -52,8 +53,8 @@ class UserTest {
     testCase1.setTestCaseName("Users have same roll no");
 
     //Test Case 2 Diff roll no
-    User firstUser2 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList("A","B","C","D"));
-    User secondUser2 = new User("User 2",18,"address 1","Roll No 3", Arrays.asList("A","B","F","D"));
+    User firstUser2 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
+    User secondUser2 = new User("User 2",18,"address 1","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     EqualsTestCaseStructure testCase2 = new EqualsTestCaseStructure();
     testCase2.setFirstUser(firstUser2);
     testCase2.setSecondUser(secondUser2);
@@ -74,8 +75,8 @@ class UserTest {
 
   private static Stream<CompareToTestCaseStructure> generateTestForCompareTo(){
     //Test Case 1 Same roll no Diff user name
-    User firstUser1 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList("A","B","C","D"));
-    User secondUser1 = new User("User 2",18,"address 1","Roll No 1", Arrays.asList("A","B","F","D"));
+    User firstUser1 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
+    User secondUser1 = new User("User 2",18,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
     CompareToTestCaseStructure testCase1 = new CompareToTestCaseStructure();
     testCase1.setFirstUser(firstUser1);
     testCase1.setSecondUser(secondUser1);
@@ -83,8 +84,8 @@ class UserTest {
     testCase1.setTestCaseName("Users have same roll no diff user name");
 
     //Test Case 2 Diff roll no Same user name
-    User firstUser2 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList("A","B","C","D"));
-    User secondUser2 = new User("User 1",18,"address 1","Roll No 3", Arrays.asList("A","B","F","D"));
+    User firstUser2 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
+    User secondUser2 = new User("User 1",18,"address 1","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
     CompareToTestCaseStructure testCase2 = new CompareToTestCaseStructure();
     testCase2.setFirstUser(firstUser2);
     testCase2.setSecondUser(secondUser2);

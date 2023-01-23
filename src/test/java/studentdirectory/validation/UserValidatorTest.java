@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import studentdirectory.enums.Courses;
 import studentdirectory.models.User;
 import studentdirectory.validation.uservalidatortestcasestructure.ValidateAgeNumericTestCaseStructure;
 import studentdirectory.validation.uservalidatortestcasestructure.ValidateCoursesTestCaseStructure;
@@ -18,25 +19,25 @@ class UserValidatorTest {
   private static Stream<ValidateUserTestCaseStructure> generateTestCaseForValidateUser() {
     //Test Case 1 age negative
     User user1 = new User("User 1", -10, "address 1", "rollNo 1",
-        Arrays.asList("course 1", "course 2", "course 3", "course 4"));
+        Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     ValidateUserTestCaseStructure
         testCase1 = new ValidateUserTestCaseStructure();
     testCase1.setUser(user1);
-    testCase1.setErrMessage("negative age");
+    testCase1.setErrMessage("Age cant be negative");
     testCase1.setTestCaseName("Age negative");
 
     //Test Case 2 name empty
     User user2 = new User("", -10, "address 1", "rollNo 1",
-        Arrays.asList("course 1", "course 2", "course 3", "course 4"));
+        Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.F));
     ValidateUserTestCaseStructure
         testCase2 = new ValidateUserTestCaseStructure();
     testCase2.setUser(user2);
-    testCase2.setErrMessage("name is empty");
+    testCase2.setErrMessage("name cant be empty");
     testCase2.setTestCaseName("Empty name");
 
     //Test Case 3 valid user
-    User user3 = new User("", -10, "address 1", "rollNo 1",
-        Arrays.asList("course 1", "course 2", "course 3", "course 4"));
+    User user3 = new User("Punit", 10, "address 1", "rollNo 1",
+        Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     ValidateUserTestCaseStructure
         testCase3 = new ValidateUserTestCaseStructure();
     testCase3.setUser(user3);

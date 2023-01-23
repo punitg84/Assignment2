@@ -3,6 +3,7 @@ package studentdirectory.controller;
 import static org.junit.jupiter.api.Assertions.*;
 import static studentdirectory.controller.UserCollectionController.addUser;
 import static studentdirectory.controller.UserCollectionController.deleteUser;
+import static studentdirectory.controller.UserCollectionController.getUserListSortedByOrder;
 import static studentdirectory.controller.UserController.createUser;
 
 import java.util.Arrays;
@@ -14,7 +15,9 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.controller.usercollectioncontrollertestcasestructure.AddUserTestCaseStructure;
 import studentdirectory.controller.usercollectioncontrollertestcasestructure.DeleteUserTestCaseStructure;
+import studentdirectory.controller.usercollectioncontrollertestcasestructure.GetUserListSortedByOrderTestCaseStructure;
 import studentdirectory.controller.usercontrollertestcasestructure.CreateUserTestCaseStructure;
+import studentdirectory.enums.Courses;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
@@ -62,7 +65,7 @@ class UserCollectionControllerTest {
     DeleteUserTestCaseStructure testCase1 =
         new DeleteUserTestCaseStructure();
     User user1 = new User("User 1", 10, "Address 1", "192",
-        Arrays.asList("A", "B", "C", "E"));
+        Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     testCase1.setUserListSize(0);
     testCase1.setUser(user1);
     testCase1.setRollNoToDelete("192");
@@ -72,7 +75,7 @@ class UserCollectionControllerTest {
     DeleteUserTestCaseStructure testCase2 =
         new DeleteUserTestCaseStructure();
     User user2 = new User("User 2", 10, "Address 2", "192",
-        Arrays.asList("A", "B", "C", "E"));
+        Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     testCase2.setUserListSize(1);
     testCase2.setUser(user2);
     testCase2.setRollNoToDelete("194");
@@ -97,10 +100,39 @@ class UserCollectionControllerTest {
       assertEquals(expectedSize, actualSize, testCase.getTestCaseName());
     }
   }
+  private static Stream<GetUserListSortedByOrderTestCaseStructure> generateTestCaseForGetUserListSortedByOrder(){
+    //Test Case
+    User firstUser = new User("User 1",10,"address 2","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
+    User secondUser = new User("User 2",18,"address 2","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
+    User thirdUser = new User("User 3",17,"address 2","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
+    GetUserListSortedByOrderTestCaseStructure testCase = new GetUserListSortedByOrderTestCaseStructure();
+    //Random ordering
+    testCase.addUserInRandomUserList(thirdUser);
+    testCase.addUserInRandomUserList(firstUser);
+    testCase.addUserInRandomUserList(secondUser);
+    //Sorted ordering
+    testCase.addUserInSortedUserList(secondUser);
+    testCase.addUserInSortedUserList(thirdUser);
+    testCase.addUserInSortedUserList(firstUser);
 
-  @Test
-  void getUserListSortedByOrder() {
+    testCase.setAscending(false);
+    testCase.setOrder("AGE");
+    testCase.setTestCaseName("Sorting by age in descending order");
 
+    return Stream.of(testCase);
+  }
+  @ParameterizedTest
+  @MethodSource("generateTestCaseForGetUserListSortedByOrder")
+  void testGetUserListSortedByOrder(GetUserListSortedByOrderTestCaseStructure testCase) {
+    UserCollection userCollection = UserCollection.getInstance();
+    for(User user:testCase.getRandomUserList()){
+      userCollection.addUser(user);
+    }
+    String order = testCase.getOrder();
+    boolean isAscending = testCase.isAscending();
+    List<User> actual = getUserListSortedByOrder(order,isAscending);
+    List<User> expected = testCase.getSortedUserList();
+    assertEquals(expected,actual,testCase.getTestCaseName());
   }
 
   @AfterEach
