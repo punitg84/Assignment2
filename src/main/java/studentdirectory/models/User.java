@@ -1,33 +1,26 @@
-package studdir.models;
+package studentdirectory.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-public class Student implements Serializable, Comparable<Student> {
+import java.util.List;
+
+public class User implements Serializable, Comparable<User> {
 
   private String name;
   public int age;
   private String address;
   private String rollNo;
-  private ArrayList<String> courses = new ArrayList<>();
+  private List<String> courses;
 
-  public void setName(String name) {
-    this.name = name;
+  public String getRollNo() {
+    return rollNo;
   }
 
-  public void setAge(int age) {
-    this.age = age;
-  }
-
-  public void setAddress(String address) {
-    this.address = address;
-  }
-
-  public void setRollNo(String rollNo) {
-    this.rollNo = rollNo;
-  }
-
-  public void setCourses(ArrayList<String> courses) {
-    this.courses = courses;
+  public User(String name, int age, String address, String rollNo, List<String> courses){
+    this.name=name;
+    this.age=age;
+    this.address=address;
+    this.rollNo=rollNo;
+    this.courses=courses;
   }
 
   @Override
@@ -52,7 +45,7 @@ public class Student implements Serializable, Comparable<Student> {
   }
 
   @Override
-  public int compareTo(Student o) {
+  public int compareTo(User o) {
     return 0;
   }
 }

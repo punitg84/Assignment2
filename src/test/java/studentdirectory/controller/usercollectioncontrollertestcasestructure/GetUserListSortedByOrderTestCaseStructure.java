@@ -1,0 +1,4 @@
+package studentdirectory.controller.usercollectioncontrollertestcasestructure;
+
+public class GetUserListSortedByOrderTestCaseStructure {
+}
