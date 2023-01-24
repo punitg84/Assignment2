@@ -30,7 +30,7 @@ class FileControllerTest {
     testCase.addUser(firstUser);
     testCase.addUser(secondUser);
     testCase.setTestCaseName("Adding user in file and then reading them");
-
+    testCase.setErrMessage("");
     return Stream.of(testCase);
   }
 
@@ -41,11 +41,15 @@ class FileControllerTest {
     for(User user:testCase.getUserList()){
       userCollection.addUser(user);
     }
-    writeUserDetailsToFile();
-    List<User> oldData = new ArrayList<>(userCollection.getUserList());
-    userCollection.clearUserList();
-    readUserDetailsFromFile();
-    List<User> newData = new ArrayList<>(userCollection.getUserList());
-    assertEquals(oldData, newData, testCase.getTestCaseName());
+    try{
+      writeUserDetailsToFile();
+      List<User> oldData = new ArrayList<>(userCollection.getUserList());
+      userCollection.clearUserList();
+      readUserDetailsFromFile();
+      List<User> newData = new ArrayList<>(userCollection.getUserList());
+      assertEquals(oldData, newData, testCase.getTestCaseName());
+    }catch(Exception e){
+      assertEquals(testCase.getErrMessage(),e.getMessage(),testCase.getTestCaseName());
+    }
   }
 }

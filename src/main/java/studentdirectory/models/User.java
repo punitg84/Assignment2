@@ -1,22 +1,46 @@
 package studentdirectory.models;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import studentdirectory.enums.Courses;
 
 public class User implements Serializable, Comparable<User> {
 
-  private String name;
-  private int age;
-  private String address;
-  private String rollNo;
-  private List<Courses> courses;
+  @NotEmpty(message = "Name cant be empty or null")
+  private final String name;
+  @Min(value = 3, message = "Age should not be less than 3")
+  @Max(value = 100, message = "Age should not be greater than 100")
+  private final int age;
+  @Size(min = 10, max = 50, message
+      = "Address must be longer than 10 characters but less than 50 characters")
+  private final String address;
+
+  @NotEmpty(message = "Roll No cannot be empty")
+  private final String rollNo;
+  @Size(min=4, max=4)
+  private final List<Courses> courses;
+
+  public String getName() {
+    return name;
+  }
 
   public String getRollNo() {
     return rollNo;
   }
 
-  public User(String name, int age, String address, String rollNo, List<Courses> courses){
+  public int getAge() {
+    return age;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public User(final String name, final int age, final String address, final String rollNo, final List<Courses> courses){
     this.name=name;
     this.age=age;
     this.address=address;
@@ -26,12 +50,19 @@ public class User implements Serializable, Comparable<User> {
 
   @Override
   public int hashCode() {
-    return super.hashCode();
+    return rollNo.hashCode();
   }
 
   @Override
-  public boolean equals(Object obj) {
-    return super.equals(obj);
+  public boolean equals(final Object obj) {
+    if (obj == this) {
+      return true;
+    }
+    if (!(obj instanceof User)) {
+      return false;
+    }
+    final User otherUser = (User) obj;
+    return rollNo.compareTo(otherUser.getRollNo()) == 0;
   }
 
   @Override
@@ -46,7 +77,10 @@ public class User implements Serializable, Comparable<User> {
   }
 
   @Override
-  public int compareTo(User o) {
-    return 0;
+  public int compareTo(final User o) {
+    if(name.equals(o.getName())){
+      return rollNo.compareTo(o.getRollNo());
+    }
+    return name.compareTo(o.getName());
   }
 }

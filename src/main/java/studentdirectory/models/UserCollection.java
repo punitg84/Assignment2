@@ -1,31 +1,37 @@
 package studentdirectory.models;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
-//singleton pattern
-public class UserCollection implements Serializable {
-  HashSet<User> userList = new HashSet<>();
-  private static UserCollection userCollection = new UserCollection();
+public final class UserCollection implements Serializable {
+  private final Map<String,User> userMap = new TreeMap<>();
+  private static final UserCollection USER_COLLECTION = new UserCollection();
 
   public static UserCollection getInstance() {
-    return userCollection;
+    return USER_COLLECTION;
   }
 
-  public void addUser(User user) {
-    userList.add(user);
+  public void addUser(final User user) {
+    userMap.put(user.getRollNo(),user);
   }
 
-  public void deleteUser(int rollNo) {
-
+  public void deleteUser(final String rollNo) {
+    userMap.remove(rollNo);
   }
 
   public void clearUserList() {
-    userList.clear();
+    userMap.clear();
   }
 
-  public HashSet<User> getUserList() {
-    return userList;
+  public List<User> getUserList() {
+    return new ArrayList<>(userMap.values());
+  }
+
+  public Map<String, User> getUserMap() {
+    return userMap;
   }
 
   private UserCollection() {

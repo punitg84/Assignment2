@@ -17,14 +17,14 @@ class UserControllerTest {
   private static Stream<CreateUserTestCaseStructure> generateTestCaseForCreateUser() {
     //Test Case 1 providing valid student
     CreateUserTestCaseStructure testCase1 =
-        new CreateUserTestCaseStructure("User 1", "10", "Address 1", "192",
+        new CreateUserTestCaseStructure("User 1", "10", "Address 1 is a long address", "192",
             Arrays.asList("A", "B", "C", "E"));
     testCase1.setErrMessage("");
     testCase1.setTestCaseName("Adding valid user");
 
     //Test Case 2 providing invalid student
     CreateUserTestCaseStructure testCase2 =
-        new CreateUserTestCaseStructure("", "10", "Address 2", "193",
+        new CreateUserTestCaseStructure("", "10", "Address 1 is a long address", "193",
             Arrays.asList("A", "B", "C", "E"));
     testCase2.setErrMessage("Name cant be empty or null");
     testCase2.setTestCaseName("Adding invalid user with name empty");

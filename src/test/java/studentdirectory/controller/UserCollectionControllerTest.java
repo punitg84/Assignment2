@@ -4,20 +4,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import static studentdirectory.controller.UserCollectionController.addUser;
 import static studentdirectory.controller.UserCollectionController.deleteUser;
 import static studentdirectory.controller.UserCollectionController.getUserListSortedByOrder;
-import static studentdirectory.controller.UserController.createUser;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.controller.usercollectioncontrollertestcasestructure.AddUserTestCaseStructure;
 import studentdirectory.controller.usercollectioncontrollertestcasestructure.DeleteUserTestCaseStructure;
 import studentdirectory.controller.usercollectioncontrollertestcasestructure.GetUserListSortedByOrderTestCaseStructure;
-import studentdirectory.controller.usercontrollertestcasestructure.CreateUserTestCaseStructure;
 import studentdirectory.enums.Courses;
+import studentdirectory.enums.SortOrder;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
@@ -26,7 +24,7 @@ class UserCollectionControllerTest {
   private static Stream<AddUserTestCaseStructure> generateTestCaseForAddUser() {
     //Test Case 1 providing valid student
     AddUserTestCaseStructure testCase1 =
-        new AddUserTestCaseStructure("User 1", "10", "Address 1", "192",
+        new AddUserTestCaseStructure("User 1", "10", "Address 1 is a long value", "192",
             Arrays.asList("A", "B", "C", "E"));
     testCase1.setUserListSize(1);
     testCase1.setTestCaseName("Adding valid user");
@@ -115,8 +113,7 @@ class UserCollectionControllerTest {
     testCase.addUserInSortedUserList(thirdUser);
     testCase.addUserInSortedUserList(firstUser);
 
-    testCase.setAscending(false);
-    testCase.setOrder("AGE");
+    testCase.setOrder(SortOrder.AGE_DESC);
     testCase.setTestCaseName("Sorting by age in descending order");
 
     return Stream.of(testCase);
@@ -128,9 +125,8 @@ class UserCollectionControllerTest {
     for(User user:testCase.getRandomUserList()){
       userCollection.addUser(user);
     }
-    String order = testCase.getOrder();
-    boolean isAscending = testCase.isAscending();
-    List<User> actual = getUserListSortedByOrder(order,isAscending);
+    SortOrder order = testCase.getOrder();
+    List<User> actual = getUserListSortedByOrder(order);
     List<User> expected = testCase.getSortedUserList();
     assertEquals(expected,actual,testCase.getTestCaseName());
   }

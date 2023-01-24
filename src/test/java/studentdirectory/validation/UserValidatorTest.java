@@ -18,21 +18,21 @@ import studentdirectory.validation.uservalidatortestcasestructure.ValidateUserTe
 class UserValidatorTest {
   private static Stream<ValidateUserTestCaseStructure> generateTestCaseForValidateUser() {
     //Test Case 1 age negative
-    User user1 = new User("User 1", -10, "address 1", "rollNo 1",
+    User user1 = new User("User 1", -10, "address 1 is of more than 10 characters", "rollNo 1",
         Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     ValidateUserTestCaseStructure
         testCase1 = new ValidateUserTestCaseStructure();
     testCase1.setUser(user1);
-    testCase1.setErrMessage("Age cant be negative");
+    testCase1.setErrMessage("Age should not be less than 3");
     testCase1.setTestCaseName("Age negative");
 
     //Test Case 2 name empty
-    User user2 = new User("", -10, "address 1", "rollNo 1",
+    User user2 = new User("", 10, "address 1 is longer than 10 characters", "rollNo 1",
         Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.F));
     ValidateUserTestCaseStructure
         testCase2 = new ValidateUserTestCaseStructure();
     testCase2.setUser(user2);
-    testCase2.setErrMessage("name cant be empty");
+    testCase2.setErrMessage("Name cant be empty or null");
     testCase2.setTestCaseName("Empty name");
 
     //Test Case 3 valid user
@@ -41,7 +41,7 @@ class UserValidatorTest {
     ValidateUserTestCaseStructure
         testCase3 = new ValidateUserTestCaseStructure();
     testCase3.setUser(user3);
-    testCase3.setErrMessage("");
+    testCase3.setErrMessage("Address must be longer than 10 characters but less than 50 characters");
     testCase3.setTestCaseName("Valid user");
 
     return Stream.of(testCase1, testCase2, testCase3);
@@ -63,15 +63,15 @@ class UserValidatorTest {
     ValidateAgeNumericTestCaseStructure
         testCase1 = new ValidateAgeNumericTestCaseStructure();
     testCase1.setAge("random");
-    testCase1.setErrMessage("Age is not an integer");
+    testCase1.setErrMessage("Age needs to be a numeric value");
     testCase1.setTestCaseName("Non integral value");
 
     //Test Case 2 integral value
     ValidateAgeNumericTestCaseStructure
         testCase2 = new ValidateAgeNumericTestCaseStructure();
-    testCase1.setAge("5");
-    testCase1.setErrMessage("");
-    testCase1.setTestCaseName("integral value");
+    testCase2.setAge("5");
+    testCase2.setErrMessage("");
+    testCase2.setTestCaseName("integral value");
 
     return Stream.of(testCase1,testCase2);
   }
@@ -92,7 +92,7 @@ class UserValidatorTest {
     ValidateCoursesTestCaseStructure
         testCase1 = new ValidateCoursesTestCaseStructure();
     testCase1.setCourses(Arrays.asList("A", "B", "C", "C"));
-    testCase1.setErrMessage("Courses are need to be 4 distinct ones");
+    testCase1.setErrMessage("Courses are required to be 4 distinct");
     testCase1.setTestCaseName("Less than 4 courses");
 
     //Test Case 2 4 courses
@@ -106,7 +106,7 @@ class UserValidatorTest {
     ValidateCoursesTestCaseStructure
         testCase3 = new ValidateCoursesTestCaseStructure();
     testCase3.setCourses(Arrays.asList("A", "Random", "C", "F"));
-    testCase3.setErrMessage("Courses are need to be A B C D E or F");
+    testCase3.setErrMessage("Courses are need to have the following values only: A,B,C,D,E and F");
     testCase3.setTestCaseName("Invalid Course");
 
     return Stream.of(testCase1,testCase2,testCase3);

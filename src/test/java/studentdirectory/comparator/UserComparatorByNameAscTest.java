@@ -19,7 +19,7 @@ class UserComparatorByNameAscTest {
     CompareToTestCaseStructure testCase1 = new CompareToTestCaseStructure();
     testCase1.setFirstUser(firstUser1);
     testCase1.setSecondUser(secondUser1);
-    testCase1.setOutput(1);
+    testCase1.setOutput(-1);
     testCase1.setTestCaseName("User 1 name less than User 2 name");
 
     //Test Case 2 User 2 name less than User 1 name
@@ -28,7 +28,7 @@ class UserComparatorByNameAscTest {
     CompareToTestCaseStructure testCase2 = new CompareToTestCaseStructure();
     testCase2.setFirstUser(firstUser2);
     testCase2.setSecondUser(secondUser2);
-    testCase2.setOutput(-1);
+    testCase2.setOutput(1);
     testCase2.setTestCaseName("User 2 name less than User 1 name");
 
     //Test Case 3 Same name
@@ -39,7 +39,7 @@ class UserComparatorByNameAscTest {
     testCase3.setSecondUser(secondUser3);
     testCase3.setOutput(0);
     testCase3.setTestCaseName("User have same name");
-    return Stream.of(testCase1,testCase3);
+    return Stream.of(testCase1,testCase2,testCase3);
   }
 
   @ParameterizedTest

@@ -2,14 +2,14 @@ package studentdirectory.controller.usercollectioncontrollertestcasestructure;
 
 import java.util.ArrayList;
 import java.util.List;
+import studentdirectory.enums.SortOrder;
 import studentdirectory.models.User;
 import studentdirectory.testcasestructure.GenericTestCaseStructure;
 
 public class GetUserListSortedByOrderTestCaseStructure extends GenericTestCaseStructure {
   List<User> randomUserList = new ArrayList<>();
   List<User> sortedUserList = new ArrayList<>();
-  String order;
-  boolean isAscending;
+  SortOrder order;
 
   public List<User> getRandomUserList() {
     return randomUserList;
@@ -27,19 +27,12 @@ public class GetUserListSortedByOrderTestCaseStructure extends GenericTestCaseSt
     sortedUserList.add(user);
   }
 
-  public String getOrder() {
+  public SortOrder getOrder() {
     return order;
   }
 
-  public void setOrder(String order) {
+  public void setOrder(SortOrder order) {
     this.order = order;
   }
 
-  public boolean isAscending() {
-    return isAscending;
-  }
-
-  public void setAscending(boolean ascending) {
-    isAscending = ascending;
-  }
 }

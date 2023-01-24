@@ -1,23 +1,36 @@
 package studentdirectory.controller;
 
+import static studentdirectory.validation.UserCollectionValidator.validateRollNoPresent;
+import static studentdirectory.validation.UserCollectionValidator.validateRollNoAbsent;
+
+import java.util.ArrayList;
 import java.util.List;
+import studentdirectory.enums.SortOrder;
 import studentdirectory.models.User;
+import studentdirectory.models.UserCollection;
 
-public class UserCollectionController {
-  static void addUser(String name, String age, String address, String rollNo, List<String> courses) throws Exception{
-    //call controller and fetch object
-    //check for duplicate
-    //add to list
+public final class UserCollectionController {
+  public static void addUser(final String name, final String age, final String address,final String rollNo,
+                                       final List<String> courses) throws Exception{
+
+    final User user = UserController.createUser(name,age,address,rollNo,courses);
+    validateRollNoAbsent(rollNo);
+
+    final UserCollection userCollection = UserCollection.getInstance();
+    userCollection.addUser(user);
   }
 
-  static void deleteUser(String rollNo) throws Exception {
-    //check if present
-    //delete it
+  public static void deleteUser(final String rollNo) throws Exception {
+    validateRollNoPresent(rollNo);
+    final UserCollection userCollection = UserCollection.getInstance();
+    userCollection.deleteUser(rollNo);
   }
 
-  static List<User> getUserListSortedByOrder(String parameter, boolean isAscending){
-    //convert into enum
-    //run switch case to decide comparator and sort it using it
-    return null;
+  public static List<User> getUserListSortedByOrder(final SortOrder sortOrder){
+    return new ArrayList<>(UserCollection.getInstance().getUserList());
+  }
+
+  private UserCollectionController(){
+
   }
 }

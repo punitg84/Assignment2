@@ -7,6 +7,6 @@ public class UserComparatorByRollNoDesc implements Comparator<User> {
 
   @Override
   public int compare(User o1, User o2) {
-    return 0;
+    return o2.getRollNo().compareTo(o1.getRollNo());
   }
 }
