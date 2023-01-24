@@ -1,23 +1,14 @@
-package studentdirectory.controller.usercollectioncontrollertestcasestructure;
+package studentdirectory.controller.usercontrollertestscenario;
 
 import java.util.List;
-import studentdirectory.testcasestructure.GenericTestCaseStructure;
+import studentdirectory.testscenario.GenericTestScenario;
 
-public class AddUserTestCaseStructure extends GenericTestCaseStructure {
+public class CreateUserTestScenario extends GenericTestScenario {
   private String name;
   public String age;
   private String address;
   private String rollNo;
   private List<String> courses;
-  private int userListSize;
-
-  public int getUserListSize() {
-    return userListSize;
-  }
-
-  public void setUserListSize(int userListSize) {
-    this.userListSize = userListSize;
-  }
 
   public String getName() {
     return name;
@@ -39,7 +30,7 @@ public class AddUserTestCaseStructure extends GenericTestCaseStructure {
     return courses;
   }
 
-  public AddUserTestCaseStructure(String name, String age, String address, String rollNo, List<String> courses){
+  public CreateUserTestScenario(String name, String age, String address, String rollNo, List<String> courses){
     super();
     this.name=name;
     this.age=age;

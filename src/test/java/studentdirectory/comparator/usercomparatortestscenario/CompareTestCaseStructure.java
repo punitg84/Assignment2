@@ -1,4 +1,4 @@
-package studentdirectory.comparator.usercomparatortestcasestructure;
+package studentdirectory.comparator.usercomparatortestscenario;
 
 import studentdirectory.models.User;
 

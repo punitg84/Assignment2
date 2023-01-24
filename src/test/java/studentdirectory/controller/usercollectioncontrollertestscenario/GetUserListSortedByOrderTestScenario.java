@@ -1,12 +1,12 @@
-package studentdirectory.controller.usercollectioncontrollertestcasestructure;
+package studentdirectory.controller.usercollectioncontrollertestscenario;
 
 import java.util.ArrayList;
 import java.util.List;
 import studentdirectory.enums.SortOrder;
 import studentdirectory.models.User;
-import studentdirectory.testcasestructure.GenericTestCaseStructure;
+import studentdirectory.testscenario.GenericTestScenario;
 
-public class GetUserListSortedByOrderTestCaseStructure extends GenericTestCaseStructure {
+public class GetUserListSortedByOrderTestScenario extends GenericTestScenario {
   List<User> randomUserList = new ArrayList<>();
   List<User> sortedUserList = new ArrayList<>();
   SortOrder order;

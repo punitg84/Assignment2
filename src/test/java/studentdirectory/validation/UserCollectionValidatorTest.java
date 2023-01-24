@@ -12,16 +12,16 @@ import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.enums.Courses;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
-import studentdirectory.validation.usercollectionvalidatortestcasestructure.ValidateRollNoTestCaseStructure;
+import studentdirectory.validation.usercollectionvalidatortestscenario.ValidateRollNoTestScenario;
 
 class UserCollectionValidatorTest {
 
-  private static Stream<ValidateRollNoTestCaseStructure> generateTestCaseForValidateRollNoPresent() {
+  private static Stream<ValidateRollNoTestScenario> generateTestCaseForValidateRollNoPresent() {
     //Test Case 1 non duplicate users
     User user1 = new User("User 1", 10, "address 1", "rollNo 1",
         Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.F));
     String rollNo1 = "rollNo 2";
-    ValidateRollNoTestCaseStructure testCase1 = new ValidateRollNoTestCaseStructure();
+    ValidateRollNoTestScenario testCase1 = new ValidateRollNoTestScenario();
     testCase1.addUserInUserList(user1);
     testCase1.setRollNo(rollNo1);
     testCase1.setErrMessage("Roll No is not present in the database");
@@ -31,7 +31,7 @@ class UserCollectionValidatorTest {
     User user2 = new User("User 1", 10, "address 1", "rollNo 1",
         Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     String rollNo2 = "rollNo 1";
-    ValidateRollNoTestCaseStructure testCase2 = new ValidateRollNoTestCaseStructure();
+    ValidateRollNoTestScenario testCase2 = new ValidateRollNoTestScenario();
     testCase2.addUserInUserList(user2);
     testCase2.setRollNo(rollNo2);
     testCase2.setErrMessage("");
@@ -42,7 +42,7 @@ class UserCollectionValidatorTest {
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForValidateRollNoPresent")
-  void testValidateRollNoPresent(ValidateRollNoTestCaseStructure testCase) {
+  void testValidateRollNoPresent(ValidateRollNoTestScenario testCase) {
     UserCollection userCollection = UserCollection.getInstance();
     for (User user : testCase.getUserList()) {
       userCollection.addUser(user);
@@ -55,12 +55,12 @@ class UserCollectionValidatorTest {
     }
   }
 
-  private static Stream<ValidateRollNoTestCaseStructure> generateTestCaseForValidateRollNoAbsent() {
+  private static Stream<ValidateRollNoTestScenario> generateTestCaseForValidateRollNoAbsent() {
     //Test Case 1 non duplicate users
     User user1 = new User("User 1", 10, "address 1", "rollNo 1",
         Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.F));
     String rollNo1 = "rollNo 2";
-    ValidateRollNoTestCaseStructure testCase1 = new ValidateRollNoTestCaseStructure();
+    ValidateRollNoTestScenario testCase1 = new ValidateRollNoTestScenario();
     testCase1.addUserInUserList(user1);
     testCase1.setRollNo(rollNo1);
     testCase1.setErrMessage("");
@@ -70,7 +70,7 @@ class UserCollectionValidatorTest {
     User user2 = new User("User 1", 10, "address 1", "rollNo 1",
         Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     String rollNo2 = "rollNo 1";
-    ValidateRollNoTestCaseStructure testCase2 = new ValidateRollNoTestCaseStructure();
+    ValidateRollNoTestScenario testCase2 = new ValidateRollNoTestScenario();
     testCase2.addUserInUserList(user2);
     testCase2.setRollNo(rollNo2);
     testCase2.setErrMessage("Roll No is already present in the database");
@@ -81,7 +81,7 @@ class UserCollectionValidatorTest {
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForValidateRollNoAbsent")
-  void testValidateRollNoAbsent(ValidateRollNoTestCaseStructure testCase) {
+  void testValidateRollNoAbsent(ValidateRollNoTestScenario testCase) {
     UserCollection userCollection = UserCollection.getInstance();
     for (User user : testCase.getUserList()) {
       userCollection.addUser(user);

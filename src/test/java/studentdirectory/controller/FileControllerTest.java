@@ -4,25 +4,23 @@ import static org.junit.jupiter.api.Assertions.*;
 import static studentdirectory.controller.FileController.readUserDetailsFromFile;
 import static studentdirectory.controller.FileController.writeUserDetailsToFile;
 
-import jakarta.validation.constraints.AssertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import studentdirectory.controller.filecontrollertestcasestructure.ReadWriteUserDetailsToFileTestCaseStructure;
+import studentdirectory.controller.filecontrollertestscenario.ReadWriteUserDetailsToFileTestScenario;
 import studentdirectory.enums.Courses;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
 class FileControllerTest {
 
-  private static Stream<ReadWriteUserDetailsToFileTestCaseStructure> generateTestCaseForReadWriteUserDetailsToFile() {
+  private static Stream<ReadWriteUserDetailsToFileTestScenario> generateTestCaseForReadWriteUserDetailsToFile() {
     //Test Case
-    ReadWriteUserDetailsToFileTestCaseStructure testCase =
-        new ReadWriteUserDetailsToFileTestCaseStructure();
+    ReadWriteUserDetailsToFileTestScenario testCase =
+        new ReadWriteUserDetailsToFileTestScenario();
     User firstUser =
         new User("User 1", 10, "address 1", "Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     User secondUser =
@@ -36,7 +34,7 @@ class FileControllerTest {
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForReadWriteUserDetailsToFile")
-  void testReadWriteUserDetailsToFile(ReadWriteUserDetailsToFileTestCaseStructure testCase) {
+  void testReadWriteUserDetailsToFile(ReadWriteUserDetailsToFileTestScenario testCase) {
     UserCollection userCollection = UserCollection.getInstance();
     for(User user:testCase.getUserList()){
       userCollection.addUser(user);

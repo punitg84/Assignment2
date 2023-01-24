@@ -1,18 +1,18 @@
-package studentdirectory.models.usertestcasestructure;
+package studentdirectory.models.usertestscenario;
 
 import studentdirectory.models.User;
-import studentdirectory.testcasestructure.GenericTestCaseStructure;
+import studentdirectory.testscenario.GenericTestScenario;
 
-public class EqualsTestCaseStructure extends GenericTestCaseStructure {
+public class CompareToTestScenario extends GenericTestScenario {
   private User firstUser;
   private User secondUser;
-  private boolean output;
+  private int output;
 
-  public boolean getOutput() {
+  public int getOutput() {
     return output;
   }
 
-  public void setOutput(boolean output) {
+  public void setOutput(int output) {
     this.output = output;
   }
 

@@ -1,9 +1,9 @@
-package studentdirectory.controller.usercollectioncontrollertestcasestructure;
+package studentdirectory.controller.usercollectioncontrollertestscenario;
 
 import studentdirectory.models.User;
-import studentdirectory.testcasestructure.GenericTestCaseStructure;
+import studentdirectory.testscenario.GenericTestScenario;
 
-public class DeleteUserTestCaseStructure extends GenericTestCaseStructure {
+public class DeleteUserTestScenario extends GenericTestScenario {
   private User user;
   private String rollNoToDelete;
 

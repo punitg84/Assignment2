@@ -1,9 +1,9 @@
-package studentdirectory.models.usertestcasestructure;
+package studentdirectory.models.usertestscenario;
 
 import studentdirectory.models.User;
-import studentdirectory.testcasestructure.GenericTestCaseStructure;
+import studentdirectory.testscenario.GenericTestScenario;
 
-public class HashCodeTestCaseStructure extends GenericTestCaseStructure {
+public class HashCodeTestScenario extends GenericTestScenario {
   private User user;
   private int output;
 

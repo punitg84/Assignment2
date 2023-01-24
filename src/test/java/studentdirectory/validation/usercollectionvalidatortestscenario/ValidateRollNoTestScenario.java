@@ -1,11 +1,11 @@
-package studentdirectory.validation.usercollectionvalidatortestcasestructure;
+package studentdirectory.validation.usercollectionvalidatortestscenario;
 
 import java.util.ArrayList;
 import java.util.List;
 import studentdirectory.models.User;
-import studentdirectory.testcasestructure.GenericTestCaseStructure;
+import studentdirectory.testscenario.GenericTestScenario;
 
-public class ValidateRollNoTestCaseStructure extends GenericTestCaseStructure {
+public class ValidateRollNoTestScenario extends GenericTestScenario {
   private List<User> userList = new ArrayList<>();
   private String rollNo;
 

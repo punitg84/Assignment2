@@ -2,31 +2,28 @@ package studentdirectory.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.enums.Courses;
-import studentdirectory.models.usertestcasestructure.CompareToTestCaseStructure;
-import studentdirectory.models.usertestcasestructure.EqualsTestCaseStructure;
-import studentdirectory.models.usertestcasestructure.HashCodeTestCaseStructure;
+import studentdirectory.models.usertestscenario.CompareToTestScenario;
+import studentdirectory.models.usertestscenario.EqualsTestScenario;
+import studentdirectory.models.usertestscenario.HashCodeTestScenario;
 
 class UserTest {
 
-  private static Stream<HashCodeTestCaseStructure> generateTestCaseForHashCode(){
+  private static Stream<HashCodeTestScenario> generateTestCaseForHashCode(){
     //Test Case 1 Alpha Numeric Roll No
     User user1 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
-    HashCodeTestCaseStructure testCase1 = new HashCodeTestCaseStructure();
+    HashCodeTestScenario testCase1 = new HashCodeTestScenario();
     testCase1.setUser(user1);
     testCase1.setOutput(-1813876907);
     testCase1.setTestCaseName("Alpha Numeric Roll No");
 
     //Test Case 2 Numeric Roll No
     User user2 = new User("User 2",10,"address 2","8930", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
-    HashCodeTestCaseStructure testCase2 = new HashCodeTestCaseStructure();
+    HashCodeTestScenario testCase2 = new HashCodeTestScenario();
     testCase2.setUser(user2);
     testCase2.setOutput(1724702);
     testCase2.setTestCaseName("Numeric Roll No");
@@ -36,17 +33,17 @@ class UserTest {
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForHashCode")
-  void testHashCode(HashCodeTestCaseStructure testCase) {
+  void testHashCode(HashCodeTestScenario testCase) {
     User user = testCase.getUser();
     int actualOutput = user.hashCode();
     assertEquals(testCase.getOutput(),actualOutput,testCase.getTestCaseName());
   }
 
-  private static Stream<EqualsTestCaseStructure> generateTestCaseForEquals(){
+  private static Stream<EqualsTestScenario> generateTestCaseForEquals(){
     //Test Case 1 Same roll no
     User firstUser1 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     User secondUser1 = new User("User 2",18,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
-    EqualsTestCaseStructure testCase1 = new EqualsTestCaseStructure();
+    EqualsTestScenario testCase1 = new EqualsTestScenario();
     testCase1.setFirstUser(firstUser1);
     testCase1.setSecondUser(secondUser1);
     testCase1.setOutput(true);
@@ -55,7 +52,7 @@ class UserTest {
     //Test Case 2 Diff roll no
     User firstUser2 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     User secondUser2 = new User("User 2",18,"address 1","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
-    EqualsTestCaseStructure testCase2 = new EqualsTestCaseStructure();
+    EqualsTestScenario testCase2 = new EqualsTestScenario();
     testCase2.setFirstUser(firstUser2);
     testCase2.setSecondUser(secondUser2);
     testCase2.setOutput(false);
@@ -66,18 +63,18 @@ class UserTest {
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForEquals")
-  void testEquals(EqualsTestCaseStructure testCase) {
+  void testEquals(EqualsTestScenario testCase) {
     User firstUser = testCase.getFirstUser();
     User secondUser = testCase.getSecondUser();
     boolean actualOutput = firstUser.equals(secondUser);
     assertEquals(testCase.getOutput(),actualOutput,testCase.getTestCaseName());
   }
 
-  private static Stream<CompareToTestCaseStructure> generateTestForCompareTo(){
+  private static Stream<CompareToTestScenario> generateTestForCompareTo(){
     //Test Case 1 Same roll no Diff user name
     User firstUser1 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     User secondUser1 = new User("User 2",18,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
-    CompareToTestCaseStructure testCase1 = new CompareToTestCaseStructure();
+    CompareToTestScenario testCase1 = new CompareToTestScenario();
     testCase1.setFirstUser(firstUser1);
     testCase1.setSecondUser(secondUser1);
     testCase1.setOutput(-1);
@@ -86,7 +83,7 @@ class UserTest {
     //Test Case 2 Diff roll no Same user name
     User firstUser2 = new User("User 1",10,"address 1","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     User secondUser2 = new User("User 1",18,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
-    CompareToTestCaseStructure testCase2 = new CompareToTestCaseStructure();
+    CompareToTestScenario testCase2 = new CompareToTestScenario();
     testCase2.setFirstUser(firstUser2);
     testCase2.setSecondUser(secondUser2);
     testCase2.setOutput(1);
@@ -96,7 +93,7 @@ class UserTest {
   }
   @ParameterizedTest
   @MethodSource("generateTestForCompareTo")
-  void testCompareTo(CompareToTestCaseStructure testCase) {
+  void testCompareTo(CompareToTestScenario testCase) {
     User firstUser = testCase.getFirstUser();
     User secondUser = testCase.getSecondUser();
     int actualOutput = firstUser.compareTo(secondUser);

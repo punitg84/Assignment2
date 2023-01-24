@@ -11,9 +11,9 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import studentdirectory.controller.usercollectioncontrollertestcasestructure.AddUserTestCaseStructure;
-import studentdirectory.controller.usercollectioncontrollertestcasestructure.DeleteUserTestCaseStructure;
-import studentdirectory.controller.usercollectioncontrollertestcasestructure.GetUserListSortedByOrderTestCaseStructure;
+import studentdirectory.controller.usercollectioncontrollertestscenario.AddUserTestScenario;
+import studentdirectory.controller.usercollectioncontrollertestscenario.DeleteUserTestScenario;
+import studentdirectory.controller.usercollectioncontrollertestscenario.GetUserListSortedByOrderTestScenario;
 import studentdirectory.enums.Courses;
 import studentdirectory.enums.SortOrder;
 import studentdirectory.models.User;
@@ -21,17 +21,17 @@ import studentdirectory.models.UserCollection;
 
 class UserCollectionControllerTest {
 
-  private static Stream<AddUserTestCaseStructure> generateTestCaseForAddUser() {
+  private static Stream<AddUserTestScenario> generateTestCaseForAddUser() {
     //Test Case 1 providing valid student
-    AddUserTestCaseStructure testCase1 =
-        new AddUserTestCaseStructure("User 1", "10", "Address 1 is a long value", "192",
+    AddUserTestScenario testCase1 =
+        new AddUserTestScenario("User 1", "10", "Address 1 is a long value", "192",
             Arrays.asList("A", "B", "C", "E"));
     testCase1.setUserListSize(1);
     testCase1.setTestCaseName("Adding valid user");
 
     //Test Case 2 providing invalid student
-    AddUserTestCaseStructure testCase2 =
-        new AddUserTestCaseStructure("", "10", "Address 2", "193",
+    AddUserTestScenario testCase2 =
+        new AddUserTestScenario("", "10", "Address 2", "193",
             Arrays.asList("A", "B", "C", "E"));
     testCase2.setUserListSize(0);
     testCase2.setTestCaseName("Adding invalid user with name empty");
@@ -41,7 +41,7 @@ class UserCollectionControllerTest {
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForAddUser")
-  void testAddUser(AddUserTestCaseStructure testCase) {
+  void testAddUser(AddUserTestScenario testCase) {
     String name = testCase.getName();
     String address = testCase.getAddress();
     String age = testCase.getAge();
@@ -58,10 +58,10 @@ class UserCollectionControllerTest {
     }
   }
 
-  private static Stream<DeleteUserTestCaseStructure> generateTestCaseForDeleteUser() {
+  private static Stream<DeleteUserTestScenario> generateTestCaseForDeleteUser() {
     //Test Case 1 providing valid student roll no
-    DeleteUserTestCaseStructure testCase1 =
-        new DeleteUserTestCaseStructure();
+    DeleteUserTestScenario testCase1 =
+        new DeleteUserTestScenario();
     User user1 = new User("User 1", 10, "Address 1", "192",
         Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     testCase1.setUserListSize(0);
@@ -70,8 +70,8 @@ class UserCollectionControllerTest {
     testCase1.setTestCaseName("Deleting valid roll no");
 
     //Test Case 2 providing invalid student roll no
-    DeleteUserTestCaseStructure testCase2 =
-        new DeleteUserTestCaseStructure();
+    DeleteUserTestScenario testCase2 =
+        new DeleteUserTestScenario();
     User user2 = new User("User 2", 10, "Address 2", "192",
         Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     testCase2.setUserListSize(1);
@@ -84,7 +84,7 @@ class UserCollectionControllerTest {
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForDeleteUser")
-  void testDeleteUser(DeleteUserTestCaseStructure testCase) {
+  void testDeleteUser(DeleteUserTestScenario testCase) {
     User user = testCase.getUser();
     String rollNoToDelete = testCase.getRollNoToDelete();
     int expectedSize = testCase.getUserListSize();
@@ -98,12 +98,12 @@ class UserCollectionControllerTest {
       assertEquals(expectedSize, actualSize, testCase.getTestCaseName());
     }
   }
-  private static Stream<GetUserListSortedByOrderTestCaseStructure> generateTestCaseForGetUserListSortedByOrder(){
+  private static Stream<GetUserListSortedByOrderTestScenario> generateTestCaseForGetUserListSortedByOrder(){
     //Test Case
     User firstUser = new User("User 1",10,"address 2","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
     User secondUser = new User("User 2",18,"address 2","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
     User thirdUser = new User("User 3",17,"address 2","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
-    GetUserListSortedByOrderTestCaseStructure testCase = new GetUserListSortedByOrderTestCaseStructure();
+    GetUserListSortedByOrderTestScenario testCase = new GetUserListSortedByOrderTestScenario();
     //Random ordering
     testCase.addUserInRandomUserList(thirdUser);
     testCase.addUserInRandomUserList(firstUser);
@@ -120,7 +120,7 @@ class UserCollectionControllerTest {
   }
   @ParameterizedTest
   @MethodSource("generateTestCaseForGetUserListSortedByOrder")
-  void testGetUserListSortedByOrder(GetUserListSortedByOrderTestCaseStructure testCase) {
+  void testGetUserListSortedByOrder(GetUserListSortedByOrderTestScenario testCase) {
     UserCollection userCollection = UserCollection.getInstance();
     for(User user:testCase.getRandomUserList()){
       userCollection.addUser(user);

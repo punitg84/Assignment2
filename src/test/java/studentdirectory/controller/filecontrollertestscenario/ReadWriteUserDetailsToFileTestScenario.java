@@ -1,11 +1,11 @@
-package studentdirectory.controller.filecontrollertestcasestructure;
+package studentdirectory.controller.filecontrollertestscenario;
 
 import java.util.ArrayList;
 import java.util.List;
 import studentdirectory.models.User;
-import studentdirectory.testcasestructure.GenericTestCaseStructure;
+import studentdirectory.testscenario.GenericTestScenario;
 
-public class ReadWriteUserDetailsToFileTestCaseStructure extends GenericTestCaseStructure {
+public class ReadWriteUserDetailsToFileTestScenario extends GenericTestScenario {
   List<User> userList = new ArrayList<>();
 
   public List<User> getUserList() {

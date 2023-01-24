@@ -1,6 +1,6 @@
-package studentdirectory.testcasestructure;
+package studentdirectory.testscenario;
 
-public class GenericTestCaseStructure {
+public class GenericTestScenario {
   private String errMessage;
   private String testCaseName;
 
@@ -20,7 +20,7 @@ public class GenericTestCaseStructure {
     this.testCaseName = testCaseName;
   }
 
-  public GenericTestCaseStructure(){
+  public GenericTestScenario(){
     errMessage="";
     testCaseName="";
   }
