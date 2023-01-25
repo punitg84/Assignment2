@@ -7,8 +7,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public final class UserCollection implements Serializable {
-  private final Map<String, User> userMap = new TreeMap<>();
+
   private static final UserCollection USER_COLLECTION = new UserCollection();
+
+  private final Map<String, User> userMap = new TreeMap<>();
 
   public static UserCollection getInstance() {
     return USER_COLLECTION;

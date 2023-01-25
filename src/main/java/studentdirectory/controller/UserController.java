@@ -14,8 +14,8 @@ public class UserController {
                          final String rollNo,
                          final List<String> inputCourses) throws Exception {
     validateAgeNumeric(age);
-    final int numericAge = Integer.parseInt(age);
     validateCourses(inputCourses);
+    final int numericAge = Integer.parseInt(age);
     final List<Courses> coursesList =
         inputCourses.stream().map(Courses::valueOf).collect(Collectors.toList());
     final User user = new User(name, numericAge, address, rollNo, coursesList);

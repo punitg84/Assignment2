@@ -13,6 +13,26 @@ public class Main {
   private static Scanner scanner = new Scanner(System.in);
   private static boolean isUserExited;
 
+  public static void main(String[] args) {
+    loadData();
+    do {
+      showMenu();
+    } while (!isUserExited);
+  }
+
+  static void loadData() {
+    try {
+      FileController.readUserDetailsFromFile();
+    } catch (Exception e) {
+      showErrors(e.getMessage());
+    }
+  }
+
+  static void showErrors(final String errMessage) {
+    System.out.println("The given request could not be processed due to the following error:");
+    System.out.println(errMessage);
+  }
+
   static void showMenu() {
     System.out.println(
         "Select one of the 5 options available by entering number\n" + "1. Add User Details\n" +
@@ -41,11 +61,6 @@ public class Main {
     }
   }
 
-  static void showErrors(final String errMessage) {
-    System.out.println("The given request could not be processed due to the following error:");
-    System.out.println(errMessage);
-  }
-
   static void addUser() throws Exception {
     System.out.println(
         "Give the input in following order line by line\n" + "1. Full name\n" + "2. Age\n" +
@@ -66,15 +81,6 @@ public class Main {
     System.out.println("The User got entered successfully");
   }
 
-  static void deleteUser() throws Exception {
-    System.out.println("Enter the roll no of the user to be deleted");
-    final String rollNo = scanner.nextLine();
-
-    UserCollectionController.deleteUser(rollNo);
-
-    System.out.println("The User got deleted successfully");
-  }
-
   static void displayUser() throws Exception {
     System.out.println("Select order in which data needs to be sorted\n" +
         "1. According to age in ascending order\n" + "2. According to age in descending order\n" +
@@ -91,6 +97,16 @@ public class Main {
 
     System.out.println(UserCollectionController.getUserListSortedByOrder(sortOrder));
   }
+
+  static void deleteUser() throws Exception {
+    System.out.println("Enter the roll no of the user to be deleted");
+    final String rollNo = scanner.nextLine();
+
+    UserCollectionController.deleteUser(rollNo);
+
+    System.out.println("The User got deleted successfully");
+  }
+
 
   static void saveUser() throws Exception {
     System.out.println("All the User details are being save to the file...");
@@ -113,18 +129,4 @@ public class Main {
     isUserExited = true;
   }
 
-  static void loadData() {
-    try {
-      FileController.readUserDetailsFromFile();
-    } catch (Exception e) {
-      showErrors(e.getMessage());
-    }
-  }
-
-  public static void main(String[] args) {
-    loadData();
-    do {
-      showMenu();
-    } while (!isUserExited);
-  }
 }

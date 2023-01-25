@@ -17,20 +17,20 @@ public enum SortOrder {
 
   private static final Map<Integer, SortOrder> lookup = new HashMap<Integer, SortOrder>();
 
+  private final int code;
+
   static {
     for (SortOrder order : EnumSet.allOf(SortOrder.class)) {
       lookup.put(order.getCode(), order);
     }
   }
 
-  private final int code;
+  SortOrder(int code) {
+    this.code = code;
+  }
 
   private int getCode() {
     return code;
-  }
-
-  SortOrder(int code) {
-    this.code = code;
   }
 
   public static SortOrder get(int code) {

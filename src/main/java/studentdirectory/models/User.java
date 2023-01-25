@@ -26,6 +26,15 @@ public class User implements Serializable, Comparable<User> {
   @Size(min = 4, max = 4)
   private final List<Courses> courses;
 
+  public User(final String name, final int age, final String address, final String rollNo,
+              final List<Courses> courses) {
+    this.name = name;
+    this.age = age;
+    this.address = address;
+    this.rollNo = rollNo;
+    this.courses = courses;
+  }
+
   public String getName() {
     return name;
   }
@@ -40,15 +49,6 @@ public class User implements Serializable, Comparable<User> {
 
   public String getAddress() {
     return address;
-  }
-
-  public User(final String name, final int age, final String address, final String rollNo,
-              final List<Courses> courses) {
-    this.name = name;
-    this.age = age;
-    this.address = address;
-    this.rollNo = rollNo;
-    this.courses = courses;
   }
 
   @Override
@@ -69,16 +69,16 @@ public class User implements Serializable, Comparable<User> {
   }
 
   @Override
-  public String toString() {
-    return "Student{" + "name='" + name + '\'' + ", age=" + age + ", address='" + address + '\''
-        + ", rollNo=" + rollNo + ", courses=" + courses + '}';
-  }
-
-  @Override
   public int compareTo(final User o) {
     if (name.equals(o.getName())) {
       return rollNo.compareTo(o.getRollNo());
     }
     return name.compareTo(o.getName());
+  }
+
+  @Override
+  public String toString() {
+    return "Student{" + "name='" + name + '\'' + ", age=" + age + ", address='" + address + '\''
+        + ", rollNo=" + rollNo + ", courses=" + courses + '}';
   }
 }

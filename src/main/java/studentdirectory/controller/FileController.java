@@ -15,7 +15,7 @@ import studentdirectory.models.UserCollection;
 
 public class FileController {
   public static void writeUserDetailsToFile() throws Exception {
-    final String home = System.getProperty("user.home");
+    final String home = new File("").getAbsolutePath();
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
         new BufferedOutputStream(Files.newOutputStream(Paths.get(home + FILE_PATH))))) {
       final UserCollection userCollection = UserCollection.getInstance();
