@@ -2,7 +2,6 @@ package studentdirectory;
 
 import static studentdirectory.validation.InputValidator.sortOptionValidator;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,7 +20,7 @@ public class Main {
     }
   }
 
-  static void loadData() {
+  private static void loadData() {
     try {
       FileController.readUserDetailsFromFile();
     } catch (Exception e) {
@@ -30,12 +29,12 @@ public class Main {
     }
   }
 
-  static void showErrors(final String errMessage) {
+  private static void showErrors(final String errMessage) {
     System.out.println("The given request could not be processed due to the following error:");
     System.out.println(errMessage);
   }
 
-  static void showMenu() {
+  private static void showMenu() {
     System.out.println(
         "Select one of the 5 options available by entering number\n" + "1. Add User Details\n" +
             "2. Display User Details\n" + "3. Delete User Details\n" + "4. Save User Details\n" +
@@ -43,7 +42,7 @@ public class Main {
     selectOptionFromMenu();
   }
 
-  static void selectOptionFromMenu() {
+  private static void selectOptionFromMenu() {
     try {
       final String option = scanner.nextLine();
       switch (option) {
@@ -63,7 +62,7 @@ public class Main {
     }
   }
 
-  static void addUser() throws Exception {
+  private static void addUser() throws Exception {
     System.out.println(
         "Give the input in following order line by line\n" + "1. Full name\n" + "2. Age\n" +
             "3. Roll No\n" + "4. Address\n" + "5. 4 courses from A,B,C,D,E or F in 4 lines");
@@ -83,7 +82,7 @@ public class Main {
     System.out.println("The User got entered successfully");
   }
 
-  static void displayUser() throws Exception {
+  private static void displayUser() throws Exception {
     System.out.println("Select order in which data needs to be sorted\n" +
         "1. According to age in ascending order\n" + "2. According to age in descending order\n" +
         "3. According to name in ascending order\n" + "4. According to name in descending order\n" +
@@ -100,7 +99,7 @@ public class Main {
     System.out.println(UserCollectionController.getUserListSortedByOrder(sortOrder));
   }
 
-  static void deleteUser() throws Exception {
+  private static void deleteUser() throws Exception {
     System.out.println("Enter the roll no of the user to be deleted");
     final String rollNo = scanner.nextLine();
 
@@ -110,7 +109,7 @@ public class Main {
   }
 
 
-  static void saveUser() throws Exception {
+  private static void saveUser() throws Exception {
     System.out.println("All the User details are being save to the file...");
 
     FileController.writeUserDetailsToFile();
@@ -118,7 +117,7 @@ public class Main {
     System.out.println("The Details have been successfully saved");
   }
 
-  static void exitUser() throws Exception {
+  private static void exitUser() throws Exception {
     System.out.println(
         "Do you wish to save the details, Enter yes if interested or else press enter");
 

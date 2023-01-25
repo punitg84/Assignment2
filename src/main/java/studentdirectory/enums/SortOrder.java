@@ -15,17 +15,17 @@ public enum SortOrder {
   ROLL_NO_ASC(7),
   ROLL_NO_DESC(8);
 
-  private static final Map<Integer, SortOrder> lookup = new HashMap<Integer, SortOrder>();
+  private static final Map<Integer, SortOrder> INTEGER_SORT_ORDER_MAP = new HashMap<>();
 
   private final int code;
 
   static {
-    for (SortOrder order : EnumSet.allOf(SortOrder.class)) {
-      lookup.put(order.getCode(), order);
+    for (final SortOrder order : EnumSet.allOf(SortOrder.class)) {
+      INTEGER_SORT_ORDER_MAP.put(order.getCode(), order);
     }
   }
 
-  SortOrder(int code) {
+  SortOrder(final int code) {
     this.code = code;
   }
 
@@ -33,7 +33,7 @@ public enum SortOrder {
     return code;
   }
 
-  public static SortOrder get(int code) {
-    return lookup.get(code);
+  public static SortOrder get(final int code) {
+    return INTEGER_SORT_ORDER_MAP.get(code);
   }
 }

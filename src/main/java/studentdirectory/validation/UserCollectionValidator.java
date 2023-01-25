@@ -1,7 +1,6 @@
 package studentdirectory.validation;
 
 import java.util.Map;
-import java.util.TreeMap;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 

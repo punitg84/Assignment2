@@ -35,7 +35,7 @@ public final class UserCollectionController {
   }
 
   public static List<User> getUserListSortedByOrder(final SortOrder sortOrder) {
-    List<User> userList = UserCollection.getInstance().getUserList();
+    final List<User> userList = UserCollection.getInstance().getUserList();
     switch (sortOrder) {
       case AGE_ASC -> userList.sort(new UserComparatorByAgeAsc());
       case AGE_DESC -> userList.sort(new UserComparatorByAgeDesc());

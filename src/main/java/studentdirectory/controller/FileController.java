@@ -51,7 +51,7 @@ public class FileController {
 
   private static void createNewFile() throws Exception {
     try {
-      File fileObj = new File(APPLICATION_PATH + FILE_PATH);
+      final File fileObj = new File(APPLICATION_PATH + FILE_PATH);
       fileObj.createNewFile();
     } catch (Exception e) {
       throw new Exception("File is not available and can't be created");
