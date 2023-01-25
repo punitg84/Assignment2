@@ -348,4 +348,4 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/vim,node,macos,maven,gradle,windows,eclipse,intellij+all,visualstudiocode
 
 # Ignore files of db
-.ser
+*.ser
