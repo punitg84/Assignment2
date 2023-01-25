@@ -32,7 +32,7 @@ public class UserValidator {
 
   public static void validateCourses(final List<String> courses) throws Exception {
     final HashSet<String> coursesSet = new HashSet<>(courses);
-    if (coursesSet.size() != Course.REQUIRED_LIMIT) {
+    if (coursesSet.size() != Course.REQUIRED_LIMIT_FOR_USER) {
       throw new Exception("Courses are required to be 4 distinct");
     }
     try {

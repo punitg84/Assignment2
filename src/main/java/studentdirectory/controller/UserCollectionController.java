@@ -3,8 +3,15 @@ package studentdirectory.controller;
 import static studentdirectory.validation.UserCollectionValidator.validateRollNoPresent;
 import static studentdirectory.validation.UserCollectionValidator.validateRollNoAbsent;
 
-import java.util.ArrayList;
 import java.util.List;
+import studentdirectory.comparator.UserComparatorByAddressAsc;
+import studentdirectory.comparator.UserComparatorByAddressDesc;
+import studentdirectory.comparator.UserComparatorByAgeAsc;
+import studentdirectory.comparator.UserComparatorByAgeDesc;
+import studentdirectory.comparator.UserComparatorByNameAsc;
+import studentdirectory.comparator.UserComparatorByNameDesc;
+import studentdirectory.comparator.UserComparatorByRollNoAsc;
+import studentdirectory.comparator.UserComparatorByRollNoDesc;
 import studentdirectory.enums.SortOrder;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
@@ -28,7 +35,18 @@ public final class UserCollectionController {
   }
 
   public static List<User> getUserListSortedByOrder(final SortOrder sortOrder) {
-    return new ArrayList<>(UserCollection.getInstance().getUserList());
+    List<User> userList = UserCollection.getInstance().getUserList();
+    switch (sortOrder) {
+      case AGE_ASC -> userList.sort(new UserComparatorByAgeAsc());
+      case AGE_DESC -> userList.sort(new UserComparatorByAgeDesc());
+      case NAME_ASC -> userList.sort(new UserComparatorByNameAsc());
+      case NAME_DESC -> userList.sort(new UserComparatorByNameDesc());
+      case ROLL_NO_ASC -> userList.sort(new UserComparatorByRollNoAsc());
+      case ROLL_NO_DESC -> userList.sort(new UserComparatorByRollNoDesc());
+      case ADDRESS_ASC -> userList.sort(new UserComparatorByAddressAsc());
+      case ADDRESS_DESC -> userList.sort(new UserComparatorByAddressDesc());
+    }
+    return userList;
   }
 
   private UserCollectionController() {

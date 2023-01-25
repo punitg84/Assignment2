@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public final class UserCollection implements Serializable {
+public final class UserCollection {
 
   private static final UserCollection USER_COLLECTION = new UserCollection();
 

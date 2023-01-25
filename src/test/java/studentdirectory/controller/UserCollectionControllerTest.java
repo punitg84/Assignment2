@@ -101,11 +101,11 @@ class UserCollectionControllerTest {
 
   private static Stream<GetUserListSortedByOrderTestScenario> generateTestCaseForGetUserListSortedByOrder() {
     //Test Case
-    User firstUser = new User("User 1", 10, "address 2", "Roll No 1",
+    User firstUser = new User("User 1", 10, "address 2 is a long address", "Roll No 1",
         Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
-    User secondUser = new User("User 2", 18, "address 2", "Roll No 3",
+    User secondUser = new User("User 2", 18, "address 2 is a long address", "Roll No 2",
         Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
-    User thirdUser = new User("User 3", 17, "address 2", "Roll No 3",
+    User thirdUser = new User("User 3", 17, "address 2 is a long address", "Roll No 3",
         Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
     GetUserListSortedByOrderTestScenario testCase = new GetUserListSortedByOrderTestScenario();
     //Random ordering

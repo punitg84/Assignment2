@@ -11,8 +11,7 @@ import studentdirectory.models.User;
 
 public class UserController {
   static User createUser(final String name, final String age, final String address,
-                         final String rollNo,
-                         final List<String> inputCourses) throws Exception {
+                         final String rollNo, final List<String> inputCourses) throws Exception {
     validateAgeNumeric(age);
     validateCourses(inputCourses);
     final int numericAge = Integer.parseInt(age);

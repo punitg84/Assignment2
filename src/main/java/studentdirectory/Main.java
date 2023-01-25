@@ -2,6 +2,7 @@ package studentdirectory;
 
 import static studentdirectory.validation.InputValidator.sortOptionValidator;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,9 +16,9 @@ public class Main {
 
   public static void main(String[] args) {
     loadData();
-    do {
+    while (!isUserExited) {
       showMenu();
-    } while (!isUserExited);
+    }
   }
 
   static void loadData() {
@@ -25,6 +26,7 @@ public class Main {
       FileController.readUserDetailsFromFile();
     } catch (Exception e) {
       showErrors(e.getMessage());
+      isUserExited = true;
     }
   }
 
