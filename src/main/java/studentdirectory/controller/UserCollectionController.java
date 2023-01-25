@@ -18,12 +18,9 @@ import studentdirectory.models.UserCollection;
 
 public final class UserCollectionController {
   public static void addUser(final String name, final String age, final String address,
-                             final String rollNo,
-                             final List<String> courses) throws Exception {
-
+                             final String rollNo, final List<String> courses) throws Exception {
     final User user = UserController.createUser(name, age, address, rollNo, courses);
     validateRollNoAbsent(rollNo);
-
     final UserCollection userCollection = UserCollection.getInstance();
     userCollection.addUser(user);
   }

@@ -10,19 +10,23 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
 public class FileController {
 
   private static final String APPLICATION_PATH = new File("").getAbsolutePath();
+  private static final Path path = Paths.get(APPLICATION_PATH, FILE_PATH);
 
   public static void writeUserDetailsToFile() throws Exception {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
-        new BufferedOutputStream(Files.newOutputStream(Paths.get(APPLICATION_PATH + FILE_PATH))))) {
-      final UserCollection userCollection = UserCollection.getInstance();
-      for (final User user : userCollection.getUserList()) {
+        new BufferedOutputStream(Files.newOutputStream(path)))) {
+      final List<User> userList = UserCollection.getInstance().getUserList();
+      outputStream.writeObject(userList.size());
+      for (final User user : userList) {
         outputStream.writeObject(user);
       }
     } catch (NoSuchFileException e) {
@@ -34,16 +38,20 @@ public class FileController {
 
   public static void readUserDetailsFromFile() throws Exception {
     try (ObjectInputStream inputStream = new ObjectInputStream(
-        new BufferedInputStream(Files.newInputStream(Paths.get(APPLICATION_PATH + FILE_PATH))))) {
+        new BufferedInputStream(Files.newInputStream(path)))) {
+      int userListSize = (int) inputStream.readObject();
       final UserCollection userCollection = UserCollection.getInstance();
-      while (true) {
+      while (userListSize-- != 0) {
         final User user = (User) inputStream.readObject();
         userCollection.addUser(user);
       }
     } catch (NoSuchFileException e) {
       createNewFile();
     } catch (EOFException e) {
-      // Data read in this case
+      File file = new File(path.toUri());
+      if (file.length() != 0) {
+        throw new Exception("Error while reading data, Terminating");
+      }
     } catch (Exception e) {
       throw new Exception("Not Able to process the file hence terminating");
     }
@@ -51,7 +59,7 @@ public class FileController {
 
   private static void createNewFile() throws Exception {
     try {
-      final File fileObj = new File(APPLICATION_PATH + FILE_PATH);
+      final File fileObj = new File(path.toUri());
       fileObj.createNewFile();
     } catch (Exception e) {
       throw new Exception("File is not available and can't be created");

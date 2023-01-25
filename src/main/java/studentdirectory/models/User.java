@@ -35,6 +35,10 @@ public class User implements Serializable, Comparable<User> {
     this.courses = courses;
   }
 
+  public static User CreateUserWithRollNo(String rollNo) {
+    return new User("", 0, "", rollNo,null);
+  }
+
   public String getName() {
     return name;
   }

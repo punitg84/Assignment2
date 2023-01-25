@@ -1,38 +1,39 @@
 package studentdirectory.models;
 
+import static studentdirectory.models.User.CreateUserWithRollNo;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public final class UserCollection {
 
   private static final UserCollection USER_COLLECTION = new UserCollection();
 
-  private final Map<String, User> userMap = new TreeMap<>();
+  private final HashSet<User> userSet = new HashSet<>();
 
   public static UserCollection getInstance() {
     return USER_COLLECTION;
   }
 
   public void addUser(final User user) {
-    userMap.put(user.getRollNo(), user);
+    userSet.add(user);
   }
 
   public void deleteUser(final String rollNo) {
-    userMap.remove(rollNo);
+    userSet.remove(CreateUserWithRollNo(rollNo));
+  }
+
+  public boolean isUserWithGivenRollNoPresent(final String rollNo) {
+    return userSet.contains(CreateUserWithRollNo(rollNo));
   }
 
   public void clearUserList() {
-    userMap.clear();
+    userSet.clear();
   }
 
   public List<User> getUserList() {
-    return new ArrayList<>(userMap.values());
-  }
-
-  public Map<String, User> getUserMap() {
-    return userMap;
+    return new ArrayList<>(userSet);
   }
 
   private UserCollection() {

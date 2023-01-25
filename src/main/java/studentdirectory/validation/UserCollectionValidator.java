@@ -1,7 +1,5 @@
 package studentdirectory.validation;
 
-import java.util.Map;
-import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
 public class UserCollectionValidator {
@@ -19,9 +17,7 @@ public class UserCollectionValidator {
   }
 
   private static boolean isRollNoPresent(final String rollNo) {
-    final UserCollection userCollection = UserCollection.getInstance();
-    final Map<String, User> userMap = userCollection.getUserMap();
-    return userMap.containsKey(rollNo);
+    return UserCollection.getInstance().isUserWithGivenRollNoPresent(rollNo);
   }
 
 }
