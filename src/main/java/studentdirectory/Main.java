@@ -87,7 +87,7 @@ public class Main {
     final String option = scanner.nextLine();
     sortOptionValidator(option);
     final int optionNumber = Integer.parseInt(option);
-    final SortOrder sortOrder = SortOrder.values()[optionNumber - 1];
+    final SortOrder sortOrder = SortOrder.get(optionNumber);
 
     System.out.println(UserCollectionController.getUserListSortedByOrder(sortOrder));
   }

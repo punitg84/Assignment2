@@ -38,11 +38,11 @@ class UserControllerTest {
     String age = testCase.getAge();
     List<String> courses = testCase.getCourses();
     String rollNo = testCase.getRollNo();
-    try{
-      createUser(name,age,address,rollNo,courses);
-      assertEquals(testCase.getErrMessage(),"",testCase.getTestCaseName());
-    }catch(Exception e){
-      assertEquals(testCase.getErrMessage(),e.getMessage(),testCase.getTestCaseName());
+    try {
+      createUser(name, age, address, rollNo, courses);
+      assertEquals(testCase.getErrMessage(), "", testCase.getTestCaseName());
+    } catch (Exception e) {
+      assertEquals(testCase.getErrMessage(), e.getMessage(), testCase.getTestCaseName());
     }
   }
 }

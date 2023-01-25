@@ -12,16 +12,18 @@ public class User implements Serializable, Comparable<User> {
 
   @NotEmpty(message = "Name cant be empty or null")
   private final String name;
+
   @Min(value = 3, message = "Age should not be less than 3")
   @Max(value = 100, message = "Age should not be greater than 100")
   private final int age;
-  @Size(min = 10, max = 50, message
-      = "Address must be longer than 10 characters but less than 50 characters")
+
+  @Size(min = 10, max = 50, message = "Address must be longer than 10 characters but less than 50 characters")
   private final String address;
 
   @NotEmpty(message = "Roll No cannot be empty")
   private final String rollNo;
-  @Size(min=4, max=4)
+
+  @Size(min = 4, max = 4)
   private final List<Courses> courses;
 
   public String getName() {
@@ -40,12 +42,13 @@ public class User implements Serializable, Comparable<User> {
     return address;
   }
 
-  public User(final String name, final int age, final String address, final String rollNo, final List<Courses> courses){
-    this.name=name;
-    this.age=age;
-    this.address=address;
-    this.rollNo=rollNo;
-    this.courses=courses;
+  public User(final String name, final int age, final String address, final String rollNo,
+              final List<Courses> courses) {
+    this.name = name;
+    this.age = age;
+    this.address = address;
+    this.rollNo = rollNo;
+    this.courses = courses;
   }
 
   @Override
@@ -67,18 +70,13 @@ public class User implements Serializable, Comparable<User> {
 
   @Override
   public String toString() {
-    return "Student{" +
-        "name='" + name + '\'' +
-        ", age=" + age +
-        ", address='" + address + '\'' +
-        ", rollNo=" + rollNo +
-        ", courses=" + courses +
-        '}';
+    return "Student{" + "name='" + name + '\'' + ", age=" + age + ", address='" + address + '\''
+        + ", rollNo=" + rollNo + ", courses=" + courses + '}';
   }
 
   @Override
   public int compareTo(final User o) {
-    if(name.equals(o.getName())){
+    if (name.equals(o.getName())) {
       return rollNo.compareTo(o.getRollNo());
     }
     return name.compareTo(o.getName());

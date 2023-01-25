@@ -22,9 +22,11 @@ class FileControllerTest {
     ReadWriteUserDetailsToFileTestScenario testCase =
         new ReadWriteUserDetailsToFileTestScenario();
     User firstUser =
-        new User("User 1", 10, "address 1", "Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
+        new User("User 1", 10, "address 1", "Roll No 1",
+            Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     User secondUser =
-        new User("User 2", 18, "address 2", "Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
+        new User("User 2", 18, "address 2", "Roll No 1",
+            Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     testCase.addUser(firstUser);
     testCase.addUser(secondUser);
     testCase.setTestCaseName("Adding user in file and then reading them");
@@ -36,18 +38,18 @@ class FileControllerTest {
   @MethodSource("generateTestCaseForReadWriteUserDetailsToFile")
   void testReadWriteUserDetailsToFile(ReadWriteUserDetailsToFileTestScenario testCase) {
     UserCollection userCollection = UserCollection.getInstance();
-    for(User user:testCase.getUserList()){
+    for (User user : testCase.getUserList()) {
       userCollection.addUser(user);
     }
-    try{
+    try {
       writeUserDetailsToFile();
       List<User> oldData = new ArrayList<>(userCollection.getUserList());
       userCollection.clearUserList();
       readUserDetailsFromFile();
       List<User> newData = new ArrayList<>(userCollection.getUserList());
       assertEquals(oldData, newData, testCase.getTestCaseName());
-    }catch(Exception e){
-      assertEquals(testCase.getErrMessage(),e.getMessage(),testCase.getTestCaseName());
+    } catch (Exception e) {
+      assertEquals(testCase.getErrMessage(), e.getMessage(), testCase.getTestCaseName());
     }
   }
 }

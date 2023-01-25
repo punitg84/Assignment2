@@ -20,9 +20,9 @@ public class GenericTestScenario {
     this.testCaseName = testCaseName;
   }
 
-  public GenericTestScenario(){
-    errMessage="";
-    testCaseName="";
+  public GenericTestScenario() {
+    errMessage = "";
+    testCaseName = "";
   }
 
 }

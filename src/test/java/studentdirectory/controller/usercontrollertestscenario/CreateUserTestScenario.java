@@ -30,12 +30,13 @@ public class CreateUserTestScenario extends GenericTestScenario {
     return courses;
   }
 
-  public CreateUserTestScenario(String name, String age, String address, String rollNo, List<String> courses){
+  public CreateUserTestScenario(String name, String age, String address, String rollNo,
+                                List<String> courses) {
     super();
-    this.name=name;
-    this.age=age;
-    this.address=address;
-    this.rollNo=rollNo;
-    this.courses=courses;
+    this.name = name;
+    this.age = age;
+    this.address = address;
+    this.rollNo = rollNo;
+    this.courses = courses;
   }
 }

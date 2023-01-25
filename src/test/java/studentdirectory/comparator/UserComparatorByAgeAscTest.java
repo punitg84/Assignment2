@@ -11,10 +11,12 @@ import studentdirectory.models.User;
 import studentdirectory.models.usertestscenario.CompareToTestScenario;
 
 class UserComparatorByAgeAscTest {
-  private static Stream<CompareToTestScenario> generateTestForCompare(){
+  private static Stream<CompareToTestScenario> generateTestForCompare() {
     //Test Case 1 User 1 age less than User 2 age
-    User firstUser1 = new User("User 1",10,"address 1","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
-    User secondUser1 = new User("User 2",18,"address 2","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
+    User firstUser1 = new User("User 1", 10, "address 1", "Roll No 1",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+    User secondUser1 = new User("User 2", 18, "address 2", "Roll No 1",
+        Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
     CompareToTestScenario testCase1 = new CompareToTestScenario();
     testCase1.setFirstUser(firstUser1);
     testCase1.setSecondUser(secondUser1);
@@ -22,8 +24,10 @@ class UserComparatorByAgeAscTest {
     testCase1.setTestCaseName("User 1 age less than User 2 age");
 
     //Test Case 2 User 2 age less than User 1 age
-    User firstUser2 = new User("User 1",16,"address 2","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
-    User secondUser2 = new User("User 2",1,"address 1","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
+    User firstUser2 = new User("User 1", 16, "address 2", "Roll No 1",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+    User secondUser2 = new User("User 2", 1, "address 1", "Roll No 3",
+        Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
     CompareToTestScenario testCase2 = new CompareToTestScenario();
     testCase2.setFirstUser(firstUser2);
     testCase2.setSecondUser(secondUser2);
@@ -31,14 +35,16 @@ class UserComparatorByAgeAscTest {
     testCase2.setTestCaseName("User 2 age less than User 1 age");
 
     //Test Case 3 Same address
-    User firstUser3 = new User("User 1",10,"address 2","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
-    User secondUser3 = new User("User 2",10,"address 2","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
+    User firstUser3 = new User("User 1", 10, "address 2", "Roll No 1",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+    User secondUser3 = new User("User 2", 10, "address 2", "Roll No 3",
+        Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
     CompareToTestScenario testCase3 = new CompareToTestScenario();
     testCase3.setFirstUser(firstUser3);
     testCase3.setSecondUser(secondUser3);
     testCase3.setOutput(0);
     testCase3.setTestCaseName("User have same age");
-    return Stream.of(testCase1,testCase2,testCase3);
+    return Stream.of(testCase1, testCase2, testCase3);
   }
 
   @ParameterizedTest
@@ -47,7 +53,7 @@ class UserComparatorByAgeAscTest {
     UserComparatorByAgeAsc comparator = new UserComparatorByAgeAsc();
     User firstUser = testCase.getFirstUser();
     User secondUser = testCase.getSecondUser();
-    int actualOutput = comparator.compare(firstUser,secondUser);
-    assertEquals(testCase.getOutput(),actualOutput,testCase.getTestCaseName());
+    int actualOutput = comparator.compare(firstUser, secondUser);
+    assertEquals(testCase.getOutput(), actualOutput, testCase.getTestCaseName());
   }
 }

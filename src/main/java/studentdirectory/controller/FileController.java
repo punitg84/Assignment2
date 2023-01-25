@@ -5,6 +5,7 @@ import static studentdirectory.constants.Path.FILE_PATH;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.EOFException;
+import java.io.File;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
@@ -27,7 +28,7 @@ public class FileController {
   }
 
   public static void readUserDetailsFromFile() throws Exception {
-    final String home = System.getProperty("user.home");
+    final String home = new File("").getAbsolutePath();
     try (ObjectInputStream inputStream = new ObjectInputStream(
         new BufferedInputStream(Files.newInputStream(Paths.get(home + FILE_PATH))))) {
       final UserCollection userCollection = UserCollection.getInstance();

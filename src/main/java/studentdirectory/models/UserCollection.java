@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public final class UserCollection implements Serializable {
-  private final Map<String,User> userMap = new TreeMap<>();
+  private final Map<String, User> userMap = new TreeMap<>();
   private static final UserCollection USER_COLLECTION = new UserCollection();
 
   public static UserCollection getInstance() {
@@ -15,7 +15,7 @@ public final class UserCollection implements Serializable {
   }
 
   public void addUser(final User user) {
-    userMap.put(user.getRollNo(),user);
+    userMap.put(user.getRollNo(), user);
   }
 
   public void deleteUser(final String rollNo) {

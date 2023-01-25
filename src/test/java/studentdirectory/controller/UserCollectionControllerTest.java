@@ -63,7 +63,7 @@ class UserCollectionControllerTest {
     DeleteUserTestScenario testCase1 =
         new DeleteUserTestScenario();
     User user1 = new User("User 1", 10, "Address 1", "192",
-        Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     testCase1.setUserListSize(0);
     testCase1.setUser(user1);
     testCase1.setRollNoToDelete("192");
@@ -73,13 +73,13 @@ class UserCollectionControllerTest {
     DeleteUserTestScenario testCase2 =
         new DeleteUserTestScenario();
     User user2 = new User("User 2", 10, "Address 2", "192",
-        Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     testCase2.setUserListSize(1);
     testCase2.setUser(user2);
     testCase2.setRollNoToDelete("194");
     testCase2.setTestCaseName("Deleting invalid roll no");
 
-    return Stream.of(testCase1,testCase2);
+    return Stream.of(testCase1, testCase2);
   }
 
   @ParameterizedTest
@@ -89,20 +89,24 @@ class UserCollectionControllerTest {
     String rollNoToDelete = testCase.getRollNoToDelete();
     int expectedSize = testCase.getUserListSize();
     UserCollection.getInstance().addUser(user);
-    try{
+    try {
       deleteUser(rollNoToDelete);
       int actualSize = UserCollection.getInstance().getUserList().size();
       assertEquals(expectedSize, actualSize, testCase.getTestCaseName());
-    }catch(Exception e){
+    } catch (Exception e) {
       int actualSize = UserCollection.getInstance().getUserList().size();
       assertEquals(expectedSize, actualSize, testCase.getTestCaseName());
     }
   }
-  private static Stream<GetUserListSortedByOrderTestScenario> generateTestCaseForGetUserListSortedByOrder(){
+
+  private static Stream<GetUserListSortedByOrderTestScenario> generateTestCaseForGetUserListSortedByOrder() {
     //Test Case
-    User firstUser = new User("User 1",10,"address 2","Roll No 1", Arrays.asList(Courses.A,Courses.B,Courses.C,Courses.D));
-    User secondUser = new User("User 2",18,"address 2","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
-    User thirdUser = new User("User 3",17,"address 2","Roll No 3", Arrays.asList(Courses.A,Courses.B,Courses.F,Courses.D));
+    User firstUser = new User("User 1", 10, "address 2", "Roll No 1",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+    User secondUser = new User("User 2", 18, "address 2", "Roll No 3",
+        Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
+    User thirdUser = new User("User 3", 17, "address 2", "Roll No 3",
+        Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
     GetUserListSortedByOrderTestScenario testCase = new GetUserListSortedByOrderTestScenario();
     //Random ordering
     testCase.addUserInRandomUserList(thirdUser);
@@ -118,21 +122,22 @@ class UserCollectionControllerTest {
 
     return Stream.of(testCase);
   }
+
   @ParameterizedTest
   @MethodSource("generateTestCaseForGetUserListSortedByOrder")
   void testGetUserListSortedByOrder(GetUserListSortedByOrderTestScenario testCase) {
     UserCollection userCollection = UserCollection.getInstance();
-    for(User user:testCase.getRandomUserList()){
+    for (User user : testCase.getRandomUserList()) {
       userCollection.addUser(user);
     }
     SortOrder order = testCase.getOrder();
     List<User> actual = getUserListSortedByOrder(order);
     List<User> expected = testCase.getSortedUserList();
-    assertEquals(expected,actual,testCase.getTestCaseName());
+    assertEquals(expected, actual, testCase.getTestCaseName());
   }
 
   @AfterEach
-  void cleanup(){
+  void cleanup() {
     //Clearing user collection
     UserCollection.getInstance().clearUserList();
   }

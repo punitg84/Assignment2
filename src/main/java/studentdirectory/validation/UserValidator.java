@@ -24,20 +24,20 @@ public class UserValidator {
     }
   }
 
-  public static void validateAgeNumeric(final String age) throws Exception{
+  public static void validateAgeNumeric(final String age) throws Exception {
     if (!age.matches(IS_NUMERIC_REGEX)) {
       throw new Exception("Age needs to be a numeric value");
     }
   }
 
-  public static void validateCourses(final List<String> courses) throws Exception{
+  public static void validateCourses(final List<String> courses) throws Exception {
     final HashSet<String> coursesSet = new HashSet<>(courses);
-    if(coursesSet.size() != Course.REQUIRED_LIMIT){
+    if (coursesSet.size() != Course.REQUIRED_LIMIT) {
       throw new Exception("Courses are required to be 4 distinct");
     }
-    try{
-      courses.forEach(Courses::valueOf);
-    }catch (Exception e){
+    try {
+      courses.stream().forEach(Courses::valueOf);
+    } catch (Exception e) {
       throw new Exception("Courses are need to have the following values only: A,B,C,D,E and F");
     }
   }
