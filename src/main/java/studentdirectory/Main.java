@@ -1,6 +1,6 @@
 package studentdirectory;
 
-import static studentdirectory.validation.InputValidator.sortOptionValidator;
+import static studentdirectory.validation.InputValidator.validateSortOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +92,7 @@ public class Main {
         "8. According to roll no in descending order\n");
 
     final String option = scanner.nextLine();
-    sortOptionValidator(option);
+    validateSortOption(option);
     final int optionNumber = Integer.parseInt(option);
     final SortOrder sortOrder = SortOrder.get(optionNumber);
 
