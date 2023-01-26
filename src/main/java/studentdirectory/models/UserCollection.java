@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.TreeSet;
 
 public final class UserCollection {
 
   private static final UserCollection USER_COLLECTION = new UserCollection();
 
-  private final HashSet<User> userSet = new HashSet<>();
+  private final TreeSet<User> userSet = new TreeSet<>();
 
   private final HashMap<String,User> rollNoUserMapping = new HashMap<>();
 
