@@ -18,7 +18,7 @@ import studentdirectory.models.UserCollection;
 
 public class FileController {
 
-  private static final String APPLICATION_PATH = new File("").getAbsolutePath();
+  private static final String APPLICATION_PATH = System.getProperty("user.dir");
   private static final Path path = Paths.get(APPLICATION_PATH, FILE_PATH);
 
   public static void writeUserDetailsToFile() throws Exception {
