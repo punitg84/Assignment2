@@ -15,6 +15,8 @@ public enum SortOrder {
   ROLL_NO_ASC(7),
   ROLL_NO_DESC(8);
 
+  public static final int NO_OF_SORT_OPTIONS = 8;
+
   private static final Map<Integer, SortOrder> INTEGER_SORT_ORDER_MAP = new HashMap<>();
 
   private final int code;

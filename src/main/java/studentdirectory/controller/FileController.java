@@ -19,11 +19,11 @@ import studentdirectory.models.UserCollection;
 public class FileController {
 
   private static final String APPLICATION_PATH = System.getProperty("user.dir");
-  private static final Path path = Paths.get(APPLICATION_PATH, FILE_PATH);
+  private static final Path PATH = Paths.get(APPLICATION_PATH, FILE_PATH);
 
   public static void writeUserDetailsToFile() throws Exception {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
-        new BufferedOutputStream(Files.newOutputStream(path)))) {
+        new BufferedOutputStream(Files.newOutputStream(PATH)))) {
       final List<User> userList = UserCollection.getInstance().getUserList();
       outputStream.writeObject(userList.size());
       for (final User user : userList) {
@@ -38,17 +38,17 @@ public class FileController {
 
   public static void readUserDetailsFromFile() throws Exception {
     try (ObjectInputStream inputStream = new ObjectInputStream(
-        new BufferedInputStream(Files.newInputStream(path)))) {
-      int userListSize = (int) inputStream.readObject();
+        new BufferedInputStream(Files.newInputStream(PATH)))) {
+      final int userListSize = (int) inputStream.readObject();
       final UserCollection userCollection = UserCollection.getInstance();
-      while (userListSize-- != 0) {
+      for (int i = 1; i <= userListSize; i++) {
         final User user = (User) inputStream.readObject();
         userCollection.addUser(user);
       }
     } catch (NoSuchFileException e) {
       createNewFile();
     } catch (EOFException e) {
-      File file = new File(path.toUri());
+      final File file = new File(PATH.toUri());
       if (file.length() != 0) {
         throw new Exception("Error while reading data, Terminating");
       }
@@ -59,7 +59,7 @@ public class FileController {
 
   private static void createNewFile() throws Exception {
     try {
-      final File fileObj = new File(path.toUri());
+      final File fileObj = new File(PATH.toUri());
       fileObj.createNewFile();
     } catch (Exception e) {
       throw new Exception("File is not available and can't be created");

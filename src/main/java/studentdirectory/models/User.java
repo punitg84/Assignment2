@@ -4,12 +4,15 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import studentdirectory.enums.Courses;
 
 public class User implements Serializable, Comparable<User> {
 
+  @Serial
+  private static final long serialVersionUID = 101;
   @NotEmpty(message = "Name cant be empty or null")
   private final String name;
 
@@ -17,7 +20,7 @@ public class User implements Serializable, Comparable<User> {
   @Max(value = 100, message = "Age should not be greater than 100")
   private final int age;
 
-  @Size(min = 10, max = 50, message = "Address must be longer than 10 characters but less than 50 characters")
+  @Size(min = 10, max = 50, message = "Address must be longer than 10 char but less than 50 char")
   private final String address;
 
   @NotEmpty(message = "Roll No cannot be empty")

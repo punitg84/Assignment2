@@ -11,7 +11,7 @@ public final class UserCollection {
 
   private final TreeSet<User> userSet = new TreeSet<>();
 
-  private final HashMap<String,User> rollNoUserMapping = new HashMap<>();
+  private final HashMap<String, User> rollNoUserMapping = new HashMap<>();
 
   public static UserCollection getInstance() {
     return USER_COLLECTION;
@@ -19,11 +19,11 @@ public final class UserCollection {
 
   public void addUser(final User user) {
     userSet.add(user);
-    rollNoUserMapping.put(user.getRollNo(),user);
+    rollNoUserMapping.put(user.getRollNo(), user);
   }
 
   public void deleteUser(final String rollNo) {
-    User user = rollNoUserMapping.get(rollNo);
+    final User user = rollNoUserMapping.get(rollNo);
     userSet.remove(user);
     rollNoUserMapping.remove(rollNo);
   }

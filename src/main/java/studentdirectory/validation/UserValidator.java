@@ -13,9 +13,13 @@ import studentdirectory.constants.Course;
 import studentdirectory.enums.Courses;
 import studentdirectory.models.User;
 
-public class UserValidator {
+public final class UserValidator {
   private static final ValidatorFactory FACTORY = Validation.buildDefaultValidatorFactory();
   private static final Validator VALIDATOR = FACTORY.getValidator();
+
+  private UserValidator() {
+
+  }
 
   public static void validateUser(final User user) throws Exception {
     final Set<ConstraintViolation<User>> violations = VALIDATOR.validate(user);
@@ -41,5 +45,4 @@ public class UserValidator {
       throw new Exception("Courses are need to have the following values only: A,B,C,D,E and F");
     }
   }
-
 }

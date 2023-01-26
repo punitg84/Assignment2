@@ -1,7 +1,7 @@
 package studentdirectory.controller;
 
-import static studentdirectory.validation.UserCollectionValidator.validateRollNoPresent;
 import static studentdirectory.validation.UserCollectionValidator.validateRollNoAbsent;
+import static studentdirectory.validation.UserCollectionValidator.validateRollNoPresent;
 
 import java.util.List;
 import studentdirectory.comparator.UserComparatorByAddressAsc;
@@ -19,8 +19,8 @@ import studentdirectory.models.UserCollection;
 public final class UserCollectionController {
   public static void addUser(final String name, final String age, final String address,
                              final String rollNo, final List<String> courses) throws Exception {
-    final User user = UserController.createUser(name, age, address, rollNo, courses);
     validateRollNoAbsent(rollNo);
+    final User user = UserController.createUser(name, age, address, rollNo, courses);
     final UserCollection userCollection = UserCollection.getInstance();
     userCollection.addUser(user);
   }

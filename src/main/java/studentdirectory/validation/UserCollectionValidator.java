@@ -2,7 +2,11 @@ package studentdirectory.validation;
 
 import studentdirectory.models.UserCollection;
 
-public class UserCollectionValidator {
+public final class UserCollectionValidator {
+
+  private UserCollectionValidator() {
+
+  }
 
   public static void validateRollNoAbsent(final String rollNo) throws Exception {
     if (isRollNoPresent(rollNo)) {
