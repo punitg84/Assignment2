@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import studentdirectory.constants.Course;
-import studentdirectory.enums.Courses;
+import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
 
 public final class UserValidator {
@@ -35,14 +35,17 @@ public final class UserValidator {
   }
 
   public static void validateCourses(final List<String> courses) throws Exception {
+
     final HashSet<String> coursesSet = new HashSet<>(courses);
     if (coursesSet.size() != Course.REQUIRED_LIMIT_FOR_USER) {
-      throw new Exception("Courses are required to be 4 distinct");
+      throw new Exception("CourseType are required to be 4 distinct");
     }
+
     try {
-      courses.stream().forEach(Courses::valueOf);
+      courses.stream().forEach(CourseType::valueOf);
     } catch (Exception e) {
-      throw new Exception("Courses are need to have the following values only: A,B,C,D,E and F");
+      throw new Exception("CourseType are need to have the following values only: A,B,C,D,E and F");
     }
+
   }
 }

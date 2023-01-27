@@ -24,34 +24,10 @@ public class FileController {
   public static void writeUserDetailsToFile() throws Exception {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
         new BufferedOutputStream(Files.newOutputStream(PATH)))) {
-      final List<User> userList = UserCollection.getInstance().getUserList();
-      outputStream.writeObject(userList.size());
-      for (final User user : userList) {
-        outputStream.writeObject(user);
-      }
-    } catch (NoSuchFileException e) {
-      createNewFile();
-    } catch (Exception e) {
-      throw new Exception("Not Able to process the file hence terminating");
-    }
-  }
 
-  public static void readUserDetailsFromFile() throws Exception {
-    try (ObjectInputStream inputStream = new ObjectInputStream(
-        new BufferedInputStream(Files.newInputStream(PATH)))) {
-      final int userListSize = (int) inputStream.readObject();
-      final UserCollection userCollection = UserCollection.getInstance();
-      for (int i = 1; i <= userListSize; i++) {
-        final User user = (User) inputStream.readObject();
-        userCollection.addUser(user);
-      }
-    } catch (NoSuchFileException e) {
-      createNewFile();
-    } catch (EOFException e) {
-      final File file = new File(PATH.toUri());
-      if (file.length() != 0) {
-        throw new Exception("Error while reading data, Terminating");
-      }
+      List<User> users = UserCollection.getInstance().getUserList();
+      outputStream.writeObject(users);
+
     } catch (Exception e) {
       throw new Exception("Not Able to process the file hence terminating");
     }
@@ -63,6 +39,26 @@ public class FileController {
       fileObj.createNewFile();
     } catch (Exception e) {
       throw new Exception("File is not available and can't be created");
+    }
+  }
+
+  public static void readUserDetailsFromFile() throws Exception {
+    try (ObjectInputStream inputStream = new ObjectInputStream(
+        new BufferedInputStream(Files.newInputStream(PATH)))) {
+
+      final UserCollection userCollection = UserCollection.getInstance();
+      final List<User> users = (List<User>) inputStream.readObject();
+      users.stream().forEach(userCollection::addUser);
+
+    } catch (NoSuchFileException e) {
+      createNewFile();
+    } catch (EOFException e) {
+      final File file = new File(PATH.toUri());
+      if (file.length() != 0) {
+        throw new Exception("Error while reading data, Terminating");
+      }
+    } catch (Exception e) {
+      throw new Exception("Not Able to process the file hence terminating");
     }
   }
 }

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import studentdirectory.enums.Courses;
+import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
 import studentdirectory.models.usertestscenario.CompareToTestScenario;
 
@@ -14,9 +14,9 @@ class UserComparatorByRollNoAscTest {
   private static Stream<CompareToTestScenario> generateTestForCompare() {
     //Test Case 1 User 1 roll no less than User 2 roll no
     User firstUser1 = new User("User 1", 10, "address 1", "Roll No 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     User secondUser1 = new User("User 2", 18, "address 2", "Roll No 2",
-        Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.F, CourseType.D));
     CompareToTestScenario testCase1 = new CompareToTestScenario();
     testCase1.setFirstUser(firstUser1);
     testCase1.setSecondUser(secondUser1);
@@ -25,9 +25,9 @@ class UserComparatorByRollNoAscTest {
 
     //Test Case 2 User 2 roll no less than User 1 roll no
     User firstUser2 = new User("User 1", 10, "address 2", "Roll No 2",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     User secondUser2 = new User("User 2", 18, "address 1", "Roll No 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.F, CourseType.D));
     CompareToTestScenario testCase2 = new CompareToTestScenario();
     testCase2.setFirstUser(firstUser2);
     testCase2.setSecondUser(secondUser2);
@@ -36,9 +36,9 @@ class UserComparatorByRollNoAscTest {
 
     //Test Case 3 Same roll no
     User firstUser3 = new User("User 1", 10, "address 2", "Roll No 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     User secondUser3 = new User("User 2", 18, "address 2", "Roll No 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.F, CourseType.D));
     CompareToTestScenario testCase3 = new CompareToTestScenario();
     testCase3.setFirstUser(firstUser3);
     testCase3.setSecondUser(secondUser3);

@@ -12,28 +12,37 @@ import studentdirectory.comparator.UserComparatorByNameAsc;
 import studentdirectory.comparator.UserComparatorByNameDesc;
 import studentdirectory.comparator.UserComparatorByRollNoAsc;
 import studentdirectory.comparator.UserComparatorByRollNoDesc;
-import studentdirectory.enums.SortOrder;
+import studentdirectory.enums.SortOrderType;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
 public final class UserCollectionController {
-  public static void addUser(final String name, final String age, final String address,
-                             final String rollNo, final List<String> courses) throws Exception {
+  public static void addUser(final String name,
+                             final String age,
+                             final String address,
+                             final String rollNo,
+                             final List<String> courses) throws Exception {
+
     validateRollNoAbsent(rollNo);
     final User user = UserController.createUser(name, age, address, rollNo, courses);
     final UserCollection userCollection = UserCollection.getInstance();
     userCollection.addUser(user);
+
   }
 
   public static void deleteUser(final String rollNo) throws Exception {
+
     validateRollNoPresent(rollNo);
     final UserCollection userCollection = UserCollection.getInstance();
     userCollection.deleteUser(rollNo);
+
   }
 
-  public static List<User> getUserListSortedByOrder(final SortOrder sortOrder) {
+  public static List<User> getUserListSortedByOrder(final SortOrderType sortOrderType) {
+
     final List<User> userList = UserCollection.getInstance().getUserList();
-    switch (sortOrder) {
+
+    switch (sortOrderType) {
       case AGE_ASC -> userList.sort(new UserComparatorByAgeAsc());
       case AGE_DESC -> userList.sort(new UserComparatorByAgeDesc());
       case NAME_ASC -> userList.sort(new UserComparatorByNameAsc());
@@ -43,8 +52,10 @@ public final class UserCollectionController {
       case ADDRESS_ASC -> userList.sort(new UserComparatorByAddressAsc());
       case ADDRESS_DESC -> userList.sort(new UserComparatorByAddressDesc());
     }
+
     return userList;
   }
+
 
   private UserCollectionController() {
 

@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import studentdirectory.enums.Courses;
+import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
 import studentdirectory.validation.uservalidatortestscenario.ValidateAgeNumericTestScenario;
 import studentdirectory.validation.uservalidatortestscenario.ValidateCoursesTestScenario;
@@ -19,7 +19,7 @@ class UserValidatorTest {
   private static Stream<ValidateUserTestScenario> generateTestCaseForValidateUser() {
     //Test Case 1 age negative
     User user1 = new User("User 1", -10, "address 1 is of more than 10 characters", "rollNo 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     ValidateUserTestScenario testCase1 = new ValidateUserTestScenario();
     testCase1.setUser(user1);
     testCase1.setErrMessage("Age should not be less than 3");
@@ -27,7 +27,7 @@ class UserValidatorTest {
 
     //Test Case 2 name empty
     User user2 = new User("", 10, "address 1 is longer than 10 characters", "rollNo 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.F));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.F));
     ValidateUserTestScenario testCase2 = new ValidateUserTestScenario();
     testCase2.setUser(user2);
     testCase2.setErrMessage("Name cant be empty or null");
@@ -35,7 +35,7 @@ class UserValidatorTest {
 
     //Test Case 3 valid user
     User user3 = new User("Punit", 10, "address 1", "rollNo 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     ValidateUserTestScenario testCase3 = new ValidateUserTestScenario();
     testCase3.setUser(user3);
     testCase3.setErrMessage(
@@ -87,7 +87,7 @@ class UserValidatorTest {
     //Test Case 1 less than 4 courses
     ValidateCoursesTestScenario testCase1 = new ValidateCoursesTestScenario();
     testCase1.setCourses(Arrays.asList("A", "B", "C", "C"));
-    testCase1.setErrMessage("Courses are required to be 4 distinct");
+    testCase1.setErrMessage("CourseType are required to be 4 distinct");
     testCase1.setTestCaseName("Less than 4 courses");
 
     //Test Case 2 4 courses
@@ -96,10 +96,10 @@ class UserValidatorTest {
     testCase2.setErrMessage("");
     testCase2.setTestCaseName("4 courses accurate");
 
-    //Test Case 3 Invalid Courses
+    //Test Case 3 Invalid CourseType
     ValidateCoursesTestScenario testCase3 = new ValidateCoursesTestScenario();
     testCase3.setCourses(Arrays.asList("A", "Random", "C", "F"));
-    testCase3.setErrMessage("Courses are need to have the following values only: A,B,C,D,E and F");
+    testCase3.setErrMessage("CourseType are need to have the following values only: A,B,C,D,E and F");
     testCase3.setTestCaseName("Invalid Course");
 
     return Stream.of(testCase1, testCase2, testCase3);

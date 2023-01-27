@@ -6,19 +6,27 @@ import static studentdirectory.validation.UserValidator.validateUser;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import studentdirectory.enums.Courses;
+import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
 
 public class UserController {
-  public static User createUser(final String name, final String age, final String address,
-                                final String rollNo, final List<String> inputCourses) throws Exception {
+  public static User createUser(final String name,
+                                final String age,
+                                final String address,
+                                final String rollNo,
+                                final List<String> inputCourses) throws Exception {
+
     validateAgeNumeric(age);
     validateCourses(inputCourses);
+
     final int numericAge = Integer.parseInt(age);
-    final List<Courses> coursesList =
-        inputCourses.stream().map(Courses::valueOf).collect(Collectors.toList());
-    final User user = new User(name, numericAge, address, rollNo, coursesList);
+    final List<CourseType> courseTypeList =
+        inputCourses.stream().map(CourseType::valueOf).collect(Collectors.toList());
+    final User user = new User(name, numericAge, address, rollNo, courseTypeList);
+
     validateUser(user);
+
     return user;
+
   }
 }

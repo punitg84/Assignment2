@@ -2,14 +2,14 @@ package studentdirectory.controller.usercollectioncontrollertestscenario;
 
 import java.util.ArrayList;
 import java.util.List;
-import studentdirectory.enums.SortOrder;
+import studentdirectory.enums.SortOrderType;
 import studentdirectory.models.User;
 import studentdirectory.testscenario.GenericTestScenario;
 
 public class GetUserListSortedByOrderTestScenario extends GenericTestScenario {
   List<User> randomUserList = new ArrayList<>();
   List<User> sortedUserList = new ArrayList<>();
-  SortOrder order;
+  SortOrderType order;
 
   public List<User> getRandomUserList() {
     return randomUserList;
@@ -27,11 +27,11 @@ public class GetUserListSortedByOrderTestScenario extends GenericTestScenario {
     sortedUserList.add(user);
   }
 
-  public SortOrder getOrder() {
+  public SortOrderType getOrder() {
     return order;
   }
 
-  public void setOrder(SortOrder order) {
+  public void setOrder(SortOrderType order) {
     this.order = order;
   }
 

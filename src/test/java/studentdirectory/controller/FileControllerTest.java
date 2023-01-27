@@ -12,7 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.controller.filecontrollertestscenario.ReadWriteUserDetailsToFileTestScenario;
-import studentdirectory.enums.Courses;
+import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
@@ -24,10 +24,10 @@ class FileControllerTest {
         new ReadWriteUserDetailsToFileTestScenario();
     User firstUser =
         new User("User 1", 10, "address 1", "Roll No 1",
-            Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+            Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     User secondUser =
         new User("User 2", 18, "address 2", "Roll No 1",
-            Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+            Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     testCase.addUser(firstUser);
     testCase.addUser(secondUser);
     testCase.setTestCaseName("Adding user in file and then reading them");

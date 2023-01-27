@@ -14,8 +14,8 @@ import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.controller.usercollectioncontrollertestscenario.AddUserTestScenario;
 import studentdirectory.controller.usercollectioncontrollertestscenario.DeleteUserTestScenario;
 import studentdirectory.controller.usercollectioncontrollertestscenario.GetUserListSortedByOrderTestScenario;
-import studentdirectory.enums.Courses;
-import studentdirectory.enums.SortOrder;
+import studentdirectory.enums.CourseType;
+import studentdirectory.enums.SortOrderType;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
@@ -63,7 +63,7 @@ class UserCollectionControllerTest {
     DeleteUserTestScenario testCase1 =
         new DeleteUserTestScenario();
     User user1 = new User("User 1", 10, "Address 1", "192",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     testCase1.setUserListSize(0);
     testCase1.setUser(user1);
     testCase1.setRollNoToDelete("192");
@@ -73,7 +73,7 @@ class UserCollectionControllerTest {
     DeleteUserTestScenario testCase2 =
         new DeleteUserTestScenario();
     User user2 = new User("User 2", 10, "Address 2", "192",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     testCase2.setUserListSize(1);
     testCase2.setUser(user2);
     testCase2.setRollNoToDelete("194");
@@ -102,11 +102,11 @@ class UserCollectionControllerTest {
   private static Stream<GetUserListSortedByOrderTestScenario> generateTestCaseForGetUserListSortedByOrder() {
     //Test Case
     User firstUser = new User("User 1", 10, "address 2 is a long address", "Roll No 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     User secondUser = new User("User 2", 18, "address 2 is a long address", "Roll No 2",
-        Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.F, CourseType.D));
     User thirdUser = new User("User 3", 17, "address 2 is a long address", "Roll No 3",
-        Arrays.asList(Courses.A, Courses.B, Courses.F, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.F, CourseType.D));
     GetUserListSortedByOrderTestScenario testCase = new GetUserListSortedByOrderTestScenario();
     //Random ordering
     testCase.addUserInRandomUserList(thirdUser);
@@ -117,7 +117,7 @@ class UserCollectionControllerTest {
     testCase.addUserInSortedUserList(thirdUser);
     testCase.addUserInSortedUserList(firstUser);
 
-    testCase.setOrder(SortOrder.AGE_DESC);
+    testCase.setOrder(SortOrderType.AGE_DESC);
     testCase.setTestCaseName("Sorting by age in descending order");
 
     return Stream.of(testCase);
@@ -130,7 +130,7 @@ class UserCollectionControllerTest {
     for (User user : testCase.getRandomUserList()) {
       userCollection.addUser(user);
     }
-    SortOrder order = testCase.getOrder();
+    SortOrderType order = testCase.getOrder();
     List<User> actual = getUserListSortedByOrder(order);
     List<User> expected = testCase.getSortedUserList();
     assertEquals(expected, actual, testCase.getTestCaseName());

@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import studentdirectory.enums.Courses;
+import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 import studentdirectory.validation.usercollectionvalidatortestscenario.ValidateRollNoTestScenario;
@@ -19,7 +19,7 @@ class UserCollectionValidatorTest {
   private static Stream<ValidateRollNoTestScenario> generateTestCaseForValidateRollNoPresent() {
     //Test Case 1 non duplicate users
     User user1 = new User("User 1", 10, "address 1", "rollNo 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.F));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.F));
     String rollNo1 = "rollNo 2";
     ValidateRollNoTestScenario testCase1 = new ValidateRollNoTestScenario();
     testCase1.addUserInUserList(user1);
@@ -29,7 +29,7 @@ class UserCollectionValidatorTest {
 
     //Test Case 2 duplicate users
     User user2 = new User("User 1", 10, "address 1", "rollNo 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     String rollNo2 = "rollNo 1";
     ValidateRollNoTestScenario testCase2 = new ValidateRollNoTestScenario();
     testCase2.addUserInUserList(user2);
@@ -58,7 +58,7 @@ class UserCollectionValidatorTest {
   private static Stream<ValidateRollNoTestScenario> generateTestCaseForValidateRollNoAbsent() {
     //Test Case 1 non duplicate users
     User user1 = new User("User 1", 10, "address 1", "rollNo 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.F));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.F));
     String rollNo1 = "rollNo 2";
     ValidateRollNoTestScenario testCase1 = new ValidateRollNoTestScenario();
     testCase1.addUserInUserList(user1);
@@ -68,7 +68,7 @@ class UserCollectionValidatorTest {
 
     //Test Case 2 duplicate users
     User user2 = new User("User 1", 10, "address 1", "rollNo 1",
-        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
+        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     String rollNo2 = "rollNo 1";
     ValidateRollNoTestScenario testCase2 = new ValidateRollNoTestScenario();
     testCase2.addUserInUserList(user2);

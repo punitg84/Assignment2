@@ -13,6 +13,10 @@ public final class UserCollection {
 
   private final HashMap<String, User> rollNoUserMapping = new HashMap<>();
 
+  private UserCollection() {
+
+  }
+
   public static UserCollection getInstance() {
     return USER_COLLECTION;
   }
@@ -28,10 +32,6 @@ public final class UserCollection {
     rollNoUserMapping.remove(rollNo);
   }
 
-  public boolean isUserWithGivenRollNoPresent(final String rollNo) {
-    return rollNoUserMapping.containsKey(rollNo);
-  }
-
   public void clearUserList() {
     userSet.clear();
     rollNoUserMapping.clear();
@@ -41,7 +41,7 @@ public final class UserCollection {
     return new ArrayList<>(userSet);
   }
 
-  private UserCollection() {
-
+  public boolean isUserWithGivenRollNoPresent(final String rollNo) {
+    return rollNoUserMapping.containsKey(rollNo);
   }
 }

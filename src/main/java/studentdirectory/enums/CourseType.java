@@ -1,6 +1,6 @@
 package studentdirectory.enums;
 
-public enum Courses {
+public enum CourseType {
   A,
   B,
   C,
