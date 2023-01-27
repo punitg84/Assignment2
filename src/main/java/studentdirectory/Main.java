@@ -17,19 +17,21 @@ import studentdirectory.controller.UserCollectionController;
 import studentdirectory.enums.SortOrderType;
 
 public class Main {
+
   private static Scanner scanner = new Scanner(System.in);
   private static boolean isUserExited;
 
   private static int inputInteger() throws Exception {
-    try {
-      int input = scanner.nextInt();
-      //Ignoring enter
-      scanner.nextLine();
 
-      return input;
+    try {
+      return scanner.nextInt();
     } catch (Exception e) {
-      throw new Exception("Input is not integer");
+      scanner.next();
+      throw new Exception("Input is not integer\n");
+    } finally {
+      scanner.nextLine();      //Ignoring new line
     }
+
   }
 
   private static void exitUser() throws Exception {
@@ -83,7 +85,8 @@ public class Main {
     final int optionNumber = inputInteger();
     final SortOrderType sortOrderType = SortOrderType.get(optionNumber);
 
-    UserCollectionController.getUserListSortedByOrder(sortOrderType).stream().forEach(System.out::println);
+    UserCollectionController.getUserListSortedByOrder(sortOrderType).stream()
+        .forEach(System.out::println);
 
   }
 
@@ -146,7 +149,7 @@ public class Main {
   }
 
   private static void showErrors(final String errMessage) {
-    System.out.printf("The following error occurred :%s\n", errMessage);
+    System.out.printf("The following error occurred :%s", errMessage);
   }
 
   private static void loadData() throws Exception {
@@ -168,4 +171,5 @@ public class Main {
     }
 
   }
+
 }
