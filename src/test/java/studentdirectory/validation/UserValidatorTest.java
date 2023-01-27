@@ -39,7 +39,7 @@ class UserValidatorTest {
     ValidateUserTestScenario testCase3 = new ValidateUserTestScenario();
     testCase3.setUser(user3);
     testCase3.setErrMessage(
-        "Address must be longer than 10 characters but less than 50 characters");
+        "Address must be longer than 10 char but less than 50 char");
     testCase3.setTestCaseName("Valid user");
 
     return Stream.of(testCase1, testCase2, testCase3);
