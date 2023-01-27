@@ -24,14 +24,14 @@ class UserCollectionControllerTest {
   private static Stream<AddUserTestScenario> generateTestCaseForAddUser() {
     //Test Case 1 providing valid student
     AddUserTestScenario testCase1 =
-        new AddUserTestScenario("User 1", "10", "Address 1 is a long value", "192",
+        new AddUserTestScenario("User 1", 10, "Address 1 is a long value", "192",
             Arrays.asList("A", "B", "C", "E"));
     testCase1.setUserListSize(1);
     testCase1.setTestCaseName("Adding valid user");
 
     //Test Case 2 providing invalid student
     AddUserTestScenario testCase2 =
-        new AddUserTestScenario("", "10", "Address 2", "193",
+        new AddUserTestScenario("", 10, "Address 2", "193",
             Arrays.asList("A", "B", "C", "E"));
     testCase2.setUserListSize(0);
     testCase2.setTestCaseName("Adding invalid user with name empty");
@@ -44,7 +44,7 @@ class UserCollectionControllerTest {
   void testAddUser(AddUserTestScenario testCase) {
     String name = testCase.getName();
     String address = testCase.getAddress();
-    String age = testCase.getAge();
+    int age = testCase.getAge();
     List<String> courses = testCase.getCourses();
     String rollNo = testCase.getRollNo();
     int expectedSize = testCase.getUserListSize();

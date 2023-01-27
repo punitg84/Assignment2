@@ -7,19 +7,26 @@ import static studentdirectory.constants.UserChoice.FOURTH_CHOICE;
 import static studentdirectory.constants.UserChoice.SECOND_CHOICE;
 import static studentdirectory.constants.UserChoice.YES_CHOICE;
 import static studentdirectory.controller.FileController.readUserDetailsFromFile;
-import static studentdirectory.validation.InputValidator.validateSortOption;
+import static studentdirectory.controller.FileController.writeUserDetailsToFile;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
-import studentdirectory.controller.FileController;
 import studentdirectory.controller.UserCollectionController;
 import studentdirectory.enums.SortOrderType;
 
 public class Main {
   private static Scanner scanner = new Scanner(System.in);
   private static boolean isUserExited;
+
+  private static int inputInteger() throws Exception {
+    try {
+      return scanner.nextInt();
+    } catch (Exception e) {
+      throw new Exception("Input is not integer");
+    }
+  }
 
   private static void exitUser() throws Exception {
 
@@ -40,7 +47,7 @@ public class Main {
 
     System.out.println("All the User details are being save to the file...");
 
-    FileController.writeUserDetailsToFile();
+    writeUserDetailsToFile();
 
     System.out.println("The Details have been successfully saved");
 
@@ -69,9 +76,7 @@ public class Main {
         + "7. According to roll no in ascending order\n"
         + "8. According to roll no in descending order\n");
 
-    final String option = scanner.nextLine();
-    validateSortOption(option);
-    final int optionNumber = Integer.parseInt(option);
+    final int optionNumber = inputInteger();
     final SortOrderType sortOrderType = SortOrderType.get(optionNumber);
 
     System.out.println(UserCollectionController.getUserListSortedByOrder(sortOrderType));
@@ -90,7 +95,7 @@ public class Main {
             + "5. 4 courses from A,B,C,D,E or F in 4 lines");
 
     final String fullName = scanner.nextLine();
-    final String age = scanner.nextLine();
+    final int age = inputInteger();
     final String rollNo = scanner.nextLine();
     final String address = scanner.nextLine();
     final List<String> courses = new ArrayList<>();
@@ -106,7 +111,7 @@ public class Main {
 
     try {
 
-      final String option = scanner.nextLine();
+      final int option = inputInteger();
 
       switch (option) {
         case FIRST_CHOICE -> addUser();
@@ -114,10 +119,7 @@ public class Main {
         case THIRD_CHOICE -> deleteUser();
         case FOURTH_CHOICE -> saveUser();
         case FIFTH_CHOICE -> exitUser();
-        default -> {
-          System.out.println("Given input is incorrect select an option between 1-5");
-          selectOptionFromMenu();
-        }
+        default -> throw new Exception("Given input is incorrect");
       }
 
     } catch (Exception e) {

@@ -11,19 +11,16 @@ import studentdirectory.models.User;
 
 public class UserController {
   public static User createUser(final String name,
-                                final String age,
+                                final int age,
                                 final String address,
                                 final String rollNo,
                                 final List<String> inputCourses) throws Exception {
 
-    validateAgeNumeric(age);
     validateCourses(inputCourses);
-
-    final int numericAge = Integer.parseInt(age);
     final List<CourseType> courseTypeList =
         inputCourses.stream().map(CourseType::valueOf).collect(Collectors.toList());
-    final User user = new User(name, numericAge, address, rollNo, courseTypeList);
 
+    final User user = new User(name, age, address, rollNo, courseTypeList);
     validateUser(user);
 
     return user;

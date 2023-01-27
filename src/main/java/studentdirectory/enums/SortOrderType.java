@@ -34,8 +34,14 @@ public enum SortOrderType {
     return code;
   }
 
-  public static SortOrderType get(final int code) {
+  public static SortOrderType get(final int code) throws Exception {
+
+    if (!INTEGER_SORT_ORDER_MAP.containsKey(code)) {
+      throw new Exception("No Sort Order type against give code");
+    }
+
     return INTEGER_SORT_ORDER_MAP.get(code);
+
   }
 
 }

@@ -5,7 +5,7 @@ import studentdirectory.testscenario.GenericTestScenario;
 
 public class CreateUserTestScenario extends GenericTestScenario {
   private String name;
-  public String age;
+  public int age;
   private String address;
   private String rollNo;
   private List<String> courses;
@@ -14,7 +14,7 @@ public class CreateUserTestScenario extends GenericTestScenario {
     return name;
   }
 
-  public String getAge() {
+  public int getAge() {
     return age;
   }
 
@@ -30,7 +30,7 @@ public class CreateUserTestScenario extends GenericTestScenario {
     return courses;
   }
 
-  public CreateUserTestScenario(String name, String age, String address, String rollNo,
+  public CreateUserTestScenario(String name, int age, String address, String rollNo,
                                 List<String> courses) {
     super();
     this.name = name;
