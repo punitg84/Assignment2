@@ -1,6 +1,5 @@
 package studentdirectory.controller;
 
-import static studentdirectory.validation.UserValidator.validateAgeNumeric;
 import static studentdirectory.validation.UserValidator.validateCourses;
 import static studentdirectory.validation.UserValidator.validateUser;
 

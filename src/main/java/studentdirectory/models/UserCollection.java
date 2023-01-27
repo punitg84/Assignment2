@@ -3,18 +3,21 @@ package studentdirectory.models;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 public final class UserCollection {
 
   private static final UserCollection USER_COLLECTION = new UserCollection();
 
-  private final TreeSet<User> userSet = new TreeSet<>();
+  private final SortedSet<User> userSet;
 
-  private final HashMap<String, User> rollNoUserMapping = new HashMap<>();
+  private final Map<String, User> rollNoUserMapping;
 
   private UserCollection() {
-
+    userSet=new TreeSet<>();
+    rollNoUserMapping = new HashMap<>();
   }
 
   public static UserCollection getInstance() {

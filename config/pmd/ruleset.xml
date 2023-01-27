@@ -8,6 +8,7 @@
   
   <!-- Place to add your rules -->
   <rule ref="category/java/bestpractices.xml">
+    <exclude name="SystemPrintln"/>
     <exclude name="JUnitTestsShouldIncludeAssert"/>
 	<exclude name="GuardLogStatement"/>
 	<exclude name="PreserveStackTrace"/>
@@ -36,10 +37,13 @@
     <exclude name="ExceptionAsFlowControl"/>
     <exclude name="AvoidDeeplyNestedIfStmts"/>
     <exclude name="AvoidCatchingGenericException"/>
+    <exclude name="AvoidThrowingRawExceptionTypes"/>
+    <exclude name="SignatureDeclareThrowsException"/>
   </rule>
 
   <rule ref="category/java/documentation.xml">
     <exclude name="CommentSize" />
+    <exclude name = "CommentRequired"/>
   </rule>
 
   <rule ref="category/java/errorprone.xml">

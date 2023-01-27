@@ -25,7 +25,7 @@ public class FileController {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
         new BufferedOutputStream(Files.newOutputStream(PATH)))) {
 
-      List<User> users = UserCollection.getInstance().getUserList();
+      final List<User> users = UserCollection.getInstance().getUserList();
       outputStream.writeObject(users);
 
     } catch (Exception e) {
