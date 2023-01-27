@@ -35,8 +35,10 @@ public class FileController {
 
   private static void createNewFile() throws Exception {
     try {
+
       final File fileObj = new File(PATH.toUri());
       fileObj.createNewFile();
+
     } catch (Exception e) {
       throw new Exception("File is not available and can't be created");
     }
@@ -53,10 +55,12 @@ public class FileController {
     } catch (NoSuchFileException e) {
       createNewFile();
     } catch (EOFException e) {
+
       final File file = new File(PATH.toUri());
       if (file.length() != 0) {
         throw new Exception("Error while reading data, Terminating");
       }
+
     } catch (Exception e) {
       throw new Exception("Not Able to process the file hence terminating");
     }

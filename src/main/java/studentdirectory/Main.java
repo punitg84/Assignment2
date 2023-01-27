@@ -22,7 +22,11 @@ public class Main {
 
   private static int inputInteger() throws Exception {
     try {
-      return scanner.nextInt();
+      int input = scanner.nextInt();
+      //Ignoring enter
+      scanner.nextLine();
+
+      return input;
     } catch (Exception e) {
       throw new Exception("Input is not integer");
     }
@@ -79,7 +83,7 @@ public class Main {
     final int optionNumber = inputInteger();
     final SortOrderType sortOrderType = SortOrderType.get(optionNumber);
 
-    System.out.println(UserCollectionController.getUserListSortedByOrder(sortOrderType));
+    UserCollectionController.getUserListSortedByOrder(sortOrderType).stream().forEach(System.out::println);
 
   }
 
@@ -142,7 +146,7 @@ public class Main {
   }
 
   private static void showErrors(final String errMessage) {
-    System.out.printf("The following error occurred :%n", errMessage);
+    System.out.printf("The following error occurred :%s\n", errMessage);
   }
 
   private static void loadData() throws Exception {
@@ -154,6 +158,7 @@ public class Main {
     try {
       loadData();
     } catch (Exception e) {
+      System.out.println(e);
       showErrors(e.getMessage());
       return;
     }
