@@ -28,8 +28,7 @@ class FileControllerTest {
     User secondUser =
         new User("User 2", 18, "address 2", "Roll No 1",
             Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
-    testCase.addUser(firstUser);
-    testCase.addUser(secondUser);
+    testCase.setUserList(Arrays.asList(firstUser,secondUser));
     testCase.setTestCaseName("Adding user in file and then reading them");
     testCase.setErrMessage("");
     return Stream.of(testCase);

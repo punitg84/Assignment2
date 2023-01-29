@@ -73,7 +73,7 @@ class UserTest {
     User firstUser = testCase.getFirstUser();
     User secondUser = testCase.getSecondUser();
     boolean actualOutput = firstUser.equals(secondUser);
-    assertEquals(testCase.getOutput(), actualOutput, testCase.getTestCaseName());
+    assertEquals(testCase.isOutput(), actualOutput, testCase.getTestCaseName());
   }
 
   private static Stream<CompareToTestScenario> generateTestForCompareTo() {

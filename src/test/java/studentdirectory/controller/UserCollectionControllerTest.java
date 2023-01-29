@@ -109,14 +109,9 @@ class UserCollectionControllerTest {
         Arrays.asList(CourseType.A, CourseType.B, CourseType.F, CourseType.D));
     GetUserListSortedByOrderTestScenario testCase = new GetUserListSortedByOrderTestScenario();
     //Random ordering
-    testCase.addUserInRandomUserList(thirdUser);
-    testCase.addUserInRandomUserList(firstUser);
-    testCase.addUserInRandomUserList(secondUser);
+    testCase.setRandomUserList(Arrays.asList(thirdUser,firstUser,secondUser));
     //Sorted ordering
-    testCase.addUserInSortedUserList(secondUser);
-    testCase.addUserInSortedUserList(thirdUser);
-    testCase.addUserInSortedUserList(firstUser);
-
+    testCase.setSortedUserList(Arrays.asList(secondUser,thirdUser,firstUser));
     testCase.setOrder(SortOrderType.AGE_DESC);
     testCase.setTestCaseName("Sorting by age in descending order");
 

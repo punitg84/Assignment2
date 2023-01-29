@@ -22,7 +22,7 @@ class UserCollectionValidatorTest {
         Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.F));
     String rollNo1 = "rollNo 2";
     ValidateRollNoTestScenario testCase1 = new ValidateRollNoTestScenario();
-    testCase1.addUserInUserList(user1);
+    testCase1.setUserList(Arrays.asList(user1));
     testCase1.setRollNo(rollNo1);
     testCase1.setErrMessage("Roll No is not present in the database");
     testCase1.setTestCaseName("Duplicate Doesn't Exist");
@@ -32,7 +32,7 @@ class UserCollectionValidatorTest {
         Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     String rollNo2 = "rollNo 1";
     ValidateRollNoTestScenario testCase2 = new ValidateRollNoTestScenario();
-    testCase2.addUserInUserList(user2);
+    testCase2.setUserList(Arrays.asList(user2));
     testCase2.setRollNo(rollNo2);
     testCase2.setErrMessage("");
     testCase2.setTestCaseName("Duplicate Exist");
@@ -61,7 +61,7 @@ class UserCollectionValidatorTest {
         Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.F));
     String rollNo1 = "rollNo 2";
     ValidateRollNoTestScenario testCase1 = new ValidateRollNoTestScenario();
-    testCase1.addUserInUserList(user1);
+    testCase1.setUserList(Arrays.asList(user1));
     testCase1.setRollNo(rollNo1);
     testCase1.setErrMessage("");
     testCase1.setTestCaseName("Duplicate Doesn't Exist");
@@ -71,7 +71,7 @@ class UserCollectionValidatorTest {
         Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     String rollNo2 = "rollNo 1";
     ValidateRollNoTestScenario testCase2 = new ValidateRollNoTestScenario();
-    testCase2.addUserInUserList(user2);
+    testCase2.setUserList(Arrays.asList(user2));
     testCase2.setRollNo(rollNo2);
     testCase2.setErrMessage("Roll No is already present in the database");
     testCase2.setTestCaseName("Duplicate Exist");

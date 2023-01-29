@@ -1,8 +1,12 @@
 package studentdirectory.controller.usercollectioncontrollertestscenario;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 import studentdirectory.testscenario.GenericTestScenario;
 
+@Getter
+@Setter
 public class AddUserTestScenario extends GenericTestScenario {
   private String name;
   public int age;
@@ -10,34 +14,6 @@ public class AddUserTestScenario extends GenericTestScenario {
   private String rollNo;
   private List<String> courses;
   private int userListSize;
-
-  public int getUserListSize() {
-    return userListSize;
-  }
-
-  public void setUserListSize(int userListSize) {
-    this.userListSize = userListSize;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public int getAge() {
-    return age;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public String getRollNo() {
-    return rollNo;
-  }
-
-  public List<String> getCourses() {
-    return courses;
-  }
 
   public AddUserTestScenario(String name, int age, String address, String rollNo,
                              List<String> courses) {

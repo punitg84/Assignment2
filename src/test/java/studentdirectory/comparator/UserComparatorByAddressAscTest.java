@@ -14,10 +14,20 @@ class UserComparatorByAddressAscTest {
 
   private static Stream<CompareTestScenario> generateTestForCompare() {
 
-    User user1 = new User("User 1", 10, "address 1", "Roll No 1",
-        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
-    User user2 = new User("User 2", 18, "address 2", "Roll No 2",
-        Arrays.asList(CourseType.A, CourseType.B, CourseType.F, CourseType.D));
+    User user1 = User.builder()
+                .name("User 1")
+                .age(10)
+                .address("address 1")
+                .rollNo("Roll No 1")
+                .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+                .build();
+    User user2 = User.builder()
+                .name("User 2")
+                .age(18)
+                .address("address 2")
+                .rollNo("Roll No 2")
+                .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+                .build();
 
     //Test Case 1 User 1 address less than User 2 address
     CompareTestScenario testCase1 = CompareTestScenario.builder()
