@@ -8,7 +8,11 @@ import java.util.stream.Collectors;
 import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
 
-public class UserController {
+public final class UserController {
+
+  private UserController() {
+    //Default constructor
+  }
 
   public static User createUser(final String name,
                                 final int age,
@@ -21,11 +25,11 @@ public class UserController {
         inputCourses.stream().map(CourseType::valueOf).collect(Collectors.toList());
 
     final User user = User.builder()
-                      .name(name)
-                      .age(age).address(address)
-                      .rollNo(rollNo)
-                      .courses(courseTypeList)
-                      .build();
+        .name(name)
+        .age(age).address(address)
+        .rollNo(rollNo)
+        .courses(courseTypeList)
+        .build();
     validateUser(user);
 
     return user;

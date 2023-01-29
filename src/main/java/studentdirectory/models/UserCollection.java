@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 public final class UserCollection {
 
-  private static UserCollection userCollection;
+  private static UserCollection userCollectionInstance;
 
   private final SortedSet<User> userSet;
 
@@ -24,10 +24,10 @@ public final class UserCollection {
 
   public static UserCollection getInstance() {
 
-    if (Objects.isNull(userCollection)) {
-      userCollection = new UserCollection();
+    if (Objects.isNull(userCollectionInstance)) {
+      userCollectionInstance = new UserCollection();
     }
-    return userCollection;
+    return userCollectionInstance;
   }
 
   public void addUser(final User user) {

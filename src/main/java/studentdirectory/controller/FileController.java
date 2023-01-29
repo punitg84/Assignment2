@@ -16,12 +16,17 @@ import java.util.List;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
-public class FileController {
+public final class FileController {
 
   private static final String APPLICATION_PATH = System.getProperty("user.dir");
   private static final Path PATH = Paths.get(APPLICATION_PATH, FILE_PATH);
 
+  private FileController() {
+    //Default constructor
+  }
+
   public static void writeUserDetailsToFile() throws Exception {
+
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
         new BufferedOutputStream(Files.newOutputStream(PATH)))) {
 
@@ -34,6 +39,7 @@ public class FileController {
   }
 
   private static void createNewFile() throws Exception {
+
     try {
 
       final File fileObj = new File(PATH.toUri());
@@ -45,6 +51,7 @@ public class FileController {
   }
 
   public static void readUserDetailsFromFile() throws Exception {
+
     try (ObjectInputStream inputStream = new ObjectInputStream(
         new BufferedInputStream(Files.newInputStream(PATH)))) {
 
@@ -65,4 +72,5 @@ public class FileController {
       throw new Exception("Not Able to process the file hence terminating");
     }
   }
+
 }

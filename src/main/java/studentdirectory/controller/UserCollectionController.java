@@ -17,6 +17,11 @@ import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
 public final class UserCollectionController {
+
+  private UserCollectionController() {
+    //Default constructor
+  }
+
   public static void addUser(final String name,
                              final int age,
                              final String address,
@@ -56,8 +61,4 @@ public final class UserCollectionController {
     return userList;
   }
 
-
-  private UserCollectionController() {
-
-  }
 }

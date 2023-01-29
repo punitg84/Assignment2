@@ -1,11 +1,5 @@
 package studentdirectory;
 
-import static studentdirectory.constants.UserChoice.FIFTH_CHOICE;
-import static studentdirectory.constants.UserChoice.FIRST_CHOICE;
-import static studentdirectory.constants.UserChoice.THIRD_CHOICE;
-import static studentdirectory.constants.UserChoice.FOURTH_CHOICE;
-import static studentdirectory.constants.UserChoice.SECOND_CHOICE;
-import static studentdirectory.constants.UserChoice.YES_CHOICE;
 import static studentdirectory.controller.FileController.readUserDetailsFromFile;
 import static studentdirectory.controller.FileController.writeUserDetailsToFile;
 
@@ -13,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
+import studentdirectory.constants.UserChoice;
 import studentdirectory.controller.UserCollectionController;
 import studentdirectory.enums.SortOrderType;
 
@@ -40,7 +35,7 @@ public class Main {
         "Do you wish to save the details, Enter yes if interested or else press enter");
 
     final String choice = scanner.nextLine();
-    if (YES_CHOICE.equalsIgnoreCase(choice)) {
+    if (UserChoice.YES_CHOICE.equalsIgnoreCase(choice)) {
       saveUser();
     }
 
@@ -121,11 +116,11 @@ public class Main {
       final int option = inputInteger();
 
       switch (option) {
-        case FIRST_CHOICE -> addUser();
-        case SECOND_CHOICE -> displayUser();
-        case THIRD_CHOICE -> deleteUser();
-        case FOURTH_CHOICE -> saveUser();
-        case FIFTH_CHOICE -> exitUser();
+        case UserChoice.FIRST_CHOICE -> addUser();
+        case UserChoice.SECOND_CHOICE -> displayUser();
+        case UserChoice.THIRD_CHOICE -> deleteUser();
+        case UserChoice.FOURTH_CHOICE -> saveUser();
+        case UserChoice.FIFTH_CHOICE -> exitUser();
         default -> throw new Exception("Given input is incorrect");
       }
 
