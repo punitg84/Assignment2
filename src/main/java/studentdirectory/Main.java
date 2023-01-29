@@ -156,7 +156,6 @@ public class Main {
     try {
       loadData();
     } catch (Exception e) {
-      System.out.println(e);
       showErrors(e.getMessage());
       return;
     }
