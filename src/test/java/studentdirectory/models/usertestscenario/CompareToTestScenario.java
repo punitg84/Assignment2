@@ -14,8 +14,11 @@ public class CompareToTestScenario extends GenericTestScenario {
   private int output;
 
   @Builder
-  public CompareToTestScenario(String errMessage, String testCaseName, User firstUser,
-                               User secondUser, int output) {
+  public CompareToTestScenario(String errMessage,
+                               String testCaseName,
+                               User firstUser,
+                               User secondUser,
+                               int output) {
 
     super(errMessage, testCaseName);
     this.firstUser = firstUser;

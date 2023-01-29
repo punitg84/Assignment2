@@ -13,17 +13,17 @@ class InputValidatorTest {
 
     //Test Case 1 valid option
     ValidateSortOptionTestScenario testCase1 = ValidateSortOptionTestScenario.builder()
-        .inputString("1")
-        .errMessage("")
-        .testCaseName("Valid Option")
-        .build();
+                                              .inputString("1")
+                                              .errMessage("")
+                                              .testCaseName("Valid Option")
+                                              .build();
 
     //Test Case 2 invalid option
     ValidateSortOptionTestScenario testCase2 = ValidateSortOptionTestScenario.builder()
-        .inputString("9")
-        .errMessage("Option needs to lie between 1-8")
-        .testCaseName("Invalid option")
-        .build();
+                                              .inputString("9")
+                                              .errMessage("Option needs to lie between 1-8")
+                                              .testCaseName("Invalid option")
+                                              .build();
 
     return Stream.of(testCase1, testCase2);
   }

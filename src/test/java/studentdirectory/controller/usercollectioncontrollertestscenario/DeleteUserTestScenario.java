@@ -15,8 +15,11 @@ public class DeleteUserTestScenario extends GenericTestScenario {
   private int userListSize;
 
   @Builder
-  public DeleteUserTestScenario(String errMessage, String testCaseName, User user,
-                                String rollNoToDelete, int userListSize) {
+  public DeleteUserTestScenario(String errMessage,
+                                String testCaseName,
+                                User user,
+                                String rollNoToDelete,
+                                int userListSize) {
 
     super(errMessage, testCaseName);
     this.user = user;

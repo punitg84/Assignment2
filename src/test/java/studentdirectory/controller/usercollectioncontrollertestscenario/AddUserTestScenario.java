@@ -17,8 +17,13 @@ public class AddUserTestScenario extends GenericTestScenario {
   private int userListSize;
 
   @Builder
-  public AddUserTestScenario(String errMessage, String testCaseName, String name, int age,
-                             String address, String rollNo, List<String> courses,
+  public AddUserTestScenario(String errMessage,
+                             String testCaseName,
+                             String name,
+                             int age,
+                             String address,
+                             String rollNo,
+                             List<String> courses,
                              int userListSize) {
 
     super(errMessage, testCaseName);

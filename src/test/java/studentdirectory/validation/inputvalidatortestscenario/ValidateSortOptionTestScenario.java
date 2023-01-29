@@ -11,7 +11,8 @@ public class ValidateSortOptionTestScenario extends GenericTestScenario {
   String inputString;
 
   @Builder
-  public ValidateSortOptionTestScenario(String errMessage, String testCaseName,
+  public ValidateSortOptionTestScenario(String errMessage,
+                                        String testCaseName,
                                         String inputString) {
 
     super(errMessage, testCaseName);

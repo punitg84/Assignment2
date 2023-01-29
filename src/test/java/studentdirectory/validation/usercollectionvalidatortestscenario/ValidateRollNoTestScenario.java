@@ -15,7 +15,9 @@ public class ValidateRollNoTestScenario extends GenericTestScenario {
   private String rollNo;
 
   @Builder
-  public ValidateRollNoTestScenario(String errMessage, String testCaseName, List<User> userList,
+  public ValidateRollNoTestScenario(String errMessage,
+                                    String testCaseName,
+                                    List<User> userList,
                                     String rollNo) {
 
     super(errMessage, testCaseName);

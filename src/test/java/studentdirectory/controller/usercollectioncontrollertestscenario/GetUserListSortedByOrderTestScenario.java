@@ -17,8 +17,10 @@ public class GetUserListSortedByOrderTestScenario extends GenericTestScenario {
   SortOrderType order;
 
   @Builder
-  public GetUserListSortedByOrderTestScenario(String errMessage, String testCaseName,
-                                              List<User> randomUserList, List<User> sortedUserList,
+  public GetUserListSortedByOrderTestScenario(String errMessage,
+                                              String testCaseName,
+                                              List<User> randomUserList,
+                                              List<User> sortedUserList,
                                               SortOrderType order) {
 
     super(errMessage, testCaseName);

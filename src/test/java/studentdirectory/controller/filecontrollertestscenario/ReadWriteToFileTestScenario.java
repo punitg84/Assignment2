@@ -13,7 +13,8 @@ public class ReadWriteToFileTestScenario extends GenericTestScenario {
   List<User> userList;
 
   @Builder
-  public ReadWriteToFileTestScenario(String errMessage, String testCaseName,
+  public ReadWriteToFileTestScenario(String errMessage,
+                                     String testCaseName,
                                      List<User> userList) {
 
     super(errMessage, testCaseName);

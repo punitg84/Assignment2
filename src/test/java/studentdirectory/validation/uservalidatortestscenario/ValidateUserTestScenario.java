@@ -12,7 +12,9 @@ public class ValidateUserTestScenario extends GenericTestScenario {
   private User user;
 
   @Builder
-  public ValidateUserTestScenario(String errMessage, String testCaseName, User user) {
+  public ValidateUserTestScenario(String errMessage,
+                                  String testCaseName,
+                                  User user) {
 
     super(errMessage, testCaseName);
     this.user = user;

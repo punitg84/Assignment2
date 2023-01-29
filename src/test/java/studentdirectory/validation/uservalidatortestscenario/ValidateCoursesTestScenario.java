@@ -12,7 +12,9 @@ public class ValidateCoursesTestScenario extends GenericTestScenario {
   private List<String> courses;
 
   @Builder
-  public ValidateCoursesTestScenario(String errMessage, String testCaseName, List<String> courses) {
+  public ValidateCoursesTestScenario(String errMessage,
+                                     String testCaseName,
+                                     List<String> courses) {
 
     super(errMessage, testCaseName);
     this.courses = courses;
