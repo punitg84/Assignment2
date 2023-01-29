@@ -9,6 +9,7 @@ import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
 
 public class UserController {
+
   public static User createUser(final String name,
                                 final int age,
                                 final String address,
@@ -19,10 +20,16 @@ public class UserController {
     final List<CourseType> courseTypeList =
         inputCourses.stream().map(CourseType::valueOf).collect(Collectors.toList());
 
-    final User user = new User(name, age, address, rollNo, courseTypeList);
+    final User user = User.builder()
+                      .name(name)
+                      .age(age).address(address)
+                      .rollNo(rollNo)
+                      .courses(courseTypeList)
+                      .build();
     validateUser(user);
 
     return user;
 
   }
+
 }

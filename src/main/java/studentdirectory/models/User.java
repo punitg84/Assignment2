@@ -1,5 +1,11 @@
 package studentdirectory.models;
 
+import static studentdirectory.constants.ValidationMessage.ADDRESS_SIZE_MESSAGE;
+import static studentdirectory.constants.ValidationMessage.AGE_MAX_MESSAGE;
+import static studentdirectory.constants.ValidationMessage.AGE_MIN_MESSAGE;
+import static studentdirectory.constants.ValidationMessage.NAME_EMPTY_MESSAGE;
+import static studentdirectory.constants.ValidationMessage.ROLL_NO_EMPTY_MESSAGE;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,16 +13,21 @@ import jakarta.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import studentdirectory.enums.CourseType;
 
-
+@Getter
+@Setter
+@Builder
+@ToString
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User implements Serializable, Comparable<User> {
-
-  private static final String NAME_EMPTY_MESSAGE = "Name cant be empty or null";
-  private static final String AGE_MIN_MESSAGE = "Age should not be less than 3";
-  private static final String AGE_MAX_MESSAGE = "Age should not be greater than 100";
-  private static final String ADDRESS_SIZE_MESSAGE = "Address must be longer than 10 char but less than 50 char";
-  private static final String ROLL_NO_EMPTY_MESSAGE = "Roll No cannot be empty";
 
   @Serial
   private static final long serialVersionUID = 101;
@@ -32,58 +43,11 @@ public class User implements Serializable, Comparable<User> {
   private final String address;
 
   @NotEmpty(message = ROLL_NO_EMPTY_MESSAGE)
+  @EqualsAndHashCode.Include
   private final String rollNo;
 
   @Size(min = 4, max = 4)
   private final List<CourseType> courses;
-
-  public User(final String name, final int age, final String address, final String rollNo,
-              final List<CourseType> courses) {
-
-    this.name = name;
-    this.age = age;
-    this.address = address;
-    this.rollNo = rollNo;
-    this.courses = courses;
-
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public String getRollNo() {
-    return rollNo;
-  }
-
-  public int getAge() {
-    return age;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  @Override
-  public int hashCode() {
-    return rollNo.hashCode();
-  }
-
-  @Override
-  public boolean equals(final Object obj) {
-
-    if (obj == this) {
-      return true;
-    }
-
-    if (!(obj instanceof User)) {
-      return false;
-    }
-
-    final User otherUser = (User) obj;
-    return rollNo.compareTo(otherUser.getRollNo()) == 0;
-
-  }
 
   @Override
   public int compareTo(final User o) {
@@ -94,11 +58,5 @@ public class User implements Serializable, Comparable<User> {
 
     return name.compareTo(o.getName());
 
-  }
-
-  @Override
-  public String toString() {
-    return "Student{" + "name='" + name + '\'' + ", age=" + age + ", address='" + address + '\''
-        + ", rollNo=" + rollNo + ", courses=" + courses + '}';
   }
 }

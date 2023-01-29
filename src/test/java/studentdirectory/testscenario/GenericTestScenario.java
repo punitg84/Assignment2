@@ -1,5 +1,9 @@
 package studentdirectory.testscenario;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
+@AllArgsConstructor
 public class GenericTestScenario {
   private String errMessage;
   private String testCaseName;

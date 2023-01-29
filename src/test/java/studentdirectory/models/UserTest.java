@@ -19,7 +19,7 @@ class UserTest {
         Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     HashCodeTestScenario testCase1 = new HashCodeTestScenario();
     testCase1.setUser(user1);
-    testCase1.setOutput(-1813876907);
+    testCase1.setOutput(-1813876848);
     testCase1.setTestCaseName("Alpha Numeric Roll No");
 
     //Test Case 2 Numeric Roll No
@@ -27,7 +27,7 @@ class UserTest {
         Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
     HashCodeTestScenario testCase2 = new HashCodeTestScenario();
     testCase2.setUser(user2);
-    testCase2.setOutput(1724702);
+    testCase2.setOutput(1724761);
     testCase2.setTestCaseName("Numeric Roll No");
 
     return Stream.of(testCase1, testCase2);
