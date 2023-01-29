@@ -14,18 +14,26 @@ class UserControllerTest {
 
   private static Stream<CreateUserTestScenario> generateTestCaseForCreateUser() {
     //Test Case 1 providing valid student
-    CreateUserTestScenario testCase1 =
-        new CreateUserTestScenario("User 1", 10, "Address 1 is a long address", "192",
-            Arrays.asList("A", "B", "C", "E"));
-    testCase1.setErrMessage("");
-    testCase1.setTestCaseName("Adding valid user");
+    CreateUserTestScenario testCase1 = CreateUserTestScenario.builder()
+                                      .name("User 1")
+                                      .age(10)
+                                      .address("Address 1 is a long value")
+                                      .rollNo("192")
+                                      .courses(Arrays.asList("A", "B", "C", "E"))
+                                      .errMessage("")
+                                      .testCaseName("Adding valid user")
+                                      .build();
 
     //Test Case 2 providing invalid student
-    CreateUserTestScenario testCase2 =
-        new CreateUserTestScenario("", 10, "Address 1 is a long address", "193",
-            Arrays.asList("A", "B", "C", "E"));
-    testCase2.setErrMessage("Name cant be empty or null");
-    testCase2.setTestCaseName("Adding invalid user with name empty");
+    CreateUserTestScenario testCase2 = CreateUserTestScenario.builder()
+                                      .name("")
+                                      .age(10)
+                                      .address("Address 1 is a long value")
+                                      .rollNo("193")
+                                      .courses(Arrays.asList("A", "B", "C", "E"))
+                                      .errMessage("Name cant be empty or null")
+                                      .testCaseName("Adding invalid user with name empty")
+                                      .build();
 
     return Stream.of(testCase1, testCase2);
   }

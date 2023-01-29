@@ -11,32 +11,44 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import studentdirectory.controller.filecontrollertestscenario.ReadWriteUserDetailsToFileTestScenario;
+import studentdirectory.controller.filecontrollertestscenario.ReadWriteToFileTestScenario;
 import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
 class FileControllerTest {
 
-  private static Stream<ReadWriteUserDetailsToFileTestScenario> generateTestCaseForReadWriteUserDetailsToFile() {
+  private static Stream<ReadWriteToFileTestScenario> generateTestCaseForReadWriteUserDetailsToFile() {
+
+    User firstUser = User.builder()
+                      .name("User 1")
+                      .age(10)
+                      .address("address 1")
+                      .rollNo("Roll No 1")
+                      .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+                      .build();
+    User secondUser = User.builder()
+                      .name("User 2")
+                      .age(18)
+                      .address("address 2")
+                      .rollNo("Roll No 2")
+                      .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+                      .build();
+
     //Test Case
-    ReadWriteUserDetailsToFileTestScenario testCase =
-        new ReadWriteUserDetailsToFileTestScenario();
-    User firstUser =
-        new User("User 1", 10, "address 1", "Roll No 1",
-            Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
-    User secondUser =
-        new User("User 2", 18, "address 2", "Roll No 1",
-            Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
-    testCase.setUserList(Arrays.asList(firstUser,secondUser));
-    testCase.setTestCaseName("Adding user in file and then reading them");
-    testCase.setErrMessage("");
+
+    ReadWriteToFileTestScenario testCase = ReadWriteToFileTestScenario.builder()
+                                          .userList(Arrays.asList(firstUser,secondUser))
+                                          .testCaseName("Adding user in file and then reading them")
+                                          .errMessage("")
+                                          .build();
+
     return Stream.of(testCase);
   }
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForReadWriteUserDetailsToFile")
-  void testReadWriteUserDetailsToFile(ReadWriteUserDetailsToFileTestScenario testCase) {
+  void testReadWriteUserDetailsToFile(ReadWriteToFileTestScenario testCase) {
     UserCollection userCollection = UserCollection.getInstance();
     for (User user : testCase.getUserList()) {
       userCollection.addUser(user);

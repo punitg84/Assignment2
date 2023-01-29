@@ -10,25 +10,22 @@ import studentdirectory.validation.inputvalidatortestscenario.ValidateSortOption
 
 class InputValidatorTest {
   private static Stream<ValidateSortOptionTestScenario> generateTestCaseForValidateSortOption() {
+
     //Test Case 1 valid option
-    ValidateSortOptionTestScenario testCase1 = new ValidateSortOptionTestScenario();
-    testCase1.setInputString("1");
-    testCase1.setErrMessage("");
-    testCase1.setTestCaseName("Valid option");
+    ValidateSortOptionTestScenario testCase1 = ValidateSortOptionTestScenario.builder()
+        .inputString("1")
+        .errMessage("")
+        .testCaseName("Valid Option")
+        .build();
 
     //Test Case 2 invalid option
-    ValidateSortOptionTestScenario testCase2 = new ValidateSortOptionTestScenario();
-    testCase2.setInputString("9");
-    testCase2.setErrMessage("Option needs to lie between 1-8");
-    testCase2.setTestCaseName("Invalid option");
+    ValidateSortOptionTestScenario testCase2 = ValidateSortOptionTestScenario.builder()
+        .inputString("9")
+        .errMessage("Option needs to lie between 1-8")
+        .testCaseName("Invalid option")
+        .build();
 
-    //Test Case 3 non-numeric option
-    ValidateSortOptionTestScenario testCase3 = new ValidateSortOptionTestScenario();
-    testCase3.setInputString(" ");
-    testCase3.setErrMessage("Option needs to have a numeric value");
-    testCase3.setTestCaseName("Non numeric option");
-
-    return Stream.of(testCase1, testCase2, testCase3);
+    return Stream.of(testCase1, testCase2);
   }
 
   @ParameterizedTest

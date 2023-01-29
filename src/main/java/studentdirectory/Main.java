@@ -22,7 +22,7 @@ public class Main {
       return scanner.nextInt();
     } catch (Exception e) {
       scanner.next();
-      throw new Exception("Input is not integer\n");
+      throw new Exception("Input is not integer");
     } finally {
       scanner.nextLine();      //Ignoring new line
     }

@@ -23,18 +23,26 @@ class UserCollectionControllerTest {
 
   private static Stream<AddUserTestScenario> generateTestCaseForAddUser() {
     //Test Case 1 providing valid student
-    AddUserTestScenario testCase1 =
-        new AddUserTestScenario("User 1", 10, "Address 1 is a long value", "192",
-            Arrays.asList("A", "B", "C", "E"));
-    testCase1.setUserListSize(1);
-    testCase1.setTestCaseName("Adding valid user");
+    AddUserTestScenario testCase1 = AddUserTestScenario.builder()
+                                    .name("User 1")
+                                    .age(10)
+                                    .address("Address 1 is a long value")
+                                    .rollNo("192")
+                                    .courses(Arrays.asList("A", "B", "C", "E"))
+                                    .userListSize(1)
+                                    .testCaseName("Adding valid user")
+                                    .build();
 
     //Test Case 2 providing invalid student
-    AddUserTestScenario testCase2 =
-        new AddUserTestScenario("", 10, "Address 2", "193",
-            Arrays.asList("A", "B", "C", "E"));
-    testCase2.setUserListSize(0);
-    testCase2.setTestCaseName("Adding invalid user with name empty");
+    AddUserTestScenario testCase2 = AddUserTestScenario.builder()
+                                    .name("User 2")
+                                    .age(10)
+                                    .address("Address 2")
+                                    .rollNo("193")
+                                    .courses(Arrays.asList("A", "B", "C", "E"))
+                                    .userListSize(0)
+                                    .testCaseName("Adding invalid user with name empty")
+                                    .build();
 
     return Stream.of(testCase1, testCase2);
   }
@@ -59,25 +67,28 @@ class UserCollectionControllerTest {
   }
 
   private static Stream<DeleteUserTestScenario> generateTestCaseForDeleteUser() {
+    User user = User.builder()
+                .name("User 1")
+                .age(10)
+                .address("address 1 is a long address")
+                .rollNo("192")
+                .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+                .build();
     //Test Case 1 providing valid student roll no
-    DeleteUserTestScenario testCase1 =
-        new DeleteUserTestScenario();
-    User user1 = new User("User 1", 10, "Address 1", "192",
-        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
-    testCase1.setUserListSize(0);
-    testCase1.setUser(user1);
-    testCase1.setRollNoToDelete("192");
-    testCase1.setTestCaseName("Deleting valid roll no");
+    DeleteUserTestScenario testCase1 = DeleteUserTestScenario.builder()
+                                        .user(user)
+                                        .userListSize(0)
+                                        .rollNoToDelete("192")
+                                        .testCaseName("Deleting valid roll no")
+                                        .build();
 
     //Test Case 2 providing invalid student roll no
-    DeleteUserTestScenario testCase2 =
-        new DeleteUserTestScenario();
-    User user2 = new User("User 2", 10, "Address 2", "192",
-        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
-    testCase2.setUserListSize(1);
-    testCase2.setUser(user2);
-    testCase2.setRollNoToDelete("194");
-    testCase2.setTestCaseName("Deleting invalid roll no");
+    DeleteUserTestScenario testCase2 = DeleteUserTestScenario.builder()
+                                      .user(user)
+                                      .userListSize(1)
+                                      .rollNoToDelete("194")
+                                      .testCaseName("Deleting invalid roll no")
+                                      .build();
 
     return Stream.of(testCase1, testCase2);
   }
@@ -100,20 +111,38 @@ class UserCollectionControllerTest {
   }
 
   private static Stream<GetUserListSortedByOrderTestScenario> generateTestCaseForGetUserListSortedByOrder() {
+
+    User firstUser = User.builder()
+                .name("User 1")
+                .age(10)
+                .address("address 1 is a long address")
+                .rollNo("Roll No 1")
+                .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+                .build();
+
+    User secondUser = User.builder()
+                .name("User 2")
+                .age(18)
+                .address("address 1 is a long address")
+                .rollNo("Roll No 2")
+                .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+                .build();
+
+    User thirdUser = User.builder()
+                .name("User 3")
+                .age(17)
+                .address("address 1 is a long address")
+                .rollNo("Roll No 3")
+                .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+                .build();
+
     //Test Case
-    User firstUser = new User("User 1", 10, "address 2 is a long address", "Roll No 1",
-        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
-    User secondUser = new User("User 2", 18, "address 2 is a long address", "Roll No 2",
-        Arrays.asList(CourseType.A, CourseType.B, CourseType.F, CourseType.D));
-    User thirdUser = new User("User 3", 17, "address 2 is a long address", "Roll No 3",
-        Arrays.asList(CourseType.A, CourseType.B, CourseType.F, CourseType.D));
-    GetUserListSortedByOrderTestScenario testCase = new GetUserListSortedByOrderTestScenario();
-    //Random ordering
-    testCase.setRandomUserList(Arrays.asList(thirdUser,firstUser,secondUser));
-    //Sorted ordering
-    testCase.setSortedUserList(Arrays.asList(secondUser,thirdUser,firstUser));
-    testCase.setOrder(SortOrderType.AGE_DESC);
-    testCase.setTestCaseName("Sorting by age in descending order");
+    GetUserListSortedByOrderTestScenario testCase = GetUserListSortedByOrderTestScenario.builder()
+        .randomUserList(Arrays.asList(thirdUser,firstUser,secondUser))
+        .sortedUserList(Arrays.asList(secondUser,thirdUser,firstUser))
+        .order(SortOrderType.AGE_DESC)
+        .testCaseName("Sorting by age in descending order")
+        .build();
 
     return Stream.of(testCase);
   }

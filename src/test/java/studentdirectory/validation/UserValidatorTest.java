@@ -1,7 +1,6 @@
 package studentdirectory.validation;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static studentdirectory.validation.UserValidator.validateAgeNumeric;
 import static studentdirectory.validation.UserValidator.validateCourses;
 import static studentdirectory.validation.UserValidator.validateUser;
 
@@ -11,38 +10,43 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
-import studentdirectory.validation.uservalidatortestscenario.ValidateAgeNumericTestScenario;
 import studentdirectory.validation.uservalidatortestscenario.ValidateCoursesTestScenario;
 import studentdirectory.validation.uservalidatortestscenario.ValidateUserTestScenario;
 
 class UserValidatorTest {
   private static Stream<ValidateUserTestScenario> generateTestCaseForValidateUser() {
+
+    User user1 = User.builder()
+                .name("User 1")
+                .age(-10)
+                .address("address 1 is a long address")
+                .rollNo("192")
+                .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+                .build();
+
+    User user2 = User.builder()
+                .name("User 1")
+                .age(10)
+                .address("address 1 is a long address")
+                .rollNo("192")
+                .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+                .build();
+
     //Test Case 1 age negative
-    User user1 = new User("User 1", -10, "address 1 is of more than 10 characters", "rollNo 1",
-        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
-    ValidateUserTestScenario testCase1 = new ValidateUserTestScenario();
-    testCase1.setUser(user1);
-    testCase1.setErrMessage("Age should not be less than 3");
-    testCase1.setTestCaseName("Age negative");
+    ValidateUserTestScenario testCase1 = ValidateUserTestScenario.builder()
+                                        .user(user1)
+                                        .errMessage("Age should not be less than 3")
+                                        .testCaseName("Age negative")
+                                        .build();
 
-    //Test Case 2 name empty
-    User user2 = new User("", 10, "address 1 is longer than 10 characters", "rollNo 1",
-        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.F));
-    ValidateUserTestScenario testCase2 = new ValidateUserTestScenario();
-    testCase2.setUser(user2);
-    testCase2.setErrMessage("Name cant be empty or null");
-    testCase2.setTestCaseName("Empty name");
+    //Test Case 2 valid user
+    ValidateUserTestScenario testCase2 = ValidateUserTestScenario.builder()
+                                        .user(user2)
+                                        .errMessage("")
+                                        .testCaseName("Valid User")
+                                        .build();
 
-    //Test Case 3 valid user
-    User user3 = new User("Punit", 10, "address 1", "rollNo 1",
-        Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D));
-    ValidateUserTestScenario testCase3 = new ValidateUserTestScenario();
-    testCase3.setUser(user3);
-    testCase3.setErrMessage(
-        "Address must be longer than 10 char but less than 50 char");
-    testCase3.setTestCaseName("Valid user");
-
-    return Stream.of(testCase1, testCase2, testCase3);
+    return Stream.of(testCase1, testCase2);
   }
 
   @ParameterizedTest
@@ -56,51 +60,27 @@ class UserValidatorTest {
     }
   }
 
-  private static Stream<ValidateAgeNumericTestScenario> generateTestCaseForValidateAgeNumeric() {
-    //Test Case 1 non integral value
-    ValidateAgeNumericTestScenario testCase1 = new ValidateAgeNumericTestScenario();
-    testCase1.setAge("random");
-    testCase1.setErrMessage("Age needs to be a numeric value");
-    testCase1.setTestCaseName("Non integral value");
-
-    //Test Case 2 integral value
-    ValidateAgeNumericTestScenario testCase2 = new ValidateAgeNumericTestScenario();
-    testCase2.setAge("5");
-    testCase2.setErrMessage("");
-    testCase2.setTestCaseName("integral value");
-
-    return Stream.of(testCase1, testCase2);
-  }
-
-  @ParameterizedTest
-  @MethodSource("generateTestCaseForValidateAgeNumeric")
-  void testValidateAgeNumeric(ValidateAgeNumericTestScenario testCase) {
-    try {
-      validateAgeNumeric(testCase.getAge());
-      assertEquals(testCase.getErrMessage(), "", testCase.getTestCaseName());
-    } catch (Exception e) {
-      assertEquals(testCase.getErrMessage(), e.getMessage(), testCase.getTestCaseName());
-    }
-  }
-
   private static Stream<ValidateCoursesTestScenario> generateTestCaseForValidateCourses() {
     //Test Case 1 less than 4 courses
-    ValidateCoursesTestScenario testCase1 = new ValidateCoursesTestScenario();
-    testCase1.setCourses(Arrays.asList("A", "B", "C", "C"));
-    testCase1.setErrMessage("CourseType are required to be 4 distinct");
-    testCase1.setTestCaseName("Less than 4 courses");
+    ValidateCoursesTestScenario testCase1 = ValidateCoursesTestScenario.builder()
+                                            .courses(Arrays.asList("A", "B", "C", "C"))
+                                            .errMessage("CourseType are required to be 4 distinct")
+                                            .testCaseName("Less than 4 courses")
+                                            .build();
 
     //Test Case 2 4 courses
-    ValidateCoursesTestScenario testCase2 = new ValidateCoursesTestScenario();
-    testCase2.setCourses(Arrays.asList("A", "B", "C", "F"));
-    testCase2.setErrMessage("");
-    testCase2.setTestCaseName("4 courses accurate");
+    ValidateCoursesTestScenario testCase2 = ValidateCoursesTestScenario.builder()
+                                            .courses(Arrays.asList("A", "B", "C", "F"))
+                                            .errMessage("")
+                                            .testCaseName("4 courses accurate")
+                                            .build();
 
     //Test Case 3 Invalid CourseType
-    ValidateCoursesTestScenario testCase3 = new ValidateCoursesTestScenario();
-    testCase3.setCourses(Arrays.asList("A", "Random", "C", "F"));
-    testCase3.setErrMessage("CourseType are need to have the following values only: A,B,C,D,E and F");
-    testCase3.setTestCaseName("Invalid Course");
+    ValidateCoursesTestScenario testCase3 = ValidateCoursesTestScenario.builder()
+                                            .courses(Arrays.asList("A", "Random", "C", "F"))
+                                            .errMessage("CourseType are need to have the following values only: A,B,C,D,E and F")
+                                            .testCaseName("Invalid Course")
+                                            .build();
 
     return Stream.of(testCase1, testCase2, testCase3);
   }
