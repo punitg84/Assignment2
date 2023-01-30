@@ -31,12 +31,12 @@ class UserComparatorByAddressAscTest {
 
     //Test Case 1 User 1 address less than User 2 address
     CompareTestScenario testCase1 = CompareTestScenario.builder()
-                                    .firstUser(user1)
-                                    .secondUser(user2)
-                                    .output(-1)
-                                    .testCaseName("second user less")
-                                    .errMessage("")
-                                    .build();
+        .firstUser(user1)
+        .secondUser(user2)
+        .output(-1)
+        .testCaseName("second user less")
+        .errMessage("")
+        .build();
 
     //Test Case 2 User 2 address less than User 1 address
     CompareTestScenario testCase2 = CompareTestScenario.builder()

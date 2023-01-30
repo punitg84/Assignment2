@@ -21,27 +21,27 @@ class FileControllerTest {
   private static Stream<ReadWriteToFileTestScenario> generateTestCaseForReadWriteUserDetailsToFile() {
 
     User firstUser = User.builder()
-                      .name("User 1")
-                      .age(10)
-                      .address("address 1")
-                      .rollNo("Roll No 1")
-                      .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
-                      .build();
+        .name("User 1")
+        .age(10)
+        .address("address 1")
+        .rollNo("Roll No 1")
+        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .build();
     User secondUser = User.builder()
-                      .name("User 2")
-                      .age(18)
-                      .address("address 2")
-                      .rollNo("Roll No 2")
-                      .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
-                      .build();
+        .name("User 2")
+        .age(18)
+        .address("address 2")
+        .rollNo("Roll No 2")
+        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .build();
 
     //Test Case
 
     ReadWriteToFileTestScenario testCase = ReadWriteToFileTestScenario.builder()
-                                          .userList(Arrays.asList(firstUser,secondUser))
-                                          .testCaseName("Adding user in file and then reading them")
-                                          .errMessage("")
-                                          .build();
+        .userList(Arrays.asList(firstUser, secondUser))
+        .testCaseName("Adding user in file and then reading them")
+        .errMessage("")
+        .build();
 
     return Stream.of(testCase);
   }
@@ -49,6 +49,7 @@ class FileControllerTest {
   @ParameterizedTest
   @MethodSource("generateTestCaseForReadWriteUserDetailsToFile")
   void testReadWriteUserDetailsToFile(ReadWriteToFileTestScenario testCase) {
+
     UserCollection userCollection = UserCollection.getInstance();
     for (User user : testCase.getUserList()) {
       userCollection.addUser(user);
@@ -66,7 +67,9 @@ class FileControllerTest {
   }
 
   @AfterEach
-  void cleanup(){
+  void cleanup() {
+
     UserCollection.getInstance().clearUserList();
   }
+
 }

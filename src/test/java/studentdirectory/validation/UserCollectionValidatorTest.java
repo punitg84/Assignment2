@@ -19,28 +19,28 @@ class UserCollectionValidatorTest {
   private static Stream<ValidateRollNoTestScenario> generateTestCaseForValidateRollNoPresent() {
 
     User user = User.builder()
-                .name("User 1")
-                .age(10)
-                .address("address 1 is a long address")
-                .rollNo("192")
-                .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
-                .build();
+        .name("User 1")
+        .age(10)
+        .address("address 1 is a long address")
+        .rollNo("192")
+        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .build();
 
     //Test Case 1 non duplicate users
     ValidateRollNoTestScenario testCase1 = ValidateRollNoTestScenario.builder()
-                                          .userList(Arrays.asList(user))
-                                          .rollNo("rollNo 2")
-                                          .errMessage("Roll No is not present in the database")
-                                          .testCaseName("Duplicate Doesn't Exist")
-                                          .build();
+        .userList(Arrays.asList(user))
+        .rollNo("rollNo 2")
+        .errMessage("Roll No is not present in the database")
+        .testCaseName("Duplicate Doesn't Exist")
+        .build();
 
     //Test Case 2 duplicate users
     ValidateRollNoTestScenario testCase2 = ValidateRollNoTestScenario.builder()
-                                          .userList(Arrays.asList(user))
-                                          .rollNo("192")
-                                          .errMessage("")
-                                          .testCaseName("Duplicate Exist")
-                                          .build();
+        .userList(Arrays.asList(user))
+        .rollNo("192")
+        .errMessage("")
+        .testCaseName("Duplicate Exist")
+        .build();
 
     return Stream.of(testCase1, testCase2);
   }
@@ -48,6 +48,7 @@ class UserCollectionValidatorTest {
   @ParameterizedTest
   @MethodSource("generateTestCaseForValidateRollNoPresent")
   void testValidateRollNoPresent(ValidateRollNoTestScenario testCase) {
+
     UserCollection userCollection = UserCollection.getInstance();
     for (User user : testCase.getUserList()) {
       userCollection.addUser(user);
@@ -63,28 +64,28 @@ class UserCollectionValidatorTest {
   private static Stream<ValidateRollNoTestScenario> generateTestCaseForValidateRollNoAbsent() {
 
     User user = User.builder()
-                .name("User 1")
-                .age(10)
-                .address("address 1 is a long address")
-                .rollNo("192")
-                .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
-                .build();
+        .name("User 1")
+        .age(10)
+        .address("address 1 is a long address")
+        .rollNo("192")
+        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .build();
 
     //Test Case 1 non duplicate users
     ValidateRollNoTestScenario testCase1 = ValidateRollNoTestScenario.builder()
-                                            .userList(Arrays.asList(user))
-                                            .rollNo("rollNo 2")
-                                            .errMessage("")
-                                            .testCaseName("Duplicate Doesn't Exist")
-                                            .build();
+        .userList(Arrays.asList(user))
+        .rollNo("rollNo 2")
+        .errMessage("")
+        .testCaseName("Duplicate Doesn't Exist")
+        .build();
 
     //Test Case 2 duplicate users
     ValidateRollNoTestScenario testCase2 = ValidateRollNoTestScenario.builder()
-                                            .userList(Arrays.asList(user))
-                                            .rollNo("192")
-                                            .errMessage("Roll No is already present in the database")
-                                            .testCaseName("Duplicate Exist")
-                                            .build();
+        .userList(Arrays.asList(user))
+        .rollNo("192")
+        .errMessage("Roll No is already present in the database")
+        .testCaseName("Duplicate Exist")
+        .build();
 
     return Stream.of(testCase1, testCase2);
   }
@@ -92,6 +93,7 @@ class UserCollectionValidatorTest {
   @ParameterizedTest
   @MethodSource("generateTestCaseForValidateRollNoAbsent")
   void testValidateRollNoAbsent(ValidateRollNoTestScenario testCase) {
+
     UserCollection userCollection = UserCollection.getInstance();
     for (User user : testCase.getUserList()) {
       userCollection.addUser(user);
@@ -110,4 +112,5 @@ class UserCollectionValidatorTest {
     //Clearing user collection
     UserCollection.getInstance().clearUserList();
   }
+
 }

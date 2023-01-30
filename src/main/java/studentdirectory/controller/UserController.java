@@ -25,11 +25,11 @@ public final class UserController {
         inputCourses.stream().map(CourseType::valueOf).collect(Collectors.toList());
 
     final User user = User.builder()
-                      .name(name)
-                      .age(age).address(address)
-                      .rollNo(rollNo)
-                      .courses(courseTypeList)
-                      .build();
+        .name(name)
+        .age(age).address(address)
+        .rollNo(rollNo)
+        .courses(courseTypeList)
+        .build();
     validateUser(user);
 
     return user;
