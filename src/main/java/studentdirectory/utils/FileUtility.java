@@ -12,7 +12,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public final class File {
+public final class FileUtility {
 
   private static final String APPLICATION_PATH = System.getProperty("user.dir");
   private static final Path PATH = Paths.get(APPLICATION_PATH, FILE_PATH);
@@ -33,7 +33,7 @@ public final class File {
       final java.io.File fileObj = new java.io.File(PATH.toUri());
       fileObj.createNewFile();
     } catch (Exception e) {
-      throw new Exception("File not available and cant be created", e);
+      throw new Exception("FileUtility not available and cant be created", e);
     }
   }
 

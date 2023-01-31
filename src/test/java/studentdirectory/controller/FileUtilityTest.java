@@ -1,7 +1,7 @@
 package studentdirectory.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static studentdirectory.utils.File.readObjectFromFile;
+import static studentdirectory.utils.FileUtility.readObjectFromFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,9 +13,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.controller.filecontrollertestscenario.ReadWriteToFileTestScenario;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
-import studentdirectory.utils.File;
+import studentdirectory.utils.FileUtility;
 
-class FileTest {
+class FileUtilityTest {
 
   private static Stream<ReadWriteToFileTestScenario> generateTestCaseForReadWriteUserDetailsToFile() {
     User firstUser = User.builder()
@@ -52,7 +52,7 @@ class FileTest {
       for (User user : testCase.getUserList()) {
         userCollection.addUser(user);
       }
-      File.writeObjectToFile(userCollection.getUserList());
+      FileUtility.writeObjectToFile(userCollection.getUserList());
       List<User> oldData = new ArrayList<>(userCollection.getUserList());
       userCollection.clearUserList();
       List<User> newData = (List<User>) readObjectFromFile();

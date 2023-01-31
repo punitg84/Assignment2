@@ -1,6 +1,6 @@
 package studentdirectory.models;
 
-import static studentdirectory.utils.File.readObjectFromFile;
+import static studentdirectory.utils.FileUtility.readObjectFromFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;

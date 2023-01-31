@@ -1,6 +1,6 @@
 package studentdirectory.controller;
 
-import static studentdirectory.utils.File.writeObjectToFile;
+import static studentdirectory.utils.FileUtility.writeObjectToFile;
 
 import java.util.List;
 import studentdirectory.comparator.UserComparatorByAddressAsc;
