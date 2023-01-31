@@ -1,12 +1,16 @@
 package studentdirectory.models;
 
+import java.io.Serial;
+import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 import studentdirectory.enums.CourseName;
 
 @Getter
 @Setter
-public class Course {
+public class Course implements Serializable {
+  @Serial
+  private static final long serialVersionUID = 102;
 
   private CourseName courseName;
 

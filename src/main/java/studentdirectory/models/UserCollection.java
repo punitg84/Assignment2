@@ -1,5 +1,7 @@
 package studentdirectory.models;
 
+import static studentdirectory.utils.File.readObjectFromFile;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,16 +17,24 @@ public final class UserCollection {
   private final SortedSet<User> userSet;
   private final Map<String, User> rollNoUserMapping;
 
-  private UserCollection() {
+  private UserCollection() throws Exception {
     userSet = new TreeSet<>();
     rollNoUserMapping = new HashMap<>();
+    loadData();
   }
 
-  public static UserCollection getInstance() {
+  public static UserCollection getInstance() throws Exception {
     if (Objects.isNull(userCollectionInstance)) {
       userCollectionInstance = new UserCollection();
     }
     return userCollectionInstance;
+  }
+
+  private void loadData() throws Exception {
+    List<User> users = (List<User>) readObjectFromFile();
+    if (Objects.nonNull(users)) {
+      users.stream().forEach(this::addUser);
+    }
   }
 
   public void addUser(final User user) {

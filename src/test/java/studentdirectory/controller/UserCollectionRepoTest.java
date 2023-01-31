@@ -45,11 +45,11 @@ class UserCollectionRepoTest {
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForAddUser")
-  void testAddUser(AddUserTestScenario testCase) {
-    UserCollectionRepo userCollectionRepo = new UserCollectionRepo(UserCollection.getInstance());
+  void testAddUser(AddUserTestScenario testCase) throws Exception {
     User user = testCase.getUser();
     int expectedSize = testCase.getUserListSize();
     try {
+      UserCollectionRepo userCollectionRepo = new UserCollectionRepo(UserCollection.getInstance());
       userCollectionRepo.addUser(user);
       int actualSize = UserCollection.getInstance().getUserList().size();
       assertEquals(expectedSize, actualSize, testCase.getTestCaseName());
@@ -94,7 +94,7 @@ class UserCollectionRepoTest {
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForDeleteUser")
-  void testDeleteUser(DeleteUserTestScenario testCase) {
+  void testDeleteUser(DeleteUserTestScenario testCase) throws Exception {
     UserCollectionRepo userCollectionRepo = new UserCollectionRepo(UserCollection.getInstance());
     User user = testCase.getUser();
     String rollNoToDelete = testCase.getRollNoToDelete();
@@ -168,7 +168,7 @@ class UserCollectionRepoTest {
   }
 
   @AfterEach
-  void cleanup() {
+  void cleanup() throws Exception {
     //Clearing user collection
     UserCollection.getInstance().clearUserList();
   }

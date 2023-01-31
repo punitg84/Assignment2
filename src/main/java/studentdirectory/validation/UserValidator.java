@@ -22,14 +22,16 @@ public final class UserValidator {
   public static void validateUser(final User user) throws Exception {
     final Set<ConstraintViolation<User>> violations = VALIDATOR.validate(user);
     for (final ConstraintViolation<User> violation : violations) {
-      throw new Exception(violation.getMessage());
+      throw new Exception(
+          String.format("%1$s : value %2$s", violation.getMessage(), violation.getInvalidValue()));
     }
   }
 
   public static void validateCourses(final List<String> courses) throws Exception {
     final HashSet<String> coursesSet = new HashSet<>(courses);
     if (coursesSet.size() != Course.REQUIRED_LIMIT_FOR_USER) {
-      throw new Exception("CourseName are required to be 4 distinct");
+      throw new Exception(
+          String.format("CourseName are required to be 4 distinct, current value: %s", courses));
     }
   }
 

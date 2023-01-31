@@ -1,7 +1,7 @@
 package studentdirectory.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static studentdirectory.controller.FileController.readObjectFromFile;
+import static studentdirectory.utils.File.readObjectFromFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,8 +13,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.controller.filecontrollertestscenario.ReadWriteToFileTestScenario;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
+import studentdirectory.utils.File;
 
-class FileControllerTest {
+class FileTest {
 
   private static Stream<ReadWriteToFileTestScenario> generateTestCaseForReadWriteUserDetailsToFile() {
     User firstUser = User.builder()
@@ -46,12 +47,12 @@ class FileControllerTest {
   @ParameterizedTest
   @MethodSource("generateTestCaseForReadWriteUserDetailsToFile")
   void testReadWriteUserDetailsToFile(ReadWriteToFileTestScenario testCase) {
-    UserCollection userCollection = UserCollection.getInstance();
-    for (User user : testCase.getUserList()) {
-      userCollection.addUser(user);
-    }
     try {
-      FileController.writeObjectToFile(userCollection.getUserList());
+      UserCollection userCollection = UserCollection.getInstance();
+      for (User user : testCase.getUserList()) {
+        userCollection.addUser(user);
+      }
+      File.writeObjectToFile(userCollection.getUserList());
       List<User> oldData = new ArrayList<>(userCollection.getUserList());
       userCollection.clearUserList();
       List<User> newData = (List<User>) readObjectFromFile();
@@ -62,7 +63,7 @@ class FileControllerTest {
   }
 
   @AfterEach
-  void cleanup() {
+  void cleanup() throws Exception {
 
     UserCollection.getInstance().clearUserList();
   }

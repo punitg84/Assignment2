@@ -1,8 +1,5 @@
 package studentdirectory.view;
 
-import static studentdirectory.controller.FileController.readObjectFromFile;
-import static studentdirectory.controller.FileController.writeObjectToFile;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,7 +8,6 @@ import studentdirectory.constants.UserChoice;
 import studentdirectory.controller.UserCollectionRepo;
 import studentdirectory.controller.UserController;
 import studentdirectory.enums.SortOrderType;
-import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
 public class Application {
@@ -23,9 +19,15 @@ public class Application {
   private UserCollection userCollection;
 
   public Application() {
-    userCollection = UserCollection.getInstance();
-    userCollectionRepo = new UserCollectionRepo(userCollection);
-    userController = new UserController(userCollectionRepo);
+    try {
+      userCollection = UserCollection.getInstance();
+      userCollectionRepo = new UserCollectionRepo(userCollection);
+      userController = new UserController(userCollectionRepo);
+    } catch (Exception e) {
+      e.printStackTrace();
+      showErrors(e);
+      isUserExited = true;
+    }
   }
 
   private int inputInteger() throws Exception {
@@ -60,7 +62,7 @@ public class Application {
 
     System.out.println("All the User details are being save to the file...");
 
-    writeObjectToFile(userCollection.getUserList());
+    userCollectionRepo.saveUsers();
 
     System.out.println("The Details have been successfully saved");
 
@@ -137,6 +139,7 @@ public class Application {
 
     } catch (Exception e) {
       showErrors(e);
+      e.printStackTrace();
     }
 
   }
@@ -159,18 +162,7 @@ public class Application {
     //exception.printStackTrace();
   }
 
-  private void loadData() throws Exception {
-    userCollectionRepo.addUsers((List<User>) readObjectFromFile());
-  }
-
   public void run() {
-
-    try {
-      loadData();
-    } catch (Exception e) {
-      showErrors(e);
-      return;
-    }
 
     while (!isUserExited) {
       showMenu();

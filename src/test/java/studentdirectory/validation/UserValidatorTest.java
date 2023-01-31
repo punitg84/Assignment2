@@ -43,7 +43,7 @@ class UserValidatorTest {
     //Test Case 1 age negative
     ValidateUserTestScenario testCase1 = ValidateUserTestScenario.builder()
         .user(user1)
-        .errMessage("Age should not be less than 3")
+        .errMessage("Age should not be less than 3 : value -10")
         .testCaseName("Age negative")
         .build();
 
@@ -73,7 +73,7 @@ class UserValidatorTest {
     //Test Case 1 less than 4 courses
     ValidateCoursesTestScenario testCase1 = ValidateCoursesTestScenario.builder()
         .courses(Arrays.asList("A", "B", "C", "C"))
-        .errMessage("CourseName are required to be 4 distinct")
+        .errMessage("CourseName are required to be 4 distinct, current value: [A, B, C, C]")
         .testCaseName("Less than 4 courses")
         .build();
 

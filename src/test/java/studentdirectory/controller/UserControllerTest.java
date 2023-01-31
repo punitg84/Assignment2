@@ -31,7 +31,7 @@ class UserControllerTest {
         .address("Address 1 is a long value")
         .rollNo("193")
         .courses(Arrays.asList("A", "B", "C", "E"))
-        .errMessage("Name cant be empty or null")
+        .errMessage("Name cant be empty or null : value ")
         .testCaseName("Adding invalid user with name empty")
         .build();
 
@@ -41,13 +41,13 @@ class UserControllerTest {
   @ParameterizedTest
   @MethodSource("generateTestCaseForCreateUser")
   void testCreateUser(CreateUserTestScenario testCase) {
-    UserController userController = new UserController(new UserCollectionRepo(UserCollection.getInstance()));
     String name = testCase.getName();
     String address = testCase.getAddress();
     int age = testCase.getAge();
     List<String> courses = testCase.getCourses();
     String rollNo = testCase.getRollNo();
     try {
+      UserController userController = new UserController(new UserCollectionRepo(UserCollection.getInstance()));
       userController.createUser(name, age, address, rollNo, courses);
       assertEquals(testCase.getErrMessage(), "", testCase.getTestCaseName());
     } catch (Exception e) {

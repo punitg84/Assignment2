@@ -1,11 +1,10 @@
-package studentdirectory.controller;
+package studentdirectory.utils;
 
 import static studentdirectory.constants.Path.FILE_PATH;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.EOFException;
-import java.io.File;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
@@ -13,7 +12,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public final class FileController {
+public final class File {
 
   private static final String APPLICATION_PATH = System.getProperty("user.dir");
   private static final Path PATH = Paths.get(APPLICATION_PATH, FILE_PATH);
@@ -31,7 +30,7 @@ public final class FileController {
 
   private static void createNewFile() throws Exception {
     try {
-      final File fileObj = new File(PATH.toUri());
+      final java.io.File fileObj = new java.io.File(PATH.toUri());
       fileObj.createNewFile();
     } catch (Exception e) {
       throw new Exception("File not available and cant be created", e);
@@ -48,7 +47,7 @@ public final class FileController {
       createNewFile();
     } catch (EOFException e) {
 
-      final File file = new File(PATH.toUri());
+      final java.io.File file = new java.io.File(PATH.toUri());
       if (file.length() != 0) {
         throw new Exception("Not able to read file", e);
       }

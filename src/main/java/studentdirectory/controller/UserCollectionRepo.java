@@ -1,5 +1,7 @@
 package studentdirectory.controller;
 
+import static studentdirectory.utils.File.writeObjectToFile;
+
 import java.util.List;
 import studentdirectory.comparator.UserComparatorByAddressAsc;
 import studentdirectory.comparator.UserComparatorByAddressDesc;
@@ -28,7 +30,8 @@ public final class UserCollectionRepo {
   public void addUser(User user) throws Exception {
 
     if (isRollNoPresent(user.getRollNo())) {
-      throw new Exception("Roll No is already present in the database");
+      throw new Exception(
+          String.format("Roll No(%s) is already present in the database", user.getRollNo()));
     }
 
     collection.addUser(user);
@@ -44,7 +47,7 @@ public final class UserCollectionRepo {
   public void deleteUser(final String rollNo) throws Exception {
 
     if (!isRollNoPresent(rollNo)) {
-      throw new Exception("Roll No is not present in the database");
+      throw new Exception(String.format("Roll No(%s) is not present in the database", rollNo));
     }
     collection.deleteUser(rollNo);
 
@@ -63,10 +66,14 @@ public final class UserCollectionRepo {
       case ROLL_NO_DESC -> userList.sort(new UserComparatorByRollNoDesc());
       case ADDRESS_ASC -> userList.sort(new UserComparatorByAddressAsc());
       case ADDRESS_DESC -> userList.sort(new UserComparatorByAddressDesc());
-      default -> throw new Exception("Wrong Sort order type");
+      default -> throw new Exception(String.format("Wrong Sort order type: %s", sortOrderType));
     }
 
     return userList;
+  }
+
+  public void saveUsers() throws Exception {
+    writeObjectToFile(collection.getUserList());
   }
 
 }
