@@ -1,8 +1,7 @@
 package studentdirectory.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static studentdirectory.controller.FileController.readUserDetailsFromFile;
-import static studentdirectory.controller.FileController.writeUserDetailsToFile;
+import static studentdirectory.controller.FileController.readObjectFromFile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,27 +11,25 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.controller.filecontrollertestscenario.ReadWriteToFileTestScenario;
-import studentdirectory.enums.CourseType;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
 class FileControllerTest {
 
   private static Stream<ReadWriteToFileTestScenario> generateTestCaseForReadWriteUserDetailsToFile() {
-
     User firstUser = User.builder()
         .name("User 1")
         .age(10)
         .address("address 1")
         .rollNo("Roll No 1")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(new ArrayList<>())
         .build();
     User secondUser = User.builder()
         .name("User 2")
         .age(18)
         .address("address 2")
         .rollNo("Roll No 2")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(new ArrayList<>())
         .build();
 
     //Test Case
@@ -49,17 +46,15 @@ class FileControllerTest {
   @ParameterizedTest
   @MethodSource("generateTestCaseForReadWriteUserDetailsToFile")
   void testReadWriteUserDetailsToFile(ReadWriteToFileTestScenario testCase) {
-
     UserCollection userCollection = UserCollection.getInstance();
     for (User user : testCase.getUserList()) {
       userCollection.addUser(user);
     }
     try {
-      writeUserDetailsToFile();
+      FileController.writeObjectToFile(userCollection.getUserList());
       List<User> oldData = new ArrayList<>(userCollection.getUserList());
       userCollection.clearUserList();
-      readUserDetailsFromFile();
-      List<User> newData = new ArrayList<>(userCollection.getUserList());
+      List<User> newData = (List<User>) readObjectFromFile();
       assertEquals(oldData, newData, testCase.getTestCaseName());
     } catch (Exception e) {
       assertEquals(testCase.getErrMessage(), e.getMessage(), testCase.getTestCaseName());

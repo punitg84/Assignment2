@@ -1,8 +1,5 @@
 package studentdirectory.controller;
 
-import static studentdirectory.validation.UserCollectionValidator.validateRollNoAbsent;
-import static studentdirectory.validation.UserCollectionValidator.validateRollNoPresent;
-
 import java.util.List;
 import studentdirectory.comparator.UserComparatorByAddressAsc;
 import studentdirectory.comparator.UserComparatorByAddressDesc;
@@ -16,36 +13,46 @@ import studentdirectory.enums.SortOrderType;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
-public final class UserCollectionController {
+public final class UserCollectionRepo {
 
-  private UserCollectionController() {
-    //Default constructor
+  private UserCollection collection;
+
+  public UserCollectionRepo(UserCollection collection) {
+    this.collection = collection;
   }
 
-  public static void addUser(final String name,
-                             final int age,
-                             final String address,
-                             final String rollNo,
-                             final List<String> courses) throws Exception {
-
-    validateRollNoAbsent(rollNo);
-    final User user = UserController.createUser(name, age, address, rollNo, courses);
-    final UserCollection userCollection = UserCollection.getInstance();
-    userCollection.addUser(user);
-
+  private boolean isRollNoPresent(final String rollNo) {
+    return collection.isUserPresent(rollNo);
   }
 
-  public static void deleteUser(final String rollNo) throws Exception {
+  public void addUser(User user) throws Exception {
 
-    validateRollNoPresent(rollNo);
-    final UserCollection userCollection = UserCollection.getInstance();
-    userCollection.deleteUser(rollNo);
+    if (isRollNoPresent(user.getRollNo())) {
+      throw new Exception("Roll No is already present in the database");
+    }
+
+    collection.addUser(user);
 
   }
 
-  public static List<User> getUserListSortedByOrder(final SortOrderType sortOrderType) {
+  public void addUsers(List<User> users) throws Exception {
+    for (User user : users) {
+      addUser(user);
+    }
+  }
 
-    final List<User> userList = UserCollection.getInstance().getUserList();
+  public void deleteUser(final String rollNo) throws Exception {
+
+    if (!isRollNoPresent(rollNo)) {
+      throw new Exception("Roll No is not present in the database");
+    }
+    collection.deleteUser(rollNo);
+
+  }
+
+  public List<User> getSortedUserList(final SortOrderType sortOrderType) throws Exception {
+
+    final List<User> userList = collection.getUserList();
 
     switch (sortOrderType) {
       case AGE_ASC -> userList.sort(new UserComparatorByAgeAsc());
@@ -56,6 +63,7 @@ public final class UserCollectionController {
       case ROLL_NO_DESC -> userList.sort(new UserComparatorByRollNoDesc());
       case ADDRESS_ASC -> userList.sort(new UserComparatorByAddressAsc());
       case ADDRESS_DESC -> userList.sort(new UserComparatorByAddressDesc());
+      default -> throw new Exception("Wrong Sort order type");
     }
 
     return userList;

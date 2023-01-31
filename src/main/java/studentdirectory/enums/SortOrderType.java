@@ -15,8 +15,6 @@ public enum SortOrderType {
   ROLL_NO_ASC(7),
   ROLL_NO_DESC(8);
 
-  public static final int NO_OF_SORT_OPTIONS = 8;
-
   private static final Map<Integer, SortOrderType> INTEGER_SORT_ORDER_MAP = new HashMap<>();
 
   private final int code;
@@ -28,10 +26,6 @@ public enum SortOrderType {
 
   SortOrderType(final int code) {
     this.code = code;
-  }
-
-  private int getCode() {
-    return code;
   }
 
   public static SortOrderType get(final int code) throws Exception {

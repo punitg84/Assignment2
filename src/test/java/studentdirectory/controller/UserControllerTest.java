@@ -1,7 +1,6 @@
 package studentdirectory.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static studentdirectory.controller.UserController.createUser;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +8,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.controller.usercontrollertestscenario.CreateUserTestScenario;
+import studentdirectory.models.UserCollection;
 
 class UserControllerTest {
 
@@ -41,14 +41,14 @@ class UserControllerTest {
   @ParameterizedTest
   @MethodSource("generateTestCaseForCreateUser")
   void testCreateUser(CreateUserTestScenario testCase) {
-
+    UserController userController = new UserController(new UserCollectionRepo(UserCollection.getInstance()));
     String name = testCase.getName();
     String address = testCase.getAddress();
     int age = testCase.getAge();
     List<String> courses = testCase.getCourses();
     String rollNo = testCase.getRollNo();
     try {
-      createUser(name, age, address, rollNo, courses);
+      userController.createUser(name, age, address, rollNo, courses);
       assertEquals(testCase.getErrMessage(), "", testCase.getTestCaseName());
     } catch (Exception e) {
       assertEquals(testCase.getErrMessage(), e.getMessage(), testCase.getTestCaseName());

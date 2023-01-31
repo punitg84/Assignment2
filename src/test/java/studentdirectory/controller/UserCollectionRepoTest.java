@@ -1,10 +1,8 @@
 package studentdirectory.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static studentdirectory.controller.UserCollectionController.addUser;
-import static studentdirectory.controller.UserCollectionController.deleteUser;
-import static studentdirectory.controller.UserCollectionController.getUserListSortedByOrder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
@@ -16,49 +14,44 @@ import studentdirectory.controller.usercollectioncontrollertestscenario.DeleteUs
 import studentdirectory.controller.usercollectioncontrollertestscenario.GetUserListSortedByOrderTestScenario;
 import studentdirectory.enums.CourseType;
 import studentdirectory.enums.SortOrderType;
+import studentdirectory.models.Course;
 import studentdirectory.models.User;
 import studentdirectory.models.UserCollection;
 
-class UserCollectionControllerTest {
+class UserCollectionRepoTest {
 
-  private static Stream<AddUserTestScenario> generateTestCaseForAddUser() {
-    //Test Case 1 providing valid student
-    AddUserTestScenario testCase1 = AddUserTestScenario.builder()
+  private static Stream<AddUserTestScenario> generateTestCaseForAddUser() throws Exception {
+    List<Course> courses = new ArrayList<>();
+    for(String type:Arrays.asList("A","B","C","D")){
+      courses.add(new Course(type));
+    }
+
+    User user1 = User.builder()
         .name("User 1")
         .age(10)
-        .address("Address 1 is a long value")
-        .rollNo("192")
-        .courses(Arrays.asList("A", "B", "C", "E"))
+        .address("address 1 is a really long value")
+        .rollNo("Roll No 1")
+        .courses(courses)
+        .build();
+
+    //Test Case 1 providing valid student
+    AddUserTestScenario testCase1 = AddUserTestScenario.builder()
+        .user(user1)
         .userListSize(1)
         .testCaseName("Adding valid user")
         .build();
 
-    //Test Case 2 providing invalid student
-    AddUserTestScenario testCase2 = AddUserTestScenario.builder()
-        .name("User 2")
-        .age(10)
-        .address("Address 2")
-        .rollNo("193")
-        .courses(Arrays.asList("A", "B", "C", "E"))
-        .userListSize(0)
-        .testCaseName("Adding invalid user with name empty")
-        .build();
-
-    return Stream.of(testCase1, testCase2);
+    return Stream.of(testCase1);
   }
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForAddUser")
   void testAddUser(AddUserTestScenario testCase) {
-
-    String name = testCase.getName();
-    String address = testCase.getAddress();
-    int age = testCase.getAge();
-    List<String> courses = testCase.getCourses();
-    String rollNo = testCase.getRollNo();
+    UserCollectionRepo userCollectionRepo = new UserCollectionRepo(UserCollection.getInstance());
+    User user = testCase.getUser();
     int expectedSize = testCase.getUserListSize();
     try {
-      addUser(name, age, address, rollNo, courses);
+      userCollectionRepo.addUser(user);
       int actualSize = UserCollection.getInstance().getUserList().size();
       assertEquals(expectedSize, actualSize, testCase.getTestCaseName());
     } catch (Exception e) {
@@ -67,14 +60,19 @@ class UserCollectionControllerTest {
     }
   }
 
-  private static Stream<DeleteUserTestScenario> generateTestCaseForDeleteUser() {
+  private static Stream<DeleteUserTestScenario> generateTestCaseForDeleteUser() throws Exception {
+
+    List<Course> courses = new ArrayList<>();
+    for(String type:Arrays.asList("A","B","C","D")){
+      courses.add(new Course(type));
+    }
 
     User user = User.builder()
         .name("User 1")
         .age(10)
-        .address("address 1 is a long address")
+        .address("address 1 is a really long value")
         .rollNo("192")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(courses)
         .build();
     //Test Case 1 providing valid student roll no
     DeleteUserTestScenario testCase1 = DeleteUserTestScenario.builder()
@@ -98,13 +96,13 @@ class UserCollectionControllerTest {
   @ParameterizedTest
   @MethodSource("generateTestCaseForDeleteUser")
   void testDeleteUser(DeleteUserTestScenario testCase) {
-
+    UserCollectionRepo userCollectionRepo = new UserCollectionRepo(UserCollection.getInstance());
     User user = testCase.getUser();
     String rollNoToDelete = testCase.getRollNoToDelete();
     int expectedSize = testCase.getUserListSize();
     UserCollection.getInstance().addUser(user);
     try {
-      deleteUser(rollNoToDelete);
+      userCollectionRepo.deleteUser(rollNoToDelete);
       int actualSize = UserCollection.getInstance().getUserList().size();
       assertEquals(expectedSize, actualSize, testCase.getTestCaseName());
     } catch (Exception e) {
@@ -113,14 +111,19 @@ class UserCollectionControllerTest {
     }
   }
 
-  private static Stream<GetUserListSortedByOrderTestScenario> generateTestCaseForGetUserListSortedByOrder() {
+  private static Stream<GetUserListSortedByOrderTestScenario> generateTestCaseForGetUserListSortedByOrder()
+      throws Exception {
+    List<Course> courses = new ArrayList<>();
+    for(String type:Arrays.asList("A","B","C","D")){
+      courses.add(new Course(type));
+    }
 
     User firstUser = User.builder()
         .name("User 1")
         .age(10)
         .address("address 1 is a long address")
         .rollNo("Roll No 1")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(courses)
         .build();
 
     User secondUser = User.builder()
@@ -128,7 +131,7 @@ class UserCollectionControllerTest {
         .age(18)
         .address("address 1 is a long address")
         .rollNo("Roll No 2")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(courses)
         .build();
 
     User thirdUser = User.builder()
@@ -136,7 +139,7 @@ class UserCollectionControllerTest {
         .age(17)
         .address("address 1 is a long address")
         .rollNo("Roll No 3")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(courses)
         .build();
 
     //Test Case
@@ -152,14 +155,15 @@ class UserCollectionControllerTest {
 
   @ParameterizedTest
   @MethodSource("generateTestCaseForGetUserListSortedByOrder")
-  void testGetUserListSortedByOrder(GetUserListSortedByOrderTestScenario testCase) {
-
+  void testGetUserListSortedByOrder(GetUserListSortedByOrderTestScenario testCase)
+      throws Exception {
+    UserCollectionRepo userCollectionRepo = new UserCollectionRepo(UserCollection.getInstance());
     UserCollection userCollection = UserCollection.getInstance();
     for (User user : testCase.getRandomUserList()) {
       userCollection.addUser(user);
     }
     SortOrderType order = testCase.getOrder();
-    List<User> actual = getUserListSortedByOrder(order);
+    List<User> actual = userCollectionRepo.getSortedUserList(order);
     List<User> expected = testCase.getSortedUserList();
     assertEquals(expected, actual, testCase.getTestCaseName());
   }

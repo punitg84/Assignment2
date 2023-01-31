@@ -3,6 +3,7 @@ package studentdirectory.models;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.io.Serial;
 import java.io.Serializable;
@@ -14,7 +15,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import studentdirectory.constants.ValidationMessage;
-import studentdirectory.enums.CourseType;
 
 @Getter
 @Setter
@@ -41,8 +41,7 @@ public class User implements Serializable, Comparable<User> {
   @EqualsAndHashCode.Include
   private final String rollNo;
 
-  @Size(min = 4, max = 4)
-  private final List<CourseType> courses;
+  private final @Size(min = 4, max = 4) List<@NotNull Course> courses;
 
   @Override
   public int compareTo(final User o) {

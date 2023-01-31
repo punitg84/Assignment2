@@ -2,7 +2,9 @@ package studentdirectory.models;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -11,14 +13,18 @@ import studentdirectory.models.usertestscenario.CompareToTestScenario;
 
 class UserTest {
 
-  private static Stream<CompareToTestScenario> generateTestForCompareTo() {
+  private static Stream<CompareToTestScenario> generateTestForCompareTo() throws Exception {
+    List<Course> courses = new ArrayList<>();
+    for(String type:Arrays.asList("A","B","C","D")){
+      courses.add(new Course(type));
+    }
 
     User user1 = User.builder()
         .name("User 1")
         .age(10)
         .address("address 1")
         .rollNo("Roll No 1")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(courses)
         .build();
 
     User user2 = User.builder()
@@ -26,7 +32,7 @@ class UserTest {
         .age(10)
         .address("address 1")
         .rollNo("Roll No 1")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(courses)
         .build();
 
     User user3 = User.builder()
@@ -34,7 +40,7 @@ class UserTest {
         .age(10)
         .address("address 1")
         .rollNo("Roll No 2")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(courses)
         .build();
 
     //Test Case 1 Same roll no Diff user name

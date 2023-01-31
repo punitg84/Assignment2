@@ -4,33 +4,41 @@ import static org.junit.jupiter.api.Assertions.*;
 import static studentdirectory.validation.UserValidator.validateCourses;
 import static studentdirectory.validation.UserValidator.validateUser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.enums.CourseType;
+import studentdirectory.models.Course;
 import studentdirectory.models.User;
 import studentdirectory.validation.uservalidatortestscenario.ValidateCoursesTestScenario;
 import studentdirectory.validation.uservalidatortestscenario.ValidateUserTestScenario;
 
 class UserValidatorTest {
 
-  private static Stream<ValidateUserTestScenario> generateTestCaseForValidateUser() {
+  private static Stream<ValidateUserTestScenario> generateTestCaseForValidateUser()
+      throws Exception {
+
+    List<Course> courses = new ArrayList<>();
+    for(String type:Arrays.asList("A","B","C","D")){
+      courses.add(new Course(type));
+    }
 
     User user1 = User.builder()
         .name("User 1")
         .age(-10)
         .address("address 1 is a long address")
-        .rollNo("192")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .rollNo("Roll No 1")
+        .courses(courses)
         .build();
-
     User user2 = User.builder()
-        .name("User 1")
-        .age(10)
-        .address("address 1 is a long address")
-        .rollNo("192")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .name("User 2")
+        .age(18)
+        .address("address 2 is a long address")
+        .rollNo("Roll No 2")
+        .courses(courses)
         .build();
 
     //Test Case 1 age negative
@@ -77,14 +85,7 @@ class UserValidatorTest {
         .testCaseName("4 courses accurate")
         .build();
 
-    //Test Case 3 Invalid CourseType
-    ValidateCoursesTestScenario testCase3 = ValidateCoursesTestScenario.builder()
-        .courses(Arrays.asList("A", "Random", "C", "F"))
-        .errMessage("CourseType are need to have the following values only: A,B,C,D,E and F")
-        .testCaseName("Invalid Course")
-        .build();
-
-    return Stream.of(testCase1, testCase2, testCase3);
+    return Stream.of(testCase1, testCase2);
   }
 
   @ParameterizedTest

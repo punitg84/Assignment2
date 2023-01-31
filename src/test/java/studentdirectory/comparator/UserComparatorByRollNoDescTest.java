@@ -2,32 +2,39 @@ package studentdirectory.comparator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.comparator.usercomparatortestscenario.CompareTestScenario;
 import studentdirectory.enums.CourseType;
+import studentdirectory.models.Course;
 import studentdirectory.models.User;
 import studentdirectory.models.usertestscenario.CompareToTestScenario;
 
 class UserComparatorByRollNoDescTest {
 
-  private static Stream<CompareTestScenario> generateTestForCompare() {
+  private static Stream<CompareTestScenario> generateTestForCompare() throws Exception {
+    List<Course> courses = new ArrayList<>();
+    for(String type:Arrays.asList("A","B","C","D")){
+      courses.add(new Course(type));
+    }
 
     User user1 = User.builder()
         .name("User 1")
         .age(10)
         .address("address 1")
         .rollNo("Roll No 1")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(courses)
         .build();
     User user2 = User.builder()
         .name("User 2")
         .age(18)
         .address("address 2")
         .rollNo("Roll No 2")
-        .courses(Arrays.asList(CourseType.A, CourseType.B, CourseType.C, CourseType.D))
+        .courses(courses)
         .build();
 
     //Test Case 1 User 1 roll no less than User 2 roll no
