@@ -92,8 +92,7 @@ public class Application {
     final int optionNumber = inputInteger();
     final SortOrderType sortOrderType = SortOrderType.get(optionNumber);
 
-    userCollectionRepo.getSortedUserList(sortOrderType).stream()
-        .forEach(System.out::println);
+    userCollectionRepo.getSortedUserList(sortOrderType).stream().forEach(System.out::println);
 
   }
 

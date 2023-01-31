@@ -1,20 +1,24 @@
 package studentdirectory.models;
 
-import studentdirectory.enums.CourseType;
+import lombok.Getter;
+import lombok.Setter;
+import studentdirectory.enums.CourseName;
 
+@Getter
+@Setter
 public class Course {
 
-  private CourseType type;
+  private CourseName courseName;
 
-  public Course(String type) throws Exception {
-    this.type = getType(type);
+  public Course(String courseName) throws Exception {
+    this.courseName = getCourseName(courseName);
   }
 
-  private static CourseType getType(String type) throws Exception {
+  private static CourseName getCourseName(String name) throws Exception {
     try {
-      return CourseType.valueOf(type);
+      return CourseName.valueOf(name);
     } catch (Exception e) {
-      throw new Exception("CourseType are need to have the following values only: A,B,C,D,E and F", e);
+      throw new Exception("CourseName are need to have the following values only: A,B,C,D,E and F", e);
     }
   }
 

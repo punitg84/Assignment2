@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import studentdirectory.enums.CourseType;
 import studentdirectory.models.Course;
 import studentdirectory.models.User;
 import studentdirectory.validation.uservalidatortestscenario.ValidateCoursesTestScenario;
@@ -74,7 +73,7 @@ class UserValidatorTest {
     //Test Case 1 less than 4 courses
     ValidateCoursesTestScenario testCase1 = ValidateCoursesTestScenario.builder()
         .courses(Arrays.asList("A", "B", "C", "C"))
-        .errMessage("CourseType are required to be 4 distinct")
+        .errMessage("CourseName are required to be 4 distinct")
         .testCaseName("Less than 4 courses")
         .build();
 

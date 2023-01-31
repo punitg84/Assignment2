@@ -12,7 +12,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.controller.usercollectioncontrollertestscenario.AddUserTestScenario;
 import studentdirectory.controller.usercollectioncontrollertestscenario.DeleteUserTestScenario;
 import studentdirectory.controller.usercollectioncontrollertestscenario.GetUserListSortedByOrderTestScenario;
-import studentdirectory.enums.CourseType;
 import studentdirectory.enums.SortOrderType;
 import studentdirectory.models.Course;
 import studentdirectory.models.User;

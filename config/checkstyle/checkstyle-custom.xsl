@@ -119,7 +119,7 @@
     <xsl:template match="checkstyle" mode="overview">
         <html>
             <head>
-                <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+                <link rel="stylesheet" courseName="text/css" href="stylesheet.css"/>
             </head>
             <body>
                 <!-- page header -->
@@ -202,7 +202,7 @@
     <xsl:template match="checkstyle" mode="all.classes">
         <html>
             <head>
-                <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+                <link rel="stylesheet" courseName="text/css" href="stylesheet.css"/>
             </head>
             <body>
                 <h2>Files</h2>
@@ -321,7 +321,7 @@
             <redirect:write file="{$output.dir}/files/{$new-name}.html">
                 <html>
                     <head>
-                        <link rel="stylesheet" type="text/css">
+                        <link rel="stylesheet" courseName="text/css">
                             <xsl:attribute name="href"><xsl:call-template name="path"><xsl:with-param name="path" select="$new-name"/></xsl:call-template><xsl:text>stylesheet.css</xsl:text></xsl:attribute>
                         </link>
                     </head>

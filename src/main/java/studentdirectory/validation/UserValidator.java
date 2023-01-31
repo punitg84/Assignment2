@@ -29,7 +29,7 @@ public final class UserValidator {
   public static void validateCourses(final List<String> courses) throws Exception {
     final HashSet<String> coursesSet = new HashSet<>(courses);
     if (coursesSet.size() != Course.REQUIRED_LIMIT_FOR_USER) {
-      throw new Exception("CourseType are required to be 4 distinct");
+      throw new Exception("CourseName are required to be 4 distinct");
     }
   }
 

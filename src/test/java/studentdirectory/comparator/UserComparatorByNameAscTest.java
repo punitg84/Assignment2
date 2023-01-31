@@ -9,10 +9,8 @@ import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import studentdirectory.comparator.usercomparatortestscenario.CompareTestScenario;
-import studentdirectory.enums.CourseType;
 import studentdirectory.models.Course;
 import studentdirectory.models.User;
-import studentdirectory.models.usertestscenario.CompareToTestScenario;
 
 class UserComparatorByNameAscTest {
 
