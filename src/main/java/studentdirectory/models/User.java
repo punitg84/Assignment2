@@ -27,17 +27,17 @@ public class User implements Serializable, Comparable<User> {
   @Serial
   private static final long serialVersionUID = 101;
 
-  @NotEmpty(message = ValidationMessage.NAME_EMPTY_MESSAGE)
+  @NotEmpty(message = ValidationMessage.NAME_EMPTY_ERROR_MESSAGE)
   private final String name;
 
-  @Min(value = 3, message = ValidationMessage.AGE_MIN_MESSAGE)
-  @Max(value = 100, message = ValidationMessage.AGE_MAX_MESSAGE)
+  @Min(value = 3, message = ValidationMessage.AGE_MIN_ERROR_MESSAGE)
+  @Max(value = 100, message = ValidationMessage.AGE_MAX_ERROR_MESSAGE)
   private final int age;
 
-  @Size(min = 10, max = 50, message = ValidationMessage.ADDRESS_SIZE_MESSAGE)
+  @Size(min = 10, max = 50, message = ValidationMessage.ADDRESS_SIZE_ERROR_MESSAGE)
   private final String address;
 
-  @NotEmpty(message = ValidationMessage.ROLL_NO_EMPTY_MESSAGE)
+  @NotEmpty(message = ValidationMessage.ROLL_NO_EMPTY_ERROR_MESSAGE)
   @EqualsAndHashCode.Include
   private final String rollNo;
 
