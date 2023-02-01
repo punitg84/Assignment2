@@ -31,7 +31,7 @@ public enum SortOrderType {
   public static SortOrderType get(final int code) throws Exception {
 
     if (!INTEGER_SORT_ORDER_MAP.containsKey(code)) {
-      throw new Exception("No Sort Order type against give code");
+      throw new Exception(String.format("No Sort Order type against give code : %s", code));
     }
 
     return INTEGER_SORT_ORDER_MAP.get(code);

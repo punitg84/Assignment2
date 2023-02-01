@@ -12,19 +12,17 @@ import studentdirectory.models.UserCollection;
 
 public class Application {
 
-  private Scanner scanner = new Scanner(System.in);
+  private final Scanner scanner = new Scanner(System.in);
   private boolean isUserExited;
   private UserCollectionRepo userCollectionRepo;
   private UserController userController;
-  private UserCollection userCollection;
 
   public Application() {
     try {
-      userCollection = UserCollection.getInstance();
+      UserCollection userCollection = UserCollection.getInstance();
       userCollectionRepo = new UserCollectionRepo(userCollection);
       userController = new UserController(userCollectionRepo);
     } catch (Exception e) {
-      e.printStackTrace();
       showErrors(e);
       isUserExited = true;
     }
@@ -134,12 +132,11 @@ public class Application {
         case UserChoice.DELETE_OPTION_CHOICE -> deleteUser();
         case UserChoice.SAVE_OPTION_CHOICE -> saveUser();
         case UserChoice.EXIT_OPTION_CHOICE -> exitUser();
-        default -> throw new Exception("Given input is incorrect");
+        default -> throw new Exception(String.format("Given input is incorrect", option));
       }
 
     } catch (Exception e) {
       showErrors(e);
-      e.printStackTrace();
     }
 
   }

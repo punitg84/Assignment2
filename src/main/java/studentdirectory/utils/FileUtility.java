@@ -17,7 +17,11 @@ public final class FileUtility {
   private static final String APPLICATION_PATH = System.getProperty("user.dir");
   private static final Path PATH = Paths.get(APPLICATION_PATH, FILE_PATH);
 
-  public static void writeObjectToFile(Object obj) throws Exception {
+  private FileUtility() {
+
+  }
+
+  public static void writeObjectToFile(final Object obj) throws Exception {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
         new BufferedOutputStream(Files.newOutputStream(PATH)))) {
 
@@ -33,7 +37,7 @@ public final class FileUtility {
       final java.io.File fileObj = new java.io.File(PATH.toUri());
       fileObj.createNewFile();
     } catch (Exception e) {
-      throw new Exception("FileUtility not available and cant be created", e);
+      throw new Exception("File not available and cant be created", e);
     }
   }
 

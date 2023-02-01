@@ -1,7 +1,5 @@
 package studentdirectory.controller;
 
-import static studentdirectory.utils.FileUtility.writeObjectToFile;
-
 import java.util.List;
 import studentdirectory.comparator.UserComparatorByAddressAsc;
 import studentdirectory.comparator.UserComparatorByAddressDesc;
@@ -17,9 +15,9 @@ import studentdirectory.models.UserCollection;
 
 public final class UserCollectionRepo {
 
-  private UserCollection collection;
+  private final UserCollection collection;
 
-  public UserCollectionRepo(UserCollection collection) {
+  public UserCollectionRepo(final UserCollection collection) {
     this.collection = collection;
   }
 
@@ -27,7 +25,7 @@ public final class UserCollectionRepo {
     return collection.isUserPresent(rollNo);
   }
 
-  public void addUser(User user) throws Exception {
+  public void addUser(final User user) throws Exception {
 
     if (isRollNoPresent(user.getRollNo())) {
       throw new Exception(
@@ -38,8 +36,8 @@ public final class UserCollectionRepo {
 
   }
 
-  public void addUsers(List<User> users) throws Exception {
-    for (User user : users) {
+  public void addUsers(final List<User> users) throws Exception {
+    for (final User user : users) {
       addUser(user);
     }
   }
@@ -73,7 +71,7 @@ public final class UserCollectionRepo {
   }
 
   public void saveUsers() throws Exception {
-    writeObjectToFile(collection.getUserList());
+    collection.saveUsers();
   }
 
 }

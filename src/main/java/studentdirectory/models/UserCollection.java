@@ -1,6 +1,7 @@
 package studentdirectory.models;
 
 import static studentdirectory.utils.FileUtility.readObjectFromFile;
+import static studentdirectory.utils.FileUtility.writeObjectToFile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +32,7 @@ public final class UserCollection {
   }
 
   private void loadData() throws Exception {
-    List<User> users = (List<User>) readObjectFromFile();
+    final List<User> users = (List<User>) readObjectFromFile();
     if (Objects.nonNull(users)) {
       users.stream().forEach(this::addUser);
     }
@@ -59,6 +60,10 @@ public final class UserCollection {
 
   public boolean isUserPresent(final String rollNo) {
     return rollNoUserMapping.containsKey(rollNo);
+  }
+
+  public void saveUsers() throws Exception {
+    writeObjectToFile(getUserList());
   }
 
 }

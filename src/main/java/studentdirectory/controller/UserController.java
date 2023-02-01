@@ -10,9 +10,9 @@ import studentdirectory.models.User;
 
 public final class UserController {
 
-  UserCollectionRepo userCollectionRepo;
+  private UserCollectionRepo userCollectionRepo;
 
-  public UserController(UserCollectionRepo userCollectionRepo) {
+  public UserController(final UserCollectionRepo userCollectionRepo) {
     this.userCollectionRepo = userCollectionRepo;
   }
 
@@ -26,7 +26,7 @@ public final class UserController {
     validateCourses(inputCourses);
 
     final List<Course> courses = new ArrayList<>();
-    for (String input : inputCourses) {
+    for (final String input : inputCourses) {
       courses.add(new Course(input));
     }
 
