@@ -12,16 +12,16 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public final class FileUtility {
+public class FileUtility {
 
   private static final String APPLICATION_PATH = System.getProperty("user.dir");
   private static final Path PATH = Paths.get(APPLICATION_PATH, FILE_PATH);
 
-  private FileUtility() {
+  public FileUtility() {
 
   }
 
-  public static void writeObjectToFile(final Object obj) throws Exception {
+  public void writeObjectToFile(final Object obj) throws Exception {
     try (ObjectOutputStream outputStream = new ObjectOutputStream(
         new BufferedOutputStream(Files.newOutputStream(PATH)))) {
 
@@ -32,7 +32,7 @@ public final class FileUtility {
     }
   }
 
-  private static void createNewFile() throws Exception {
+  private void createNewFile() throws Exception {
     try {
       final java.io.File fileObj = new java.io.File(PATH.toUri());
       fileObj.createNewFile();
@@ -41,7 +41,7 @@ public final class FileUtility {
     }
   }
 
-  public static Object readObjectFromFile() throws Exception {
+  public Object readObjectFromFile() throws Exception {
     try (ObjectInputStream inputStream = new ObjectInputStream(
         new BufferedInputStream(Files.newInputStream(PATH)))) {
 

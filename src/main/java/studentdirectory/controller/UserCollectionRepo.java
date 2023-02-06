@@ -36,12 +36,6 @@ public final class UserCollectionRepo {
 
   }
 
-  public void addUsers(final List<User> users) throws Exception {
-    for (final User user : users) {
-      addUser(user);
-    }
-  }
-
   public void deleteUser(final String rollNo) throws Exception {
 
     if (!isRollNoPresent(rollNo)) {

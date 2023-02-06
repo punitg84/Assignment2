@@ -1,8 +1,6 @@
 package studentdirectory.models;
 
-import static studentdirectory.utils.FileUtility.readObjectFromFile;
-import static studentdirectory.utils.FileUtility.writeObjectToFile;
-
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,17 +8,22 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import lombok.Setter;
+import studentdirectory.utils.FileUtility;
 
-public final class UserCollection {
+@Setter
+public class UserCollection {
 
   private static UserCollection userCollectionInstance;
 
+  private FileUtility fileUtility;
   private final SortedSet<User> userSet;
   private final Map<String, User> rollNoUserMapping;
 
   private UserCollection() throws Exception {
     userSet = new TreeSet<>();
     rollNoUserMapping = new HashMap<>();
+    fileUtility = new FileUtility();
     loadData();
   }
 
@@ -31,8 +34,9 @@ public final class UserCollection {
     return userCollectionInstance;
   }
 
-  private void loadData() throws Exception {
-    final List<User> users = (List<User>) readObjectFromFile();
+  public void loadData() throws Exception {
+    clearUserList();
+    final List<User> users = (List<User>) fileUtility.readObjectFromFile();
     if (Objects.nonNull(users)) {
       users.stream().forEach(this::addUser);
     }
@@ -63,7 +67,7 @@ public final class UserCollection {
   }
 
   public void saveUsers() throws Exception {
-    writeObjectToFile(getUserList());
+    fileUtility.writeObjectToFile(getUserList());
   }
 
 }
